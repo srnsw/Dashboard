@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_au_gov_nsw_records_digitalarchives_dashboard_model_Page" items="${pages}" z="22g2OzkTMWljpQMaFT1I4QTa+6Y=">
+        <table:table data="${pages}" id="l_au_gov_nsw_records_digitalarchives_dashboard_model_Page" path="/pages" z="HzXDqLxFtNrOEgBsAALED2T1ZJ4=">
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Page_title" property="title" z="SfA6KOhmdCH493vniN/87BElW5E="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Page_content" property="content" z="YcfPH6llyApOOdcDtdmsP4xT6oA="/>
+            <table:column date="true" dateTimePattern="${page_lastupdate_date_format}" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Page_lastUpdate" property="lastUpdate" z="29vhmWtnJ3La6FRw8AETPdecmKU="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Page_lastUpdateUser" property="lastUpdateUser" z="ATsrOSE1xaQ81Ibhbf7hdJKR4sQ="/>
+        </table:table>
+    </page:list>
+</div>

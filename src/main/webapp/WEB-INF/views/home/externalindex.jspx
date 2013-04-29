@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:widget="urn:jsptagdir:/WEB-INF/tags/widget" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <jsp:output omit-xml-declaration="yes"/>
+  <spring:message code="label_home_index" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+    <h2>
+      DA Dashboard
+    </h2>
+    
+    <widget:singlefieldtable title="Information" field="information" object="infomratin text goes here"></widget:singlefieldtable>
+    <widget:singlefieldtable title="Details" field="details" object="details text goes here"></widget:singlefieldtable>
+    
+    <widget:daterangetable id="daterange_external" title="Daterange" from="1/1/2012" fromfield="from" to="1/2/2012" tofield="to"></widget:daterangetable>
+		<widget:migrationprojectdetails id="migrationproject_details" object="objj" field="fieldd" title="titletable"></widget:migrationprojectdetails>
+		    
+    <spring:url value="/workspace/showprojectsex" var="listurl"/>
+     <jtable:table createUrl="${listurl}" deleteUrl="${listurl}" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project" listUrl="${listurl}" name="project" title="Projects" updateUrl="${listurl}">
+      <jtable:field create="false" delete="false" edit="false" field="id" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_id" key="true" show="true" width="5%"/>
+      <jtable:field create="false" delete="false" edit="false" field="name" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_name" key="false" width="45%"/>
+      <jtable:field create="false" delete="false" edit="false" field="status" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_status" key="false" width="15%"/>
+      <jtable:field create="false" delete="false" edit="false" field="lastUpdatedBy" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdatedBy" key="false" width="20%"/>
+      <jtable:field create="false" delete="false" edit="false" field="creationDate" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_creationDate" key="false" width="15%"/>
+    </jtable:table>
+	     		
+    <table width="100%">
+     <tbody>
+	     <td class="dashboard" width="50%">
+	     <fieldset class="PFGFieldsetWidget">
+	     		<legend><span>Agency Information</span></legend>
+			    <p>Agency Name: <a href="#">State Rocket NSW</a></p>
+			    <p>Agency Number: <a href="#">125</a></p>
+			    <p>Contact Details: 212023455</p>
+		    </fieldset>
+	     </td>
+	     <td class="dashboard" width="50%">
+	     		<fieldset class="PFGFieldsetWidget">
+	     			<legend><span>Activities</span></legend>
+	     			<p> 11/12/2012: <a href="#">Richard Lehane</a> approved project <a href="#">Awesome Project</a></p>
+	     			<p> 10/12/2012: <a href="#">Richard Lehane</a> rejected project <a href="#">Freddio</a></p>
+	     			<p> 09/12/2012: <a href="#">Fred Freddy</a> submitted project request <a href="#">Freddio</a></p>
+	     			<p> 08/12/2012: <a href="#">Paul Elliott</a> approved user <a href="#">Fred Freddy</a></p>
+	     		</fieldset>
+	     </td>
+     </tbody>
+    </table>
+  </util:panel>
+</div>

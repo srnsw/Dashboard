@@ -1,0 +1,81 @@
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 10:32:00
+project --topLevelPackage au.gov.nsw.records.digitalarchives.dashboard --projectName DADashboard --java 6 --packaging WAR
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-11-14 10:32:01
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-11-14 10:32:03
+backup
+persistence setup --database MYSQL --provider HIBERNATE 
+backup
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Project
+field string name
+backup
+web mvc setup
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.ProjectController
+field date --fieldName creationDate --type java.util.Date
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Person
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.PersonController
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.FileRecord
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.FileRecordController
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.ProjectRequest
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.ProjectRequestController
+backup
+security setup
+controller class --class ~.web.HomeController
+focus --class ~.model.Person
+finder list 
+finder add --finderName findPeopleByEmailEquals
+interface --class ~.email.NotificationService
+class --class ~.email.NotificationServiceImpl
+email sender setup --hostServer molineux.records.nsw.gov.au --protocol SMTP --port 25 --username fred --password freddy
+email template setup --from dashboard@records.snw.gov.au --subject "Some Confirmation"
+field email template --fieldName mailTemplate --class ~.email.NotificationServiceImpl
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-12-10 16:33:55
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-01-24 09:31:29
+perform package
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-01-25 15:51:25
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-02-06 09:28:31
+perform package
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-02-08 15:19:04
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-02-12 08:16:28
+perform package
+perform package
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-02-15 09:48:30
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-02-19 13:48:53
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.ProjectPlan
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.ProjectPlanController
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.ProjectPlanController 
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.ProjectPlanController 
+web mvc view --path /projectplans --viewName index --title projectplan
+perform package
+perform package
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-02-21 15:30:28
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-03-28 08:33:16
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-03-28 09:25:46
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-03-28 12:54:16
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-03-28 14:24:39
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-03 09:04:54
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Upload
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.UploadController
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-03 10:31:38
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-03 10:39:30
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-03 15:55:29
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-08 11:51:27
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-08 15:57:36
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-09 08:45:00
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-09 16:00:35
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-11 13:08:33
+perform package
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-12 12:38:17
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-16 09:17:27
+perform package
+perform package
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-16 16:30:29
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-17 08:29:12
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Page
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.PageController
+web mvc controller --class ~.web.AdminController
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-18 16:25:14
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-19 08:27:29
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-19 16:05:01
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-22 09:45:01
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-22 16:32:08
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-29 09:24:24

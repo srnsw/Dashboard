@@ -1,0 +1,37 @@
+<jsp:root xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="yes" />
+
+  <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="Id of the object to be displayed" />
+  <jsp:directive.attribute name="name" type="java.lang.String" required="true" rtexprvalue="true" description="Name of an element to be displayed as a table" />
+  <jsp:directive.attribute name="listUrl" type="java.lang.String" required="true" rtexprvalue="true" description="List URL" />
+  <jsp:directive.attribute name="createUrl" type="java.lang.String" required="true" rtexprvalue="true" description="create URL" />
+  <jsp:directive.attribute name="updateUrl" type="java.lang.String" required="true" rtexprvalue="true" description="update URL" />
+  <jsp:directive.attribute name="deleteUrl" type="java.lang.String" required="true" rtexprvalue="true" description="delete URL" />
+  <jsp:directive.attribute name="title" type="java.lang.String" required="false" rtexprvalue="true" description="Override default label with the supplied text" />
+ 
+  <p id="${name}">${nonExsitanceVar}</p>
+  
+  
+  <c:if test="${empty title}">
+  	<spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" var="title" htmlEscape="false" />
+  </c:if>
+    
+  <script>
+	  $(document).ready(function () {
+	        $('#${name}').jtable({
+	            title: '${title}',
+	            actions: {
+	                listAction: '${listUrl}',
+	                createAction: '${createUrl}',
+	                updateAction: '${updateUrl}',
+	                deleteAction: '${deleteUrl}',
+	            },
+	            fields: {
+	            	<jsp:doBody />
+	            },
+	        });
+	 
+	        $('#${name}').jtable('load');
+	    });
+	</script>
+</jsp:root>

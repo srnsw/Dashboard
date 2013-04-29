@@ -1,0 +1,135 @@
+package au.gov.nsw.records.digitalarchives.dashboard.web;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import org.apache.commons.codec.binary.Hex;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import au.gov.nsw.records.digitalarchives.dashboard.bean.AutocompleteResponse;
+import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse;
+import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse.Status;
+import au.gov.nsw.records.digitalarchives.dashboard.email.NotificationService;
+import au.gov.nsw.records.digitalarchives.dashboard.email.NotificationServiceImpl;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
+import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
+import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
+
+@RequestMapping("/members")
+@Controller
+@RooWebScaffold(path = "members", formBackingObject = Person.class)
+public class MemberController {
+	
+	//@Secured("ROLE_ADMIN")
+	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
+	public String create(@Valid Person people, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+		if (bindingResult.hasErrors()) {
+			populateEditForm(uiModel, people);
+			return "members/create";
+		}
+		//password encryption
+		MessageDigest md;
+		try {
+			uiModel.asMap().clear();
+			md = MessageDigest.getInstance("md5");
+			md.update(people.getPassword().getBytes("UTF-8"));
+			byte[] result =  md.digest();
+			people.setPassword(Hex.encodeHexString(result));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		people.persist();
+
+		NotificationService email = new NotificationServiceImpl();
+		email.sendMessage("wisanu.promthong@records.nsw.gov.au", "test mail");
+		return "redirect:/members/" + encodeUrlPathSegment(people.getId().toString(), httpServletRequest);
+	}
+	
+	@RequestMapping(value = "/myprofile", method = RequestMethod.GET, produces = "text/html")
+  public String migrationplan(Model uiModel) {
+		Person current = UserService.getLoggedinUser();
+		if (current!=null){
+	    uiModel.addAttribute("person", current);
+	    uiModel.addAttribute("itemId", current.getId());
+		}
+    return "members/show";
+  }
+	
+	@RequestMapping(method = RequestMethod.GET, value="/retrieve")
+	public String retrievelogin(){
+		return "members/retrieve";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/getagencies")
+	public @ResponseBody String getAgencies(@RequestParam String term){
+		ObjectMapper om = new ObjectMapper();
+		List<AutocompleteResponse> listResutls = new ArrayList<AutocompleteResponse>();
+		//String htmlResult = "";
+    om.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+    om.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
+    String json = "";
+		try {
+
+			URL urlr = new URL("http://api.records.nsw.gov.au/search.json?entities=Agency&q=" + term);
+			HttpURLConnection conn = (HttpURLConnection) urlr.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Accept", "application/json");
+
+			if (conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ conn.getResponseCode());
+			}
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+
+			String line;
+			while ((line = br.readLine()) != null) {
+				json = json + line;
+			}
+			conn.disconnect();
+			
+			JsonNode rootNode = om.readValue(json, JsonNode.class);
+			JsonNode nameNode = rootNode.path("StateRecordsSearch").path("Results");
+			Iterator<JsonNode> js = nameNode.getElements();
+			while(js.hasNext()){
+				JsonNode node =  js.next().path("Result");
+				listResutls.add(new AutocompleteResponse(node.get("title").getTextValue().replaceAll("\"", ""), node.get("href").getTextValue().replaceAll("\"", "").replaceAll("http://api.records.nsw.gov.au/agencies/", "")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(JsonService.toJson(listResutls));
+		return JsonService.toJson(listResutls);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+  public @ResponseBody String listMembers(Model uiModel) {
+     return JsonService.toJson(new JTableResponse(Status.OK, Person.findAllPeople()));
+  }
+}

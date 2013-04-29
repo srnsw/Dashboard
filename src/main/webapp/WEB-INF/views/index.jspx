@@ -1,0 +1,256 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+   
+   <h2>Digital Archive project first page</h2>
+   
+   <h4>To login as an archivst use:</h4>
+   archivist@gmail.com / archivist@gmail.com 
+   
+   <br/>
+   
+   <h4>To login as an agency use:</h4>
+   agency@gmail.com / agency@gmail.com 
+   
+   <a href="/dash/login" >login</a>
+   
+   <br/>
+   <br/>
+   <h4>Project template</h4>
+   <p><a href="/dash/projects/1?form">link</a></p>
+   
+   <br/>
+   <h4>Project Plan</h4>
+   <p><a href="/dash/projectplans/1">link</a></p>
+   <br/>
+   <br/>
+   <spring:url value="/resources" var="resourcepath"></spring:url>
+   <script type="text/javascript">
+			// Convert divs to queue widgets when the DOM is ready
+			$(function() {
+				$("#uploader").plupload({
+					// General settings
+					runtimes : 'flash,browserplus,html5',
+					url : '/DADashboard/workspace/upload',
+					max_file_size : '50mb',
+					unique_names : true,
+			
+					// Resize images on clientside if we can
+					resize : {width : 320, height : 240, quality : 90},
+			
+					// Specify what files to browse for
+					filters : [
+						{title : "Image files", extensions : "jpg,gif,png"},
+						{title : "Document files", extensions : "doc,pdf,txt"},
+						{title : "Zip files", extensions : "zip"}
+					],
+			
+					// Flash settings
+					flash_swf_url : "${resourcepath}/scripts/pupload/plupload.flash.swf",
+			
+				});
+			
+				// Client side form validation
+				$('form').submit(function(e) {
+			        var uploader = $('#uploader').plupload('getUploader');
+			
+			        // Files in queue upload them first
+			        if (uploader.files.length > 0) {
+			            // When all files are uploaded submit form
+			            uploader.bind('StateChanged', function() {
+			                if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
+			                    $('form')[0].submit();
+			                }
+			            });
+			                
+			            uploader.start();
+			        } else
+			            alert('You must at least upload one file.');
+			
+			        return false;
+			    });
+			});
+			</script>
+			
+		<b>File Uploader demo</b>	
+		
+		 <form>
+    	<div id="uploader">
+        <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+    	</div>
+		</form>
+		<br/>
+		
+   ((Example of the new table))
+   
+   <p><b>Example title </b>  <a id="toggle_form" href="#"> <img src="/DADashboard/resources/images/add.png"/> </a></p>
+   
+   <div id="table_form" class="dawidget">
+	   <div class="jtable-main-container">
+				<div class="jtable-title">
+				  <div class="jtable-title-text">Example table title</div>
+				</div>
+				<table class="jtable">
+				 <tbody>
+				  <tr>
+				   <td class="" style="width: 1%;" ><input id = "termsCheck" type="checkbox" name="terms" /></td>
+					 <td class="">option text a</td>
+					 <td class="jtable-command-column" style="width: 1%;"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+					 <td class="jtable-command-column" style="width: 1%;"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+				  </tr>
+				  <tr class="jtable-row-even">
+				   <td class="" style="width: 1%;" ><input id = "termsCheck" type="checkbox" name="terms" /></td>
+					 <td class="">option text b</td>
+					 <td class="jtable-command-column" style="width: 1%;"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+					 <td class="jtable-command-column" style="width: 1%;"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+				  </tr>
+				 </tbody>
+				</table>
+				<div class="jtable-bottom-panel">
+				  <span class="alignright"><a id="add_btn" href="#">+ Add new row</a></span>
+				</div>
+		</div>
+	</div>
+	
+	<div id="add_new_row" class="dawidget">
+		<form>
+		  <fieldset>
+		    <p>
+		    	<label for="${tofield}">Select predefined text </label>
+			    <select>
+			      <option value="volvo">---------------- Select ---------------- </option>
+					  <option value="volvo">---------------- Option 1 ---------------- </option>
+					  <option value="saab">---------------- Option 2 ---------------- </option>
+					  <option value="mercedes">---------------- Option 3 ---------------- </option>
+					  <option value="audi">---------------- Option 4 ---------------- </option>
+					</select>
+		    </p>
+		    <p>
+			    <label for="${tofield}">Or add free text</label>
+			    <textarea type="text" rows="4" name="${field}" id="id_dialog_${field}" >${object}</textarea>
+		    </p>
+		  </fieldset>
+	  </form>
+	</div>
+	
+   <div id="table_form_2" class="dawidget">
+	   <div class="jtable-main-container">
+				<div class="jtable-title">
+				  <div class="jtable-title-text">Example table title</div>
+				</div>
+				<table class="jtable">
+				 <tbody>
+				  <tr>
+				   <td class="" style="width: 1%;" ><input id = "termsCheck" type="checkbox" name="terms" /></td>
+					 <td class="">option text a</td>
+					 <td class="jtable-command-column" style="width: 1%;"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+					 <td class="jtable-command-column" style="width: 1%;"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+				  </tr>
+				  <tr class="jtable-row-even">
+				   <td class="" style="width: 1%;" ><input id = "termsCheck" type="checkbox" name="terms" /></td>
+					 <td class="">option text b</td>
+					 <td class="jtable-command-column" style="width: 1%;"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+					 <td class="jtable-command-column" style="width: 1%;"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+				  </tr>
+				 </tbody>
+				</table>
+				<div class="jtable-bottom-panel">
+				  <span class="alignright"><a id="add_btn_2" href="#">+ Add new row</a></span>
+				</div>
+		</div>
+	</div>
+	 
+	<script type="text/javascript">
+	
+	 $(function() {
+		
+		 $( "#table_form_2" ).toggle();
+		 
+		 $( "#table_form" ).dialog({
+		      autoOpen: false,
+		      height: 300,
+		      width: 500,
+		      modal: true,
+		      buttons: {
+		        "OK": function() {
+		        	
+		        	//POST update to the server
+			        $.ajax({
+			  	          type:'POST',
+			  	          url: '/forms/1/${field}',
+			  	          data: "${field}=" + $("#id_dialog_${field}").val(),
+			  	    }).done(function ( data ) {
+			  	    	alert("done");
+			  	    	//update DOM and close
+			  	    	$( "#id_${field}_field" ).text( $("#id_dialog_${field}").val() );
+			          $( this ).dialog( "close" );
+			  	    }).fail(function ( data ) {
+			  	  	 // alert error
+			  	    	//alert("toggle");
+			  	    	// temporarily show it this way
+			  	    	$( "#table_form_2" ).toggle();
+			  	    	$( "#toggle_form" ).toggle();
+			  	    	$( this ).dialog( "close" );
+			  	    });
+		        },
+		        Cancel: function() {
+		          $( this ).dialog( "close" );
+		        }
+		      },
+		      close: function() {
+		       
+		      }
+		    });
+		 
+			  $( "#toggle_form" ).click(function() {
+			    $( "#table_form" ).dialog( "open" );
+			  });
+			  
+			  $( "#add_new_row" ).dialog({
+			      autoOpen: false,
+			      height: 320,
+			      width: 400,
+			      modal: true,
+			      buttons: {
+			        "OK": function() {
+			        	//POST update to the server
+				        $.ajax({
+				  	          type:'POST',
+				  	          url: '/forms/1/${field}',
+				  	          data: "${field}=" + $("#id_dialog_${field}").val(),
+				  	    }).done(function ( data ) {
+				  	    	alert("done");
+				  	    	//update DOM and close
+				  	    	$( "#id_${field}_field" ).text( $("#id_dialog_${field}").val() );
+				          $( this ).dialog( "close" );
+				  	    }).fail(function ( data ) {
+				  	    	// alert error
+				  	    	alert("fail");
+				  	    });
+			        },
+			        Cancel: function() {
+			          $( this ).dialog( "close" );
+			        }
+			      },
+			      close: function() {
+			       
+			      }
+			    });
+			  
+			  $( "#add_btn" ).button().click(function() {
+				    $( "#add_new_row" ).dialog( "open" );
+				  });
+	 });
+	 
+	 $(function() {
+			  
+			  $( "#add_btn_2" ).button().click(function() {
+				    $( "#add_new_row" ).dialog( "open" );
+				  });
+	 });
+	 
+	 $(function() {
+	 	 $( '.ui-state-default.ui-widget-header.plupload_header').remove();
+ 	 });
+	</script>
+</div>

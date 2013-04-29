@@ -1,0 +1,728 @@
+<jsp:root xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="yes" />
+  
+  <div id="projectproposaltabs">
+        <ul>
+            <li>
+                <a href="#projproposal_tabs-0">About the Records</a>
+            </li>
+            <li>
+                <a href="#projproposal_tabs-1">About the Project</a>
+            </li>
+            <li>
+                <a href="#projproposal_tabs-2">Project Startup</a>
+            </li>
+             <li>
+                <a href="#projproposal_tabs-3">Project Approval</a>
+            </li>
+        </ul>
+        <div id="projproposal_tabs-0">
+        	<!-- About the Records -->
+        	<div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Purpose</div>
+						</div>
+						<table class="jtable">
+						 <tbody>
+						  <tr>
+							 <td class="">The purpose of this document is to propose that State Records NSW and [INSERT AGENCY NAME] commence a project to migrate the [INSERT DETAILS OF RECORDS] to the State Records Digital Archives system, and for control of these records to be passed to State Records NSW as defined in Section 4 of the State Records Act 1998.</td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#"> Update </a></span>
+						</div>
+					</div>
+					<br/>
+					
+        	<div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Description</div>
+						</div>
+						<table class="jtable">
+						 <tbody>
+						  <tr>
+							 <td class="">[Information about the system/records including description of individual items if this is the basis of the migration, business processes, background of the system/records, -can be taken from systems documentation, series information etc.]</td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#"> Update </a></span>
+						</div>
+					</div>
+					<br/>
+	
+					<div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Date range</div>
+						</div>
+						<table class="jtable">
+						 <tbody>
+						  <tr>
+							 <td class="">[oldest to latest]</td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#"> Update </a></span>
+						</div>
+					</div>
+					<br/>
+					
+        	
+        
+        <div class="jtable-main-container">
+				<div class="jtable-title">
+				  <div class="jtable-title-text">Transfer Requirements</div>
+				</div>
+				<table class="jtable" >
+				 <thead>
+				   <tr>
+					<th class="jtable-column-header" style="width: 38%;">
+					   <div class="jtable-column-header-container">
+						 <span class="jtable-column-header-text">System</span>
+						 <div class="jtable-column-resize-handler"></div>
+					   </div>
+					</th>
+					<th class="jtable-column-header" style="width: 20%;">
+					  <div class="jtable-column-header-container">
+						<span class="jtable-column-header-text">Disposal Authorisation</span>
+					  </div>
+					</th>
+					<th class="jtable-column-header" style="width:20%;">
+					  <div class="jtable-column-header-container">
+						<span class="jtable-column-header-text">Access Direction</span>
+					  </div>
+					</th>
+					<th class="jtable-column-header" style="width:20%;">
+					  <div class="jtable-column-header-container">
+						<span class="jtable-column-header-text">Control Number</span>
+					  </div>
+					</th>
+					<th class="jtable-command-column-header" style="width: 1%;"></th>
+					<th class="jtable-command-column-header" style="width: 1%;"></th>
+					</tr>
+				 </thead>
+				 <tbody>
+				  <tr>
+				   <td class="">[information about the system]</td>
+				   <td class="">[can have many to one relationship with system]</td>
+					 <td class="">[can have many to one relationship with system]</td>
+					 <td class="">[relationship to be determined]</td>
+					 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+					 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+				  </tr>
+				 </tbody>
+				</table>
+				<div class="jtable-bottom-panel">
+				  <span class="alignright"><a href="#">+ Add row</a></span>
+				</div>
+			</div>
+	    <br/>	
+	    
+	    <div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Access Requirements</div>
+						</div>
+						<table class="jtable">
+						 <tbody>
+						  <tr>
+							 <td class="">[Open Access, Early Access, GIPA requests, registration of agency users]</td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#"> Update </a></span>
+						</div>
+					</div>
+			    <br/>
+			    
+	    <div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Related physical records</div>
+						</div>
+						<table class="jtable">
+						 <tbody>
+						  <tr>
+							 <td class="">[non-digital records, hybrid transfers - just an overview because physical records will be handled by ACM]</td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#"> Update </a></span>
+						</div>
+					</div>
+			    <br/>
+	    </div>
+        <div id="projproposal_tabs-1">
+        	<!-- About the Project -->
+        	
+        	<div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Objectives</div>
+						</div>
+						<table class="jtable">
+						 <tbody>
+						  <tr>
+							 <td class="">the migration of digital records and associated metadata of [INSERT DETAILS HERE] that are required as State archives from [INSERT DETAILS HERE] to the State Records Digital Archive</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+							 <td class="">the transfer of custody and control of the records from [INSERT DETAILS HERE] to the State Records Authority</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr>
+							 <td class="">a fully accountable and documented migration process</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+							 <td class="">the proper management of source records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr>
+							 <td class="">the capture of adequate information by State Records about the records and their associated requirements to allow them to preserve, protect and make [INSERT DETAILS HERE] digital records available in accordance with provisions of the State Records Act 1998</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#">+ Add row </a></span>
+						</div>
+					</div>
+			    <br/>
+	    
+			    <div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Project Deliverables</div>
+						</div>
+						<table class="jtable" >
+						 <tbody>
+						  <tr>
+						   <td class="">A Migration Plan to be agreed to and signed off by State Records and [INSERT AGENCY NAME]</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Advice regarding the retention and disposal of sources records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr>
+						   <td class="">Completed safe and documented migration of the records into the State Records Digital Archive</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Written confirmatijon to [INSERT AGENCY NAME] of the transfer of custody and control of the records to State Records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#">+ Add row</a></span>
+						</div>
+					</div>
+			    <br/>
+	    
+			    <div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">In Scope</div>
+						</div>
+						<table class="jtable" >
+						 <tbody>
+						  <tr>
+						   <td class="">Assessment of the records and requirements for their management by State Records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Negotiation and agreement on a Migration Plan by State Records and the [INSERT AGENCY NAME]</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr>
+						   <td class="">Migration of the records into the Digital Archive</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Resolving errors and issues during the migration</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr>
+						   <td class="">State Records providing written confirmation of the transfer of custody and control of the records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Advice to [INSERT AGENCY NAME] on the management of the source records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#">+ Add row</a></span>
+						</div>
+					</div>
+			    <br/>	
+			    
+			    <div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Out of Scope</div>
+						</div>
+						<table class="jtable" >
+						 <tbody>
+						  <tr>
+						   <td class=""> [text] </td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#">+ Add row</a></span>
+						</div>
+					</div>
+			    <br/>
+			    
+			    <div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Responsibilities</div>
+						</div>
+						<table class="jtable" >
+						<thead>
+						   <tr>
+							<th class="jtable-column-header" style="width:100%;">
+							  <div class="jtable-column-header-container">
+								<span class="jtable-column-header-text">State Records NSW is responsible for</span>
+							  </div>
+							</th>
+							<th class="jtable-command-column-header" style="width: 1%;"></th>
+							<th class="jtable-command-column-header" style="width: 1%;"></th>
+							</tr>
+						 </thead>
+						 <tbody>
+						  <tr>
+						   <td class="">Project menagement</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Assessment activities</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr>
+						   <td class="">Development of the Migration Plan</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Processing the migration</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr>
+						   <td class="">Confirmation to [Insert AGENCY NAME] on the transfer of custody and control of the records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Advice on the retention and/or destructijon of the source records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#">+ Add row</a></span>
+						</div>
+					</div>
+			    <br/>	
+			    
+			    <div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Responsibilities</div>
+						</div>
+						<table class="jtable" >
+						<thead>
+						   <tr>
+							<th class="jtable-column-header" style="width:100%;">
+							  <div class="jtable-column-header-container">
+								<span class="jtable-column-header-text">[INSERT AGENCY NAME] is responsible for</span>
+							  </div>
+							</th>
+							<th class="jtable-command-column-header" style="width: 1%;"></th>
+							<th class="jtable-command-column-header" style="width: 1%;"></th>
+							</tr>
+						 </thead>
+						 <tbody>
+						  <tr>
+						   <td class="">Approval of the Migration Project Proposal from State Records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Supplying State Records with information about the records and the business they document as required</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr>
+						   <td class="">Approval of the Migration Plan developed by State Records</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Providing any required resource and support for the project</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr>
+						   <td class="">Providing State Records with the records for migration</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						  <tr class="jtable-row-even">
+						   <td class="">Ensuring the requirements for the retention and/or destructjion of the source records as set by State Records are adhered to</td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+							 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#">+ Add row</a></span>
+						</div>
+					</div>
+			    <br/>
+        </div>
+        <br/>
+        
+        <div id="projproposal_tabs-2">
+      
+        <!-- Project Startup -->
+		    <div class="jtable-main-container">
+					<div class="jtable-title">
+					  <div class="jtable-title-text">Costs</div>
+					</div>
+					<table class="jtable" >
+					 <thead>
+					   <tr>
+						<th class="jtable-column-header" style="width: 70%;">
+						   <div class="jtable-column-header-container">
+							 <span class="jtable-column-header-text">Details</span>
+							 <div class="jtable-column-resize-handler"></div>
+						   </div>
+						</th>
+						<th class="jtable-column-header" style="width: 30%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Action</span>
+						  </div>
+						</th>
+						<th class="jtable-command-column-header" style="width: 1%;"></th>
+						<th class="jtable-command-column-header" style="width: 1%;"></th>
+						</tr>
+					 </thead>
+					 <tbody>
+					  <tr>
+					   <td class="">[Identification of costs such as licencing, support, storage, consultancy, service providers etc.]</td>
+						 <td class=""></td>
+						 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+						 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+					  </tr>
+					 </tbody>
+					</table>
+					<div class="jtable-bottom-panel">
+					  <span class="alignright"><a href="#">+ Add row</a></span>
+					</div>
+				</div>
+		    <br/>	
+	    	
+	    	<div class="jtable-main-container">
+					<div class="jtable-title">
+					  <div class="jtable-title-text">Preliminary risk identification</div>
+					</div>
+					<table class="jtable" >
+					 <thead>
+					   <tr>
+						<th class="jtable-column-header" style="width: 70%;">
+						   <div class="jtable-column-header-container">
+							 <span class="jtable-column-header-text">Details</span>
+							 <div class="jtable-column-resize-handler"></div>
+						   </div>
+						</th>
+						<th class="jtable-column-header" style="width: 30%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Action</span>
+						  </div>
+						</th>
+						<th class="jtable-command-column-header" style="width: 1%;"></th>
+						<th class="jtable-command-column-header" style="width: 1%;"></th>
+						</tr>
+					 </thead>
+					 <tbody>
+					  <tr>
+					   <td class="">[Identification of risks - NOT determination of the level of the risk or how it will be mitigated. Risks are assessed fully during assessment with determination of the level of risk and mitigation placed in the Migration Plan]</td>
+						 <td class=""></td>
+						 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+						 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+					  </tr>
+					 </tbody>
+					</table>
+					<div class="jtable-bottom-panel">
+					  <span class="alignright"><a href="#">+ Add row</a></span>
+					</div>
+				</div>
+		    <br/>	
+		    
+		    <div class="jtable-main-container">
+					<div class="jtable-title">
+					  <div class="jtable-title-text">Timetable</div>
+					</div>
+					<table class="jtable" >
+					 <thead>
+					   <tr>
+						<th class="jtable-column-header" style="width: 33%;">
+						   <div class="jtable-column-header-container">
+							 <span class="jtable-column-header-text">Migration projec stage</span>
+							 <div class="jtable-column-resize-handler"></div>
+						   </div>
+						</th>
+						<th class="jtable-column-header" style="width: 33%;">
+						   <div class="jtable-column-header-container">
+							 <span class="jtable-column-header-text">Stage activities</span>
+							 <div class="jtable-column-resize-handler"></div>
+						   </div>
+						</th>
+						<th class="jtable-column-header" style="width: 33%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Timeframes</span>
+						  </div>
+						</th>
+						</tr>
+					 </thead>
+					 <tbody>
+					  <tr>
+					   <td class="">Stage 1: Project Start-up</td>
+						 <td class=""></td>
+						 <td class=""></td>
+					  </tr>
+					  <tr>
+					   <td class="">Stage 2: Migration Plan</td>
+						 <td class=""></td>
+						 <td class=""></td>
+					  </tr>
+					  <tr>
+					   <td class="">Stage 3: Migration</td>
+						 <td class=""></td>
+						 <td class=""></td>
+					  </tr>
+					 </tbody>
+					</table>
+					<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#"> Update </a></span>
+						</div>
+				</div>
+		    <br/>
+		    
+		    <div class="jtable-main-container">
+						<div class="jtable-title">
+						  <div class="jtable-title-text">Recommendation</div>
+						</div>
+						<table class="jtable">
+						 <tbody>
+						  <tr>
+							 <td class="">The next stage in the migratjion project will involve assessment activities and the approval of the Migration Plan. The third and final stage in the migration project involves the migration itself. it is recommended that this migration project proceed in accordance with this proposal.</td>
+						  </tr>
+						 </tbody>
+						</table>
+						<div class="jtable-bottom-panel">
+						  <span class="alignright"><a href="#"> Update </a></span>
+						</div>
+					</div>
+					<br/>
+   		</div>
+      <div id="projproposal_tabs-3">
+      	<!-- tabs 3 -->
+      	<div class="jtable-main-container">
+					<div class="jtable-title">
+					  <div class="jtable-title-text">Request for Changes</div>
+					</div>
+					<table class="jtable" >
+					 <thead>
+					   <tr>
+						<th class="jtable-column-header" style="width: 20%;">
+						   <div class="jtable-column-header-container">
+							 <span class="jtable-column-header-text">Change Request</span>
+							 <div class="jtable-column-resize-handler"></div>
+						   </div>
+						</th>
+						<th class="jtable-column-header" style="width: 20%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Submitted By</span>
+						  </div>
+						</th>
+						<th class="jtable-column-header" style="width: 10%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Date</span>
+						  </div>
+						</th>
+						<th class="jtable-column-header" style="width: 20%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Request Status</span>
+						  </div>
+						</th>
+						<th class="jtable-column-header" style="width: 20%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Authorised By</span>
+						  </div>
+						</th>
+						<th class="jtable-column-header" style="width: 10%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Date</span>
+						  </div>
+						</th>
+						<th class="jtable-command-column-header" style="width: 1%;"></th>
+						<th class="jtable-command-column-header" style="width: 1%;"></th>
+						</tr>
+					 </thead>
+					 <tbody>
+					  <tr>
+					   <td class=""></td>
+						 <td class="">Can select registered user</td>
+						 <td class=""></td>
+						 <td class=""></td>
+						 <td class="">Can select registered user</td>
+						 <td class=""></td>
+						 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+						 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+					  </tr>
+					 </tbody>
+					</table>
+					<div class="jtable-bottom-panel">
+					  <span class="alignright"><a href="#">+ Add row</a></span>
+					</div>
+				</div>
+		    <br/>	
+		    
+		    <div class="jtable-main-container">
+					<div class="jtable-title">
+					  <div class="jtable-title-text">Approval</div>
+					</div>
+					<table class="jtable" >
+					 <thead>
+					   <tr>
+						<th class="jtable-column-header" style="width: 20%;">
+						   <div class="jtable-column-header-container">
+							 <span class="jtable-column-header-text">Approved By</span>
+							 <div class="jtable-column-resize-handler"></div>
+						   </div>
+						</th>
+						<th class="jtable-column-header" style="width: 10%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Role</span>
+						  </div>
+						</th>
+						<th class="jtable-column-header" style="width: 20%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Contact Details</span>
+						  </div>
+						</th>
+						<th class="jtable-column-header" style="width: 10%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Date</span>
+						  </div>
+						</th>
+						<th class="jtable-column-header" style="width: 20%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">SRNSW Document Reference</span>
+						  </div>
+						</th>
+						<th class="jtable-column-header" style="width: 20%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">SRNSW File Reference</span>
+						  </div>
+						</th>
+						<th class="jtable-command-column-header" style="width: 1%;"></th>
+						<th class="jtable-command-column-header" style="width: 1%;"></th>
+						</tr>
+					 </thead>
+					 <tbody>
+					  <tr>
+					   <td class="">[Identify requirements for approving officer – e.g. seniority, business owner etc.]</td>
+						 <td class=""></td>
+						 <td class=""></td>
+						 <td class="">Date selection</td>
+						 <td class="">[TRIM doc number – determine how a migration plan is approved]</td>
+						 <td class="">[TRIM file number]</td>
+						 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit Record"><span>Edit Record</span></button></td>
+						 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete"><span>Delete</span></button></td>
+					  </tr>
+					 </tbody>
+					</table>
+					<div class="jtable-bottom-panel">
+					  <span class="alignright"><a href="#">+ Add row</a></span>
+					</div>
+				</div>
+		    <br/>	
+		    
+		    <span class="alignright">
+		    	<input value="Export.." type="submit" id="export" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"></input>
+				  <input value="Approve Project Proposal" type="submit" id="proceed" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"></input>
+		  	</span>
+			     <br/>
+		    <!-- tabs3 -->
+      </div>
+      
+  </div>   
+
+ <div id="exportform" title="Export options" class="dawidget">
+   <form>
+   	
+   	<h4>Export format</h4>
+   	<input type="radio" name="exportformat" value="word"/>Word<br/>
+    <input type="radio" name="exportformat" value="pdf"/>PDF<br/>
+   	
+   	<h4>Content to be exported</h4>
+   	<input type="checkbox" name="exportcontent" value="proposal"/> Project Proposal<br/>
+		<input type="checkbox" name="exportcontent" value="assessment"/> Project Assessment <br/>
+		<input type="checkbox" name="exportcontent" value="plan"/> Migration Plan<br/>
+		 
+   </form>
+ </div>
+  <script>
+  $(function() {
+      $( "#projectproposaltabs" ).tabs();
+      $( "#proceed" ).button();
+      $( "#export" ).button().click(function() {
+		    $( "#exportform" ).dialog( "open" );
+		  });
+      
+      $( "#exportform" ).dialog({
+	      autoOpen: false,
+	      height: 270,
+	      width: 350,
+	      modal: true,
+	      buttons: {
+	        "Export": function() {
+	        	$( this ).dialog( "close" );
+	        },
+	        Cancel: function() {
+	          $( this ).dialog( "close" );
+	        }
+	      },
+	      close: function() {
+	       
+	      }
+	    });
+  });
+	</script>
+		
+</jsp:root>

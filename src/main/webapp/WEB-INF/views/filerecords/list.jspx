@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_au_gov_nsw_records_digitalarchives_dashboard_model_FileRecord" items="${filerecords}" z="FJwwfHPmlecGoFQAVjGjw3BOxlQ=">
+        <table:table data="${filerecords}" id="l_au_gov_nsw_records_digitalarchives_dashboard_model_FileRecord" path="/filerecords" z="dDukyhYolLYTSXonVP2nUy57L9E=">
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_FileRecord_format" property="format" z="dIPHHuVzfd9lggfUXblJAXm1Ktc="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_FileRecord_system" property="system" z="uJVeYemO0cM1mhmXb83HGng2DnQ="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_FileRecord_quantity" property="quantity" z="bfN82Shmf/09oQh2FluzsXWGjq8="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_FileRecord_size" property="size" z="HKkWnVEUumtcEbYfitGfkCJb5LM="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_FileRecord_description" property="description" z="ZXXjnp0K0Th+66uTfhfBvtoXewA="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_FileRecord_issues" property="issues" z="I6BPHSdfesIcM06NVXQ+guhvFT4="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <span class="alignright">
+        <form>
+            <select class="dk" id="option_dropdown" name="options">
+                <option value="">Options</option>
+                <option value="profile_update">Profile Update Request</option>
+                <option value="share">Share</option>
+            </select>
+            <spring:url value="/resources/images/help-browser.png" var="help"/>
+            <a class="noborder" href="#">
+                <img height="30px" src="${help}" style="border:0"/>
+            </a>
+        </form>
+    </span>
+    <spring:url value="/" var="root_url"/>
+    <script>
+	 		$('.dk').dropkick({
+				width: 110,
+			  change: function (value, label) {
+			    //alert('You picked: ' + label + ':' + value);
+			    	if (value == "profile_update"){
+		 		       //window.open('${root_url}projects?form', '_self');
+		 		    }else if (value == "reporting"){
+		 		       //window.open('${root_url}pages?form&amp;master=projectplan', '_blank');
+		 		    }else if (value == "share"){
+			    		 //window.open('${root_url}pages?form&amp;master=migrationplan', '_blank');
+		 		    }else {
+		 		    	 //alert('You pickedx: ' + label + ':' + value);
+		 		    }
+			    	$('.dk').dropkick('reset');
+			  }
+			});
+ 		</script>
+    <h2>My Profile</h2>
+    <page:show create="false" delete="false" id="ps_au_gov_nsw_records_digitalarchives_dashboard_model_Person" list="false" object="${person}" path="/members" update="false" z="user-managed">
+    		<field:display field="name" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_name" object="${person}" z="8yWjSUo2vPlV7XZQoALWUkMfHQA="/>
+        <field:display field="email" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_email" object="${person}" z="9/VsHI4AS7vj0AzYbXVOjCtYX+M="/>
+        <field:display field="password" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_password" object="${person}" render="false" z="user-managed"/>
+        <field:display field="approved" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_approved" object="${person}" render="false" z="user-managed"/>
+        <field:display field="telephone" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_telephone" object="${person}" z="ll7/sGGG0WwPvWD0oKsxuY92SyA="/>
+        <field:display field="address" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_address" object="${person}" z="mSX3Iqi51XfaYk4UhndfyPiJSTQ="/>
+        <field:display field="agencyNumber" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyNumber" object="${person}" z="59nMNNlyrk39GGDKOUozoarlhjk="/>
+        <field:display field="roleType" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_roleType" object="${person}" render="false" z="user-managed"/>
+        <field:display field="jobtitle" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_jobtitle" object="${person}" z="AlPRbQ0KW1fR+Y8C1dBmdNy4es0="/>
+        <field:display field="agencyText" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyText" object="${person}" z="9ZmBjNKhy03Nz+3HeBSz0zDsqk0="/>
+    </page:show>
+</div>

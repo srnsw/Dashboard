@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:sc="http://www.springframework.org/security/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <jsp:output omit-xml-declaration="yes"/>
+  <spring:message code="label_home_index" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+    <h2>
+      DA Dashboard dd
+    </h2>
+    
+    <spring:url value="/workspace/showprojects" var="listurl"/>
+     <jtable:table createUrl="${listurl}" deleteUrl="${listurl}" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project" listUrl="${listurl}" name="project" title="Projects" updateUrl="${listurl}">
+      <jtable:field create="false" delete="false" edit="false" field="id" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_id" key="true" show="true" width="5%"/>
+      <jtable:field create="false" delete="false" edit="false" field="name" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_name" key="false" width="25%"/>
+      <jtable:field create="false" delete="false" edit="false" field="agencyName" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyName" key="false" width="20%"/>
+      <jtable:field create="false" delete="false" edit="false" field="agencyNumber" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyNumber" key="false" width="15%"/>
+      <jtable:field create="false" delete="false" edit="false" field="status" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_status" key="false" width="15%"/>
+      <jtable:field create="false" delete="false" edit="false" field="lastUpdatedBy" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdatedBy" key="false" width="20%"/>
+    </jtable:table>
+	  
+	  <sc:authorize access="isAuthenticated()">
+	    <table width="100%">
+	     <tbody>
+		     <td class="dashboard" width="50%">
+		     		<fieldset class="PFGFieldsetWidget">
+		     			<legend><span>User approval requests (3)</span></legend>
+		     			<p>15/12/2012: <a href="#">Wisanu Promthong</a> registered as <a href="#">Brazil</a></p>
+		     			<p>14/12/2012: <a href="#">David Beckham</a> registered as <a href="#">England</a></p>
+		     			<p>10/12/2012: <a href="#">Robby Keane</a> registered as <a href="#">Ireland</a></p>
+		     		</fieldset>
+		     		<fieldset class="PFGFieldsetWidget">
+		     			<legend><span>Project approval requests <a href="/DADashboard/projectrequests">(2)</a></span></legend>
+		     			<p>15/12/2012: <a href="#">Paolo Maldini</a> submitted <a href="#">Publication NSW</a></p>
+		     			<p>11/12/2012: <a href="#">Robeto carlos</a> submitted <a href="#">World Cup 2011</a></p>
+		     		</fieldset>
+		     </td>
+		     <td class="dashboard" width="50%">
+		     		<fieldset class="PFGFieldsetWidget">
+		     			<legend><span>Activities</span></legend>
+		     			<p> 15/12/2012: <a href="#">Awesome Project</a> <b> error</b> :sumcheck error</p>
+		     			<p> 13/12/2012: <a href="#">Awesome Project</a> successfully quarantined</p>
+		     			<p> 11/12/2012: <a href="#">Richard Lehane</a> created project <a href="#">Awesome Project</a></p>
+		     			<p> 10/12/2012: <a href="#">Richard Lehane</a> rejected project <a href="#">Freddio</a></p>
+		     			<p> 09/12/2012: <a href="#">Fred Freddy</a> submitted project request <a href="#">Freddio</a></p>
+		     			<p> 08/12/2012: <a href="#">Paul Elliott</a> approved user <a href="#">Fred Freddy</a></p>
+		     			<p> 08/12/2012: <a href="#">Fred Freddy</a> registered as <a href="#">State Rocket NSW</a></p>  
+		     		</fieldset>
+		     </td>
+	     </tbody>
+	    </table>
+    </sc:authorize>
+  </util:panel>
+</div>

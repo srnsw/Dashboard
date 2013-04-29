@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <jsp:output omit-xml-declaration="yes"/>
+  <spring:message code="label_home_index" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+		<span class="alignright">
+		<form>
+			<select name="options" class="dk">
+			  <option value="">Options</option>
+			  <option value="new_prj">New Project</option>
+			  <option value="new_task">New Task</option>
+			  <option value="share">Share</option>
+			  <option value="export">Reporting</option>
+			</select>
+			<spring:url value="/resources/images/help-browser.png" var="help" />
+			<a href="#" class="noborder" ><img src="${help}" style="border:0" height="30px"></img></a>
+			</form>
+ 		</span>
+    <h2>
+      Dashboard
+    </h2>
+   <div class="jtable-main-container">
+							<div class="jtable-title">
+							  <div class="jtable-title-text">Projects</div>
+							</div>
+							<table class="jtable" >
+							 <thead>
+							   <tr>
+							  <th class="jtable-column-header" style="width: 10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">id</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width: 20%;">
+								   <div class="jtable-column-header-container">
+									 <span class="jtable-column-header-text">Project Name</span>
+									 <div class="jtable-column-resize-handler"></div>
+								   </div>
+								</th>
+								<th class="jtable-column-header" style="width:20%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Agency Name</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:15%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Agency Number</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:15%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Status</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:15%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Last Updated</span>
+								  </div>
+								</th>
+								<th class="jtable-command-column-header" style="width: 1%;"></th>
+								</tr>
+							 </thead>
+							 <tbody>
+							  <tr class="">
+								   <td class="">1</td>
+								   <td class="">Demo Project 1</td>
+									 <td class="">State Robot NSW</td>
+									 <td class="">115000</td>
+									 <td class="">Open</td>
+									 <td class="">14 April 2013</td>
+									 <td class="jtable-command-column"><button id="prj_1_edit_btn" class="jtable-command-button jtable-view-command-button" title="View Project"><span>Edit Record</span></button></td>
+							  </tr>
+							 </tbody>
+							</table>
+							<div class="jtable-bottom-panel">
+							   <span class="alignright"><a href="#" id="view_prj_btn" class="button">View all projects</a></span>
+							</div>
+						</div>
+			  	  <br/>
+			  	  
+			  	   <spring:url value="/resources/images/error.png" var="err_img" />
+	     	     <spring:url value="/resources/images/exclamation.png" var="excla_img" />
+	     	 
+			  	  <div class="jtable-main-container">
+							<div class="jtable-title">
+							  <div class="jtable-title-text">Tasks</div>
+							</div>
+							<table class="jtable" >
+							 <thead>
+							   <tr>
+							  <th class="jtable-column-header" style="width: 5%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">id</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width: 15%;">
+								   <div class="jtable-column-header-container">
+									 <span class="jtable-column-header-text">Task Name</span>
+									 <div class="jtable-column-resize-handler"></div>
+								   </div>
+								</th>
+								<th class="jtable-column-header" style="width:20%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Details</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Assigned To</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Created By</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:15%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Due Date</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:5%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Alerts</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Status</span>
+								  </div>
+								</th>
+								<th class="jtable-command-column-header" style="width: 1%;"></th>
+								</tr>
+							 </thead>
+							 <tbody>
+							  <tr class="">
+								   <td class="">1</td>
+								   <td class="">Contact Agency</td>
+									 <td class="">Contact State Rocket NSW for ...</td>
+									 <td class="">Richard Lehane</td>
+									 <td class="">Ken Zhai</td>
+									 <td class="">24 April 2013</td>
+									 <td class=""><img src="${excla_img}" style="border:0"/></td>
+									 <td class="">Overdue</td>
+									 <td class="jtable-command-column"><button id="prj_1_edit_btn" class="jtable-command-button jtable-view-command-button" title="View Task"><span>Edit Record</span></button></td>
+							  </tr>
+							 </tbody>
+							</table>
+							<div class="jtable-bottom-panel">
+							   <span class="alignright"><a href="#" id="new_task_btn" class="button">View all tasks</a></span>
+							</div>
+						</div>
+			  	  <br/>
+			 <table width="100%">
+	     <tbody>
+		     <td class="dashboard" width="50%">
+		     		<fieldset class="PFGFieldsetWidget">
+		     			<legend><span>Activities</span></legend>
+		     			<p> 11/12/2012: <a href="#">Richard Lehane</a> created <a href="#">Demo Project 1</a></p>
+		     			<p> 10/12/2012: <a href="#">Paul Elliott</a> updated <a href="#">Demo Project 2</a> </p>
+		     			<p> 09/12/2012: <a href="#">Ken Zhai</a> uploaded 50 files to <a href="#">Demo Project 3</a></p>
+		     			<p> 08/12/2012: <a href="#">Cassie Findlay</a> approved user <a href="#">Damien Juhasz</a></p>
+		     		</fieldset>
+		     </td>
+	     </tbody>
+	    </table>
+	    
+  </util:panel>
+  
+  <spring:url value="/" var="root_url"></spring:url>
+  <script>
+	    $(function() {
+	    	
+	    	$('.dk').dropkick({
+	    			width: 70,
+	    		  change: function (value, label) {
+	    		    //alert('You picked: ' + label + ':' + value);
+	    		    if (value == "new_prj"){
+	    		       window.open('${root_url}projects?form', '_blank');
+	    		    }else if (value == "new_task"){
+	    		       //window.open('${root_url}projects/1', '_blank');
+	    		    }else if (value == "share"){
+		    		       //window.open('${root_url}projects/1', '_blank');
+	    		    }else if (value == "export"){
+		    		       //window.open('${root_url}projects/1', '_blank');
+	    		    }else {
+	    		    	//alert('You pickedx: ' + label + ':' + value);
+	    		    }
+	    		    $('.dk').dropkick('reset');
+	    		  }
+	    		});
+	    	
+	    	$('.button').button();
+    	  $('#view_prj_btn').click(function(e) {
+	            e.preventDefault();  //stop the browser from following
+	            window.location.href = '${root_url}projects';
+	      });
+    	  $('#prj_1_edit_btn').click(function(e) {
+	            e.preventDefault();  //stop the browser from following
+	            window.location.href = '${root_url}projects/1';
+	      });
+
+	    });
+	</script>
+</div>

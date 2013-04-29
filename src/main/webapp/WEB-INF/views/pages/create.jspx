@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_au_gov_nsw_records_digitalarchives_dashboard_model_Page" modelAttribute="page" path="/pages" render="${empty dependencies}" z="q7HaXz1zl9Uelu5Ei4z+wqIeYCg=">
+        <field:simpleinput field="title" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Page_title" size="60" z="user-managed"/>
+        <field:simpleinput field="content" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Page_content" z="user-managed"/>
+        <field:input field="lastUpdateUser" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Page_lastUpdateUser" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${page_lastupdate_date_format}" field="lastUpdate" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Page_lastUpdate" render="false" z="user-managed"/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_au_gov_nsw_records_digitalarchives_dashboard_model_Page" render="${not empty dependencies}" z="EiNHlkNT8f70dBZx8Z9Vw2GVrG8="/>
+    <script type="text/javascript">
+			$(document).ready(function() {
+				var arr = $('#_content_id').rte({
+					css: ['default.css'],
+					width: 700,
+					height: 400,
+					controls_rte: rte_toolbar,
+					controls_html: html_toolbar
+				});
+				
+			});
+		</script>
+</div>

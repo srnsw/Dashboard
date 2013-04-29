@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <h2>Registered Dashboard Users</h2>
+    <page:list id="pl_au_gov_nsw_records_digitalarchives_dashboard_model_Person" items="${people}" render="false" z="user-managed">
+        <table:table data="${people}" id="l_au_gov_nsw_records_digitalarchives_dashboard_model_Person" path="/members" z="L0oJ+V1GyTfec4TPpMxYgHkioZw=">
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_name" property="name" z="XUU6bLMTLhNsp0uBWd4c0XxGgDM="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_email" property="email" z="GR7J6yBVeREZeOrR89qdcu1ks0Q="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_password" property="password" render="false" z="user-managed"/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_telephone" property="telephone" z="pWf90XfiX4YxDIcd2cn/zfDQfB0="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_address" property="address" render="false" z="user-managed"/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_approved" property="approved" z="arltwcmA/NTeXt1kDYPTRCyBS2I="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_jobtitle" property="jobtitle" z="BDzZXe3n77Dv4cftZZOgMIxzpiA="/>
+        </table:table>
+    </page:list>
+    
+    <div class="jtable-main-container">
+							<div class="jtable-title">
+							  <div class="jtable-title-text">Registered Dashboard Users</div>
+							</div>
+							<table class="jtable" >
+							 <thead>
+							   <tr>
+							  <th class="jtable-column-header" style="width: 20%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Name</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width: 20%;">
+								   <div class="jtable-column-header-container">
+									 <span class="jtable-column-header-text">Agency</span>
+									 <div class="jtable-column-resize-handler"></div>
+								   </div>
+								</th>
+								<th class="jtable-column-header" style="width:20%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Role</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:15%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Email</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:15%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Telephone</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:15%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Status</span>
+								  </div>
+								</th>
+								<th class="jtable-command-column-header" style="width: 1%;"></th>
+								<th class="jtable-command-column-header" style="width: 1%;"></th>
+								</tr>
+							 </thead>
+							 <tbody>
+							  <c:set value="true" var="iseven" />
+							  <c:forEach items="${people}" var="member">
+							    <c:choose>
+							    	 <c:when test="${iseven eq true}">
+								    	 <c:set value="jtable-row-even" var="trclass"></c:set>
+								    	 <c:set value="false" var="iseven" />
+							    	 </c:when>
+							    	 <c:otherwise>
+							    	 	 <c:set value="" var="trclass"></c:set>
+							    		 <c:set value="true" var="iseven" />
+							    	 </c:otherwise>
+							    </c:choose>
+								  <tr class="${trclass}">
+									   <td class="">${member.name}</td>
+									   <td class="">${member.agencyText}</td>
+										 <td class="">${member.jobtitle}</td>
+										 <td class="">${member.email}</td>
+										 <td class="">${member.telephone}</td>
+										 <td class="">
+											 <c:choose>
+									    	 <c:when test="${member.approved eq true}">
+									    	 	approved
+									    	 </c:when>
+									    	 <c:otherwise>
+									    	  pending
+									    	 </c:otherwise>
+								    	 </c:choose>
+										 </td>
+										 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit User"><span>Edit Member</span></button></td>
+		 							   <td class="jtable-command-column"><button class="jtable-command-button jtable-view-command-button" title="View"><span>View</span></button></td>
+								  </tr>
+							   </c:forEach>
+							 </tbody>
+							</table>
+							<div class="jtable-bottom-panel">
+							  <span class="alignright"> Page 1 of 4 <a href="#">>></a></span>
+							</div>
+						</div>
+			  	  <br/>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="peoples/list">
+        <put-attribute name="body" value="/WEB-INF/views/peoples/list.jspx"/>
+    </definition>
+<definition extends="default" name="peoples/show">
+        <put-attribute name="body" value="/WEB-INF/views/peoples/show.jspx"/>
+    </definition>
+<definition extends="default" name="peoples/create">
+        <put-attribute name="body" value="/WEB-INF/views/peoples/create.jspx"/>
+    </definition>
+<definition extends="default" name="peoples/update">
+        <put-attribute name="body" value="/WEB-INF/views/peoples/update.jspx"/>
+    </definition>
+<definition extends="default" name="members/list">
+        <put-attribute name="body" value="/WEB-INF/views/members/list.jspx"/>
+    </definition>
+<definition extends="default" name="members/show">
+        <put-attribute name="body" value="/WEB-INF/views/members/show.jspx"/>
+    </definition>
+<definition extends="default" name="members/create">
+        <put-attribute name="body" value="/WEB-INF/views/members/create.jspx"/>
+    </definition>
+<definition extends="default" name="members/update">
+        <put-attribute name="body" value="/WEB-INF/views/members/update.jspx"/>
+    </definition>
+<definition extends="default" name="members/retrieve">
+        <put-attribute name="body" value="/WEB-INF/views/members/retrieve.jspx"/>
+    </definition>
+</tiles-definitions>

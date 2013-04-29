@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest" items="${projectrequests}" z="ImFsWTFgMeVuXqA2HWCKAr5uGsM=">
+        <table:table data="${projectrequests}" id="l_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest" path="/projectrequests" z="ggIwe3GiawbmImm142d1Nwf8anY=">
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_requestPerson" property="requestPerson" z="CiieBCCTR1exum5y3RaEM5XnbOs="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_reason" property="reason" z="X29SI5nfFt2SaPOGyvIDK/98X/w="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_overview" property="overview" z="c7mxRrOoXANy56LOYb8iLEdpEIY="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_disposalAuthorisationRegistered" property="disposalAuthorisationRegistered" z="LEP3+JtuY9l2iz7NtatzuX7DrGw="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_disposalAuthorisationNumber" property="disposalAuthorisationNumber" z="1NM/bXLPDDu/dJc3aFj7xCLpr7Y="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_accessDirectionRegistered" property="accessDirectionRegistered" z="RfyzKhRmbDENHtGHCnaqkPwrLLs="/>
+        </table:table>
+    </page:list>
+</div>

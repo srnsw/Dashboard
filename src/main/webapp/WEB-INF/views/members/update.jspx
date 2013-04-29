@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_au_gov_nsw_records_digitalarchives_dashboard_model_Person" modelAttribute="person" path="/members" versionField="Version" z="LTZqIGXfgNPPA/FSQY3+GVj4DfI=">
+        <field:simpleinput field="email" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_email" required="true" z="user-managed"/>
+        <field:simpleinput field="password" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_password" render="false" required="true" type="password" z="user-managed"/>
+        <field:simpleinput field="name" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_name" required="true" z="user-managed"/>
+        <field:simpleinput field="telephone" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_telephone" z="user-managed"/>
+        <field:textarea field="address" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_address" required="true" z="user-managed"/>
+        <field:simpleinput field="agencyNumber" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyNumber" z="user-managed"/>
+        <field:select field="roleType" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_roleType" items="${roletypes}" path="roletypes" z="A3jR7rCQ4B6V0RJgPOFSMTTVSRU="/>
+        <field:checkbox field="approved" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_approved" z="Ne8CG0/6ozsUUFwnm1n4JYyoWTM="/>
+        <field:input field="jobtitle" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_jobtitle" z="HGrxcXRisEYaY92XzyWVYjnAifo="/>
+        <field:input field="agencyText" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyText" required="true" z="FeheoyNEwe8EnE4EQmYScqbh4mI="/>
+    </form:update>
+</div>

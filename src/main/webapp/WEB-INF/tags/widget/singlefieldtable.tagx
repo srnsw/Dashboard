@@ -1,0 +1,88 @@
+<jsp:root xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="yes" />
+
+  <jsp:directive.attribute name="title" type="java.lang.String" required="true" rtexprvalue="true" description="Title of this table" />
+  <jsp:directive.attribute name="object" type="java.lang.Object" required="true" rtexprvalue="true" description="The form backing object" />
+  <jsp:directive.attribute name="field" type="java.lang.String" required="true" rtexprvalue="true" description="The field name" />
+  <jsp:directive.attribute name="updateUrl" type="java.lang.String" required="false" rtexprvalue="true" description="update URL" />
+ 
+ 
+ <div class="jtable-main-container">
+		<div class="jtable-title">
+		  <div class="jtable-title-text">${title}</div>
+		</div>
+		<table class="jtable">
+		 <tbody>
+		  <tr>
+			 <td class="" id="id_${field}_field">${object}</td>
+		  </tr>
+		 </tbody>
+		</table>
+		<div class="jtable-bottom-panel">
+		  <span class="alignright"><a id="${title}_${id}_update" href="#"> Update </a></span>
+		</div>
+	</div>
+	<br/>
+  
+  <div id="${title}_${id}_dialog_form" title="Update: ${title}" class="dawidget">
+	  <form>
+		  <fieldset>
+		    <label for="${field}">${field}</label>
+		    <textarea type="text" rows="8" name="${field}" id="id_dialog_${field}" >${object}</textarea>
+		  </fieldset>
+	  </form>
+  </div>
+
+  <script>
+  $(function() {
+	  
+	  function update(){
+		  $.ajax({
+	          type:'POST',
+	          url: '/forms/1/${field}',
+	          data: "${field}=" + $("#id_dialog_${field}").val(),
+	    }).done(function ( data ) {
+	    	alert("done");	
+	    }).fail(function ( data ) {
+	    	alert("fail");
+	    });
+	  }
+	  
+	  $( "#${title}_${id}_dialog_form" ).dialog({
+	      autoOpen: false,
+	      height: 300,
+	      width: 350,
+	      modal: true,
+	      buttons: {
+	        "Update": function() {
+	        	//POST update to the server
+		        $.ajax({
+		  	          type:'POST',
+		  	          url: '/forms/1/${field}',
+		  	          data: "${field}=" + $("#id_dialog_${field}").val(),
+		  	    }).done(function ( data ) {
+		  	    	alert("done");
+		  	    	//update DOM and close
+		  	    	$( "#id_${field}_field" ).text( $("#id_dialog_${field}").val() );
+		          $( this ).dialog( "close" );
+		  	    }).fail(function ( data ) {
+		  	    	//alert error
+		  	    	alert("fail");
+		  	    });
+	        },
+	        Cancel: function() {
+	          $( this ).dialog( "close" );
+	        }
+	      },
+	      close: function() {
+	       
+	      }
+	    });
+	 
+		  $( "#${title}_${id}_update" ).button().click(function() {
+		    $( "#${title}_${id}_dialog_form" ).dialog( "open" );
+		  });
+  });
+ 
+	</script>
+</jsp:root>

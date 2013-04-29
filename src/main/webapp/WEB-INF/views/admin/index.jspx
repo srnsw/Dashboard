@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <jsp:output omit-xml-declaration="yes"/>
+  <spring:message code="label_admin_index" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+   
+   <spring:url value="/" var="root_url"></spring:url>
+   <spring:url value="/resources/images/" var="image_url"></spring:url>
+    
+    <h2>Administrative area </h2>
+    <br/>
+    
+     <table width="100%">
+	     <tbody>
+		     <td class="dashboard" width="50%">
+		     		<fieldset class="PFGFieldsetWidget">
+		     			<legend><span>User management</span></legend>
+		     			<p> User registration approval - list users registration request</p>
+		     		</fieldset>
+		     </td>
+		     <td class="dashboard" width="50%">
+		       	<fieldset class="PFGFieldsetWidget">
+		     			<legend><span>Task management</span></legend>
+		     			<p> Create a new task</p>
+		     			<p> View all tasks (show table)</p>
+		     		</fieldset>
+		     </td>
+	     </tbody>
+	    </table>
+	    
+	    <table width="100%">
+	     <tbody>
+		     <td class="dashboard" width="50%">
+		     		<fieldset class="PFGFieldsetWidget">
+		     			<legend><span>Project management</span></legend>
+					     <p><a href="${root_url}pages/projectplan"> Project Plan Template <img src="${image_url}table_edit.png" /></a> <a href="${root_url}pages/1"><img src="${image_url}view.png" /></a><br/></p> 
+					     <p><a href="${root_url}pages/migrationplan"> Migration Plan Template  <img src="${image_url}table_edit.png" /></a> <a href="${root_url}pages/2"><img src="${image_url}view.png" /></a> <br/></p>
+		     		</fieldset>
+		     </td>
+		     <td class="dashboard" width="50%">
+		       	<fieldset class="PFGFieldsetWidget">
+		     			<legend><span>Notification</span></legend>
+		     			<b> Notification on Project creation</b>
+		     				<p> <a href= "#" >Richard Lehene</a> <a href="#"><img title="remove" src="${image_url}vcard_delete.png" /></a> 
+		     				<a href= "#" > Cassie Findlay </a><a href="#"><img title="remove" src="${image_url}vcard_delete.png" /></a></p>
+		     				<p><input type="text"><!--  --></input><a href="#"><img title="add" src="${image_url}vcard_add.png" /></a></p>
+		     			<b> Notification on User registration</b>
+		     				<p> <a href= "#" > Richard Lehene </a> <a href="#"><img title="remove" src="${image_url}vcard_delete.png" /></a> 
+		     				<a href= "#" > Cassie Findlay </a><a href="#"><img title="remove" src="${image_url}vcard_delete.png" /></a></p>
+		     				<p><input type="text"><!--  --></input><a href="#"><img title="add" src="${image_url}vcard_add.png" /></a></p>
+		     		</fieldset>
+		     </td>
+	     </tbody>
+	    </table>
+    
+    
+  </util:panel>
+</div>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:dashboard="urn:jsptagdir:/WEB-INF/tags/dashboard" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <script>   (function( $ ){
+    	//plugin buttonset vertical
+    	$.fn.buttonsetv = function() {
+    	  $(':radio, :checkbox', this).wrap('<div style="margin: 1px"/>');
+    	  $(this).buttonset();
+    	  $('label:first', this).removeClass('ui-corner-left').addClass('ui-corner-top');
+    	  $('label:last', this).removeClass('ui-corner-right').addClass('ui-corner-bottom');
+    	  mw = 0; // max witdh
+    	  $('label', this).each(function(index){
+    	     w = $(this).width();
+    	     if (w &gt; mw) mw = w; 
+    	  })
+    	  $('label', this).each(function(index){
+    	    $(this).width(mw);
+    	    $(this).css('text-align', 'left');
+    	  })
+    	};
+    	})( jQuery );
+    </script>
+    <h3>Project: ${project.name}</h3>
+    <div id="projectupdatetabs">
+        <ul>
+            <li>
+                <a href="#update_tabs-0">Overview</a>
+            </li>
+            <li>
+                <a href="#update_tabs-1">Project Proposal</a>
+            </li>
+            <li>
+                <a href="#update_tabs-2">Project Assessment</a>
+            </li>
+            <li>
+                <a href="#update_tabs-3">Migration Plan</a>
+            </li>
+            <li>
+                <a href="#update_tabs-4">Event Logs</a>
+            </li>
+        </ul>
+        <div id="update_tabs-0">
+            <dashboard:projectoverview/>
+        </div>
+        <div id="update_tabs-1">
+            <dashboard:projectproposal/>
+        </div>
+        <div id="update_tabs-2">
+            <dashboard:projectassessment/>
+        </div>
+        <div id="update_tabs-3">
+            <dashboard:migrationplan files="${files}"/>
+        </div>
+        <div id="update_tabs-4">
+            <div class="jtable-main-container">
+                <div class="jtable-title">
+                    <div class="jtable-title-text">Event Logs</div>
+                </div>
+                <table class="jtable">
+                    <thead>
+                        <tr>
+                            <th class="jtable-column-header" style="width: 20%;">
+                                <div class="jtable-column-header-container">
+                                    <span class="jtable-column-header-text">User</span>
+                                </div>
+                            </th>
+                            <th class="jtable-column-header" style="width: 60%;">
+                                <div class="jtable-column-header-container">
+                                    <span class="jtable-column-header-text">Event</span>
+                                    <div class="jtable-column-resize-handler"/>
+                                </div>
+                            </th>
+                            <th class="jtable-column-header" style="width:20%;">
+                                <div class="jtable-column-header-container">
+                                    <span class="jtable-column-header-text">Timestamp</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="">
+                            <td class="">
+                                <a href="#">Richard Lehane</a>
+                            </td>
+                            <td class="">Changed project status to Approved</td>
+                            <td class="">10:35:05 13/2/2013</td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <a href="#">Ken Zhai</a>
+                            </td>
+                            <td class="">Updated Delivery Options</td>
+                            <td class="">12:34:55 9/2/2013</td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <a href="#">Cassie Findlay</a>
+                            </td>
+                            <td class="">Created the project</td>
+                            <td class="">9:24:15 25/1/2013</td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <a href="#">Cassie Findlay</a>
+                            </td>
+                            <td class="">Created the project</td>
+                            <td class="">9:24:15 25/1/2013</td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <a href="#">System</a>
+                            </td>
+                            <td class="">Sent project approval notifications to email@somewhere.gov.au, email@jedi.gov.au</td>
+                            <td class="">9:24:15 25/1/2013</td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <a href="#">Cassie Findlay</a>
+                            </td>
+                            <td class="">Created the project</td>
+                            <td class="">9:24:15 25/1/2013</td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <a href="#">Cassie Findlay</a>
+                            </td>
+                            <td class="">Created the project</td>
+                            <td class="">9:24:15 25/1/2013</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="jtable-bottom-panel">
+                    <span class="alignright"> Page 1 of 4 <a href="#">&gt;&gt;</a>
+                    </span>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+    <script>
+	    $(function() {
+	        $( "#projectupdatetabs" ).tabs();
+	        $( "#proceed" ).button();
+	    });
+    </script>
+    <form:update id="fu_au_gov_nsw_records_digitalarchives_dashboard_model_Project" modelAttribute="project" path="/projects" render="false" versionField="Version" z="user-managed">
+        <field:input field="name" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_name" z="6w6RF6RWtzpetiBcmfrOxsycMhI="/>
+        <field:input field="agencyName" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyName" z="vvjx2tSs7OeUswJvSnavIAIyBrE="/>
+        <field:input field="agencyNumber" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyNumber" z="gFOfe3pd2y26s0jiRNpXJ1IDhpU="/>
+        <field:input field="agencyContact" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyContact" z="ymv1cFNKmzGHYEWxul1wg8GGc1M="/>
+        <field:input field="srnswContact" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_srnswContact" z="o8epaI7ci8eM9O4aVFj6S/g1vts="/>
+        <field:input field="srnswFileReference" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_srnswFileReference" z="Lx21XVgEUShCUbI/tKi/+/dAdhc="/>
+        <field:input field="migrationPlanDescription" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_migrationPlanDescription" z="qAS4N+MYzZD4AnZKVYY9++1sKEU="/>
+        <field:input field="status" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_status" z="snKaGl9Ur8M+thRo78Y5OrAGGi4="/>
+        <field:datetime dateTimePattern="${project_creationdate_date_format}" field="creationDate" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_creationDate" z="/MHuL/NMAYHJ8LfFERQCXkHn1UI="/>
+        <field:input field="lastUpdatedBy" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdatedBy" z="3RvOIVesD6D7FsxEUl3wFZWoUDI="/>
+        <field:input field="overview" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_overview" z="ltrpR15cOPJPWWbcVQ1LIUa2SBE="/>
+        <field:datetime dateTimePattern="${project_lastupdate_date_format}" field="lastUpdate" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdate" z="q1O3eKs6AQKLaWcJWCTVJ09KcWg="/>
+    </form:update>
+</div>

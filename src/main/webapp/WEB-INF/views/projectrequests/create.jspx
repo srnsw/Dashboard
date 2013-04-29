@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jquery="urn:jsptagdir:/WEB-INF/tags/jquery" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <h2>Migration Project Request</h2>
+    <br/>
+    <spring:url value="/projectrequests/currentuser" var="listurl"/>
+    <spring:url value="/projectrequests/currentuser" var="listurl"/>
+    <spring:url value="/projectrequests/currentuser" var="listurl"/>
+    <spring:url value="/projectrequests/currentuser" var="listurl"/>
+    <jtable:table createUrl="${listurl}" deleteUrl="${listurl}" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person" listUrl="${listurl}" name="overview" title="Migration Project Details" updateUrl="${listurl}">
+        <jtable:field create="false" delete="false" edit="false" field="id" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_id" key="true" show="false" width="5%"/>
+        <jtable:field create="false" delete="false" edit="false" field="label" id="c_column_label" key="false" width="25%"/>
+        <jtable:field create="false" delete="false" edit="true" field="value" id="c_column_value" key="false" width="75%"/>
+    </jtable:table>
+    <form:create id="fc_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest" modelAttribute="projectRequest" path="/projectrequests" render="${empty dependencies}" z="904kf9nCI+GvnNto2qQolxmS9NA=">
+        <field:input field="requestPerson" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_requestPerson" render="false" z="user-managed"/>
+        <field:textarea field="reason" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_reason" z="user-managed"/>
+        <label for="dateRange">Date Range:</label>
+        <p id="dateRange">
+            <jquery:select field="dateStartQualifier" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_dateStartQualifier" itemValue="name" items="${datequalifiers}" path="datequalifiers" z="user-managed"/>
+            <input id="datepickerFrom" size="10" type="text"/>
+		     To
+		     <jquery:select field="dateEndQualifier" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_dateEndQualifier" itemValue="name" items="${datequalifiers}" path="datequalifiers" z="user-managed"/>
+            <input id="datepickerTo" size="10" type="text"/>
+        </p>
+        <field:textarea field="overview" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_overview" z="user-managed"/>
+        <jquery:checkbox field="disposalAuthorisationRegistered" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_disposalAuthorisationRegistered" linkClass="disposalNoInfo"/>
+        <div class="disposalNoInfo">
+            <field:input field="disposalAuthorisationNumber" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_disposalAuthorisationNumber" z="ZocQIc2EGmtBQBl+FKckzW+S+1k="/>
+        </div>
+        <jquery:checkbox field="accessDirectionRegistered" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_accessDirectionRegistered" linkClass="accessNoInfo"/>
+        <div class="accessNoInfo">
+            <field:input field="accessDirectionNumber" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_accessDirectionNumber" z="zRsLfaU1RpWGHmooG9DahJSyj8c="/>
+        </div>
+        <jquery:checkbox field="recordsBeingUsed" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_recordsBeingUsed"/>
+        <label for="physicalRecInfo">Are there any physical format records related to this migration request:</label>
+        <div id="physicalRecInfo">
+            <p id="physicalRecInfoRadio">
+                <input checked="checked" id="physicalradio1" name="physicalRecInfo" type="radio"/>
+                <label for="physicalradio1">Yes</label>
+                <input id="physicalradio2" name="physicalRecInfo" type="radio"/>
+                <label for="physicalradio2">No</label>
+                <input id="physicalradio3" name="physicalRecInfo" type="radio"/>
+                <label for="physicalradio3">Unsure</label>
+            </p>
+            <div class="relatedPhysicalRecordsInfo">
+                <field:textarea field="relatedPhysicalRecords" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_relatedPhysicalRecords" z="user-managed"/>
+            </div>
+            ${nonexistancevar}
+        </div>
+        <field:checkbox field="accessDirectionRegistered" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_accessDirectionRegistered" render="false" z="reoH1/eqbXxnVAcg4rx1inr8284="/>
+        <field:checkbox field="disposalAuthorisationRegistered" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_disposalAuthorisationRegistered" render="false" z="+IdO/zPHmroJbFIyRDv6oDiMOwU="/>
+        <field:checkbox field="recordsBeingUsed" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_recordsBeingUsed" render="false" z="W47iDu5EHtyEix7/7mKl28BbYT4="/>
+        <field:datetime dateTimePattern="${projectRequest_datestart_date_format}" field="dateStart" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_dateStart" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${projectRequest_dateend_date_format}" field="dateEnd" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest_dateEnd" render="false" z="user-managed"/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_au_gov_nsw_records_digitalarchives_dashboard_model_ProjectRequest" render="${not empty dependencies}" z="2iTFoVgvqN6PKiDfOUuc7YsFb0Q="/>
+    <script>
+		  $(function() {
+			    $( "#physicalRecInfoRadio" ).buttonset();
+	        
+			    $( "#physicalradio1" ).click(function() {
+	        	$(".relatedPhysicalRecordsInfo").show();
+	        });
+	        $("#physicalradio2").click(function() {
+			      $(".relatedPhysicalRecordsInfo").hide();
+			    });
+	        $("#physicalradio3").click(function() {
+			      $(".relatedPhysicalRecordsInfo").hide();
+			    });
+		      
+	        $( "#datepickerFrom" ).datepicker({
+		          showOn: "button",
+		          changeMonth: true,
+		          changeYear: true,
+		          buttonImage: "/DADashboard/resources/images/calendar.png",
+		          buttonImageOnly: true
+		      });
+		      $( "#datepickerTo" ).datepicker({
+		          showOn: "button",
+		          changeMonth: true,
+		          changeYear: true,
+		          buttonImage: "/DADashboard/resources/images/calendar.png",
+		          buttonImageOnly: true
+		      });
+		      $( document ).tooltip();
+		      $( "#proceed" ).button();
+		  });
+		</script>
+</div>

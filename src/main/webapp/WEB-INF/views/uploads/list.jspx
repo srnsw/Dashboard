@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_au_gov_nsw_records_digitalarchives_dashboard_model_Upload" items="${uploads}" render="false" z="user-managed">
+        <table:table data="${uploads}" id="l_au_gov_nsw_records_digitalarchives_dashboard_model_Upload" path="/uploads" z="qJ2D9FRF0U76KMiCx2QHWtBktYI=">
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileName" property="fileName" z="QLHpS4CfNpzY/fLxU7+bf1SfKTs="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileSize" property="fileSize" z="ay0qC487TMlXxPe6b9/1xcDkkXs="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_uuid" property="uuid" z="SE6KmgqTw6sBuxpvLFMTE98ER6A="/>
+        </table:table>
+    </page:list>
+    
+    <span class="alignright">
+		<form>
+			<select name="options" class="dk">
+			  <option value="">Options</option>
+			  <option value="upload">Upload files</option>
+			  <option value="assessment">Run assessment</option>
+			  <option value="fileanalysis">File analysis</option>
+			  <option value="metadataanalysis">Metadata analysis</option>
+			</select>
+			<spring:url value="/resources/images/help-browser.png" var="help" />
+			<a href="#" class="noborder"><img src="${help}" style="border:0" height="30px"></img></a>
+			</form>
+ 		</span>
+ 		
+ 		<div id="run_assessment" title="Run Assessment options" class="dawidget">
+	   <form>
+			<h4>Select options</h4>
+	   	<input type="radio" name="exportformat" value="word"/>File Analysis<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>Metadata Analysis<br/>
+	   </form>
+    </div>
+    
+    <div id="file_analysis" title="File Analysis options" class="dawidget">
+	   <form>
+			<h4>Select options</h4>
+	   	<input type="radio" name="exportformat" value="word"/>Run scan<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>Rescan<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>Refresh<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>Update file type ID<br/>
+	   </form>
+    </div>
+    
+    <div id="metadata_analysis" title="Metadata Analysis options" class="dawidget">
+	   <form>
+			<h4>Select options</h4>
+	   	<input type="radio" name="exportformat" value="word"/>Run TIKA<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>Run EXIFTOOL<br/>
+	   </form>
+    </div>
+ 		<spring:url value="/" var="root_url"></spring:url>
+ 		<script>
+	
+	 		$('.dk').dropkick({
+				width: 110,
+			  change: function (value, label) {
+			    	if (value == "upload"){
+			    		 //$( "#splitform" ).dialog( "open" );
+		 		    }else if (value == "assessment"){
+		 		       $( "#run_assessment" ).dialog( "open" );
+		 		    }else if (value == "fileanalysis"){
+		 		       $( "#file_analysis" ).dialog( "open" );
+		 		    }else if (value == "metadataanalysis"){
+		 		       $( "#metadata_analysis" ).dialog( "open" );
+		 		    }
+			    	$('.dk').dropkick('reset');
+			  }
+			});
+ 		</script>
+ 		
+    <h2>File Management</h2>
+    <spring:url value="/resources" var="resourcepath"/>
+    
+    <input type="text" name="filter_input"/>
+		<SPAN id="filter">Filter</SPAN>
+		<SCRIPT type="text/javascript">
+			$("#filter").button().click(function() {
+   		//$( "#exportform" ).dialog( "open" );
+			});
+		</SCRIPT>
+    <br/>
+    <br/>
+   <div class="jtable-main-container">
+							<div class="jtable-title">
+							  <div class="jtable-title-text">File Management</div>
+							</div>
+							<table class="jtable" >
+							 <thead>
+							   <tr>
+							  <th class="jtable-column-header" style="width: 25%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">File Name</span>
+								  </div>
+								</th>
+								  <th class="jtable-column-header" style="width: 10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Extension</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width: 10%;">
+								   <div class="jtable-column-header-container">
+									 <span class="jtable-column-header-text">File Type</span>
+									 <div class="jtable-column-resize-handler"></div>
+								   </div>
+								</th>
+								<th class="jtable-column-header" style="width: 10%;">
+								   <div class="jtable-column-header-container">
+									 <span class="jtable-column-header-text">PUID</span>
+									 <div class="jtable-column-resize-handler"></div>
+								   </div>
+								</th>
+								<th class="jtable-column-header" style="width: 10%;">
+								   <div class="jtable-column-header-container">
+									 <span class="jtable-column-header-text">Format Type ID</span>
+									 <div class="jtable-column-resize-handler"></div>
+								   </div>
+								</th>
+								<th class="jtable-column-header" style="width:10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Size</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:15%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Status</span>
+								  </div>
+								</th>
+								<th class="jtable-command-column-header" style="width: 1%;"></th>
+								</tr>
+							 </thead>
+							 <tbody>
+								  <tr class="">
+									   <td class=""></td>
+									   <td class=""></td>
+										 <td class=""></td>
+										 <td class=""></td>
+										 <td class=""></td>
+										 <td class=""></td>
+										 <td class=""></td>
+										 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete file"><span>Delete file</span></button></td>
+								  </tr>
+							 </tbody>
+							</table>
+							<div class="jtable-bottom-panel">
+								<span id="upload">Upload</span>
+								<script>
+									$("#upload").button().click(function() {
+									    //$( "#exportform" ).dialog( "open" );
+									});
+								</script>
+							  <span class="alignright"> </span>
+							</div>
+						</div>
+			  	  <br/>
+			  	  
+    <br/>
+    
+    <div id="exportform" title="Report options" class="dawidget">
+	   <form>
+	   	
+	   	<h4>Tools</h4>
+	   	<input type="checkbox" name="exportcontent" value="proposal"/> Exif<br/>
+			<input type="checkbox" name="exportcontent" value="assessment"/> Apache Tika <br/>
+			<input type="checkbox" name="exportcontent" value="assessment"/> Droid <br/>
+			
+			<h4>Report type</h4>
+	   	<input type="radio" name="exportformat" value="word"/>Summary report<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>Detailed report<br/>
+	    			 
+	    <h4>Report coverage</h4>
+	   	<input type="radio" name="exportformat" value="word"/>Current batch<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>All records<br/>
+	    
+	   </form>
+    </div>
+    
+     <div id="splitform" title="Split to.." class="dawidget">
+	   <form>
+	   	
+			<h4>Select batch size</h4>
+	   	<input type="radio" name="exportformat" value="word"/>10<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>20<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>50<br/>
+	    <input type="radio" name="exportformat" value="pdf"/>Custom:<br/>
+	    <input type="text" size="10"/><br/>
+	    			 
+	   </form>
+    </div>
+    <script>
+  
+  $(document).ready(function() {
+	  $("#report_btn").button().click(function() {
+		    $( "#exportform" ).dialog( "open" );
+		});
+	  
+	  $("#split_btn").button().click(function() {
+		    $( "#splitform" ).dialog( "open" );
+		});
+	  
+	  $( "#exportform" ).dialog({
+	      autoOpen: false,
+	      height: 350,
+	      width: 350,
+	      modal: true,
+	      buttons: {
+	        "OK": function() {
+	        	$( this ).dialog( "close" );
+	        },
+	        Cancel: function() {
+	          $( this ).dialog( "close" );
+	        }
+	      },
+	      close: function() {
+	       
+	      }
+	    });
+	  
+	  $( "#splitform" ).dialog({
+	      autoOpen: false,
+	      height: 270,
+	      width: 350,
+	      modal: true,
+	      buttons: {
+	        "OK": function() {
+	        	$( this ).dialog( "close" );
+	        },
+	        Cancel: function() {
+	          $( this ).dialog( "close" );
+	        }
+	      },
+	      close: function() {
+	       
+	      }
+	    });
+	  
+	  $( "#run_assessment" ).dialog({
+ 	      autoOpen: false, 
+ 	      height: 200,
+ 	      width: 350,
+ 	      modal: true,
+ 	      buttons: {
+ 	        "OK": function() { $( this ).dialog( "close" ); },
+ 	        Cancel: function() { $( this ).dialog( "close" ); }
+ 	      },
+ 	      close: function() {}
+ 	    });
+ 	  
+ 	 $( "#file_analysis" ).dialog({
+ 	      autoOpen: false, height: 250, width: 350, modal: true,
+ 	      buttons: {
+ 	        "OK": function() { $( this ).dialog( "close" ); },
+ 	        Cancel: function() { $( this ).dialog( "close" ); }
+ 	      },
+ 	      close: function() {}
+ 	    });
+ 	 
+ 	 $( "#metadata_analysis" ).dialog({
+ 	      autoOpen: false, height: 200, width: 350, modal: true,
+ 	      buttons: {
+ 	        "OK": function() { $( this ).dialog( "close" ); },
+ 	        Cancel: function() { $( this ).dialog( "close" ); }
+ 	      },
+ 	      close: function() {}
+ 	    });
+  });
+ 
+	$(function() {
+			
+		// Convert divs to queue widgets when the DOM is ready
+		$("#uploader").plupload({
+			// General settings
+			runtimes : 'flash,browserplus,html5',
+			url : '/DADashboard/uploads/create',
+			max_file_size : '9mb',
+			unique_names : true,
+	
+			// Resize images on clientside if we can
+			// resize : {width : 320, height : 240, quality : 90},
+	
+			// Specify what files to browse for
+			filters : [
+				{title : "Image files", extensions : "jpg,gif,png"},
+				{title : "Document files", extensions : "doc,pdf,txt"},
+				{title : "Zip files", extensions : "zip"}
+			],
+	
+			// Flash settings
+			flash_swf_url : "${resourcepath}/scripts/pupload/plupload.flash.swf",
+	
+		});
+	
+		// Client side form validation
+		$('form').submit(function(e) {
+	        var uploader = $('#uploader').plupload('getUploader');
+	
+	        // Files in queue upload them first
+	        if (uploader.files.length &gt; 0) {
+	            // When all files are uploaded submit form
+	            uploader.bind('StateChanged', function() {
+	                if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
+	                    $('form')[0].submit();
+	                }
+	            });
+	                
+	            uploader.start();
+	        } else
+	            alert('You must at least upload one file.');
+	
+	        return false;
+	    });
+	  });
+    	$(function() {
+		 	 $( '.ui-state-default.ui-widget-header.plupload_header').remove();
+		 	});
+    </script>
+</div>

@@ -3,9 +3,25 @@
 
 package au.gov.nsw.records.digitalarchives.dashboard.web;
 
+import au.gov.nsw.records.digitalarchives.dashboard.model.AccessRequirement;
+import au.gov.nsw.records.digitalarchives.dashboard.model.DatabaseStorage;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Documentation;
+import au.gov.nsw.records.digitalarchives.dashboard.model.EventHistory;
+import au.gov.nsw.records.digitalarchives.dashboard.model.FileStorage;
+import au.gov.nsw.records.digitalarchives.dashboard.model.MigrationStrategyAssessment;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
+import au.gov.nsw.records.digitalarchives.dashboard.model.ProjectType;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Record;
+import au.gov.nsw.records.digitalarchives.dashboard.model.RelationshipWithOtherRecords;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Requirement;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Stakeholder;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Status;
+import au.gov.nsw.records.digitalarchives.dashboard.model.SystemAnalysis;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Upload;
 import au.gov.nsw.records.digitalarchives.dashboard.web.ProjectController;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -84,12 +100,28 @@ privileged aspect ProjectController_Roo_Controller {
     
     void ProjectController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("project_creationdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("project_lastupdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("project_lastupdatedate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("project_closedate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
     void ProjectController.populateEditForm(Model uiModel, Project project) {
         uiModel.addAttribute("project", project);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("accessrequirements", AccessRequirement.findAllAccessRequirements());
+        uiModel.addAttribute("databasestorages", DatabaseStorage.findAllDatabaseStorages());
+        uiModel.addAttribute("documentations", Documentation.findAllDocumentations());
+        uiModel.addAttribute("eventhistorys", EventHistory.findAllEventHistorys());
+        uiModel.addAttribute("filestorages", FileStorage.findAllFileStorages());
+        uiModel.addAttribute("migrationstrategyassessments", MigrationStrategyAssessment.findAllMigrationStrategyAssessments());
+        uiModel.addAttribute("pages", Page.findAllPages());
+        uiModel.addAttribute("projecttypes", Arrays.asList(ProjectType.values()));
+        uiModel.addAttribute("records", Record.findAllRecords());
+        uiModel.addAttribute("relationshipwithotherrecordses", RelationshipWithOtherRecords.findAllRelationshipWithOtherRecordses());
+        uiModel.addAttribute("requirements", Requirement.findAllRequirements());
+        uiModel.addAttribute("stakeholders", Stakeholder.findAllStakeholders());
+        uiModel.addAttribute("statuses", Status.findAllStatuses());
+        uiModel.addAttribute("systemanalyses", SystemAnalysis.findAllSystemAnalyses());
+        uiModel.addAttribute("uploads", Upload.findAllUploads());
     }
     
     String ProjectController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

@@ -5,52 +5,53 @@
     <page:list id="pl_au_gov_nsw_records_digitalarchives_dashboard_model_Upload" items="${uploads}" render="false" z="user-managed">
         <table:table data="${uploads}" id="l_au_gov_nsw_records_digitalarchives_dashboard_model_Upload" path="/uploads" z="qJ2D9FRF0U76KMiCx2QHWtBktYI=">
             <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileName" property="fileName" z="QLHpS4CfNpzY/fLxU7+bf1SfKTs="/>
-            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileSize" property="fileSize" z="ay0qC487TMlXxPe6b9/1xcDkkXs="/>
-            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_uuid" property="uuid" z="SE6KmgqTw6sBuxpvLFMTE98ER6A="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_extension" property="extension" z="qtlC1YEQjsawp77/2RzW2dHJTXo="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileType" property="fileType" z="GpRIeJKz0rJeMNlSpameTyCcAac="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_PUID" property="PUID" z="Zbl8R8OHhSJIxzR66HtIBq9YZCg="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_formatTypeID" property="formatTypeID" z="wJCE8SZ+0oUgpFcTprDLhcg4HN4="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_size" property="size" z="QSU56V3cKI9Woqp2A1wdltbTtKo="/>
         </table:table>
     </page:list>
-    
     <span class="alignright">
-		<form>
-			<select name="options" class="dk">
-			  <option value="">Options</option>
-			  <option value="upload">Upload files</option>
-			  <option value="assessment">Run assessment</option>
-			  <option value="fileanalysis">File analysis</option>
-			  <option value="metadataanalysis">Metadata analysis</option>
-			</select>
-			<spring:url value="/resources/images/help-browser.png" var="help" />
-			<a href="#" class="noborder"><img src="${help}" style="border:0" height="30px"></img></a>
-			</form>
- 		</span>
- 		
- 		<div id="run_assessment" title="Run Assessment options" class="dawidget">
-	   <form>
-			<h4>Select options</h4>
-	   	<input type="radio" name="exportformat" value="word"/>File Analysis<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>Metadata Analysis<br/>
-	   </form>
+        <form>
+            <select class="dk" name="options">
+                <option value="">Options</option>
+                <option value="upload">Upload files</option>
+                <option value="assessment">Run assessment</option>
+                <option value="fileanalysis">File analysis</option>
+                <option value="metadataanalysis">Metadata analysis</option>
+            </select>
+            <spring:url value="/resources/images/help-browser.png" var="help"/>
+            <a class="noborder" href="#">
+                <img height="30px" src="${help}" style="border:0"/>
+            </a>
+        </form>
+    </span>
+    <div class="dawidget" id="run_assessment" title="Run Assessment options">
+        <form>
+            <h4>Select options</h4>
+            <input name="exportformat" type="radio" value="word"/>File Analysis<br/>
+            <input name="exportformat" type="radio" value="pdf"/>Metadata Analysis<br/>
+        </form>
     </div>
-    
-    <div id="file_analysis" title="File Analysis options" class="dawidget">
-	   <form>
-			<h4>Select options</h4>
-	   	<input type="radio" name="exportformat" value="word"/>Run scan<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>Rescan<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>Refresh<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>Update file type ID<br/>
-	   </form>
+    <div class="dawidget" id="file_analysis" title="File Analysis options">
+        <form>
+            <h4>Select options</h4>
+            <input name="exportformat" type="radio" value="word"/>Run scan<br/>
+            <input name="exportformat" type="radio" value="pdf"/>Rescan<br/>
+            <input name="exportformat" type="radio" value="pdf"/>Refresh<br/>
+            <input name="exportformat" type="radio" value="pdf"/>Update file type ID<br/>
+        </form>
     </div>
-    
-    <div id="metadata_analysis" title="Metadata Analysis options" class="dawidget">
-	   <form>
-			<h4>Select options</h4>
-	   	<input type="radio" name="exportformat" value="word"/>Run TIKA<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>Run EXIFTOOL<br/>
-	   </form>
+    <div class="dawidget" id="metadata_analysis" title="Metadata Analysis options">
+        <form>
+            <h4>Select options</h4>
+            <input name="exportformat" type="radio" value="word"/>Run TIKA<br/>
+            <input name="exportformat" type="radio" value="pdf"/>Run EXIFTOOL<br/>
+        </form>
     </div>
- 		<spring:url value="/" var="root_url"></spring:url>
- 		<script>
+    <spring:url value="/" var="root_url"/>
+    <script>
 	
 	 		$('.dk').dropkick({
 				width: 110,
@@ -68,124 +69,118 @@
 			  }
 			});
  		</script>
- 		
     <h2>File Management</h2>
     <spring:url value="/resources" var="resourcepath"/>
-    
-    <input type="text" name="filter_input"/>
-		<SPAN id="filter">Filter</SPAN>
-		<SCRIPT type="text/javascript">
+    <input name="filter_input" type="text"/>
+    <SPAN id="filter">Filter</SPAN>
+    <SCRIPT type="text/javascript">
 			$("#filter").button().click(function() {
    		//$( "#exportform" ).dialog( "open" );
 			});
 		</SCRIPT>
     <br/>
     <br/>
-   <div class="jtable-main-container">
-							<div class="jtable-title">
-							  <div class="jtable-title-text">File Management</div>
-							</div>
-							<table class="jtable" >
-							 <thead>
-							   <tr>
-							  <th class="jtable-column-header" style="width: 25%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">File Name</span>
-								  </div>
-								</th>
-								  <th class="jtable-column-header" style="width: 10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Extension</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width: 10%;">
-								   <div class="jtable-column-header-container">
-									 <span class="jtable-column-header-text">File Type</span>
-									 <div class="jtable-column-resize-handler"></div>
-								   </div>
-								</th>
-								<th class="jtable-column-header" style="width: 10%;">
-								   <div class="jtable-column-header-container">
-									 <span class="jtable-column-header-text">PUID</span>
-									 <div class="jtable-column-resize-handler"></div>
-								   </div>
-								</th>
-								<th class="jtable-column-header" style="width: 10%;">
-								   <div class="jtable-column-header-container">
-									 <span class="jtable-column-header-text">Format Type ID</span>
-									 <div class="jtable-column-resize-handler"></div>
-								   </div>
-								</th>
-								<th class="jtable-column-header" style="width:10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Size</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:15%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Status</span>
-								  </div>
-								</th>
-								<th class="jtable-command-column-header" style="width: 1%;"></th>
-								</tr>
-							 </thead>
-							 <tbody>
-								  <tr class="">
-									   <td class=""></td>
-									   <td class=""></td>
-										 <td class=""></td>
-										 <td class=""></td>
-										 <td class=""></td>
-										 <td class=""></td>
-										 <td class=""></td>
-										 <td class="jtable-command-column"><button class="jtable-command-button jtable-delete-command-button" title="Delete file"><span>Delete file</span></button></td>
-								  </tr>
-							 </tbody>
-							</table>
-							<div class="jtable-bottom-panel">
-								<span id="upload">Upload</span>
-								<script>
+    <div class="jtable-main-container">
+        <div class="jtable-title">
+            <div class="jtable-title-text">File Management</div>
+        </div>
+        <table class="jtable">
+            <thead>
+                <tr>
+                    <th class="jtable-column-header" style="width: 25%;">
+                        <div class="jtable-column-header-container">
+                            <span class="jtable-column-header-text">File Name</span>
+                        </div>
+                    </th>
+                    <th class="jtable-column-header" style="width: 10%;">
+                        <div class="jtable-column-header-container">
+                            <span class="jtable-column-header-text">Extension</span>
+                        </div>
+                    </th>
+                    <th class="jtable-column-header" style="width: 10%;">
+                        <div class="jtable-column-header-container">
+                            <span class="jtable-column-header-text">File Type</span>
+                            <div class="jtable-column-resize-handler"/>
+                        </div>
+                    </th>
+                    <th class="jtable-column-header" style="width: 10%;">
+                        <div class="jtable-column-header-container">
+                            <span class="jtable-column-header-text">PUID</span>
+                            <div class="jtable-column-resize-handler"/>
+                        </div>
+                    </th>
+                    <th class="jtable-column-header" style="width: 10%;">
+                        <div class="jtable-column-header-container">
+                            <span class="jtable-column-header-text">Format Type ID</span>
+                            <div class="jtable-column-resize-handler"/>
+                        </div>
+                    </th>
+                    <th class="jtable-column-header" style="width:10%;">
+                        <div class="jtable-column-header-container">
+                            <span class="jtable-column-header-text">Size</span>
+                        </div>
+                    </th>
+                    <th class="jtable-column-header" style="width:15%;">
+                        <div class="jtable-column-header-container">
+                            <span class="jtable-column-header-text">Status</span>
+                        </div>
+                    </th>
+                    <th class="jtable-command-column-header" style="width: 1%;"/>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td class=""/>
+                    <td class=""/>
+                    <td class=""/>
+                    <td class=""/>
+                    <td class=""/>
+                    <td class=""/>
+                    <td class=""/>
+                    <td class="jtable-command-column">
+                        <button class="jtable-command-button jtable-delete-command-button" title="Delete file">
+                            <span>Delete file</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="jtable-bottom-panel">
+            <span id="upload">Upload</span>
+            <script>
 									$("#upload").button().click(function() {
 									    //$( "#exportform" ).dialog( "open" );
 									});
 								</script>
-							  <span class="alignright"> </span>
-							</div>
-						</div>
-			  	  <br/>
-			  	  
-    <br/>
-    
-    <div id="exportform" title="Report options" class="dawidget">
-	   <form>
-	   	
-	   	<h4>Tools</h4>
-	   	<input type="checkbox" name="exportcontent" value="proposal"/> Exif<br/>
-			<input type="checkbox" name="exportcontent" value="assessment"/> Apache Tika <br/>
-			<input type="checkbox" name="exportcontent" value="assessment"/> Droid <br/>
-			
-			<h4>Report type</h4>
-	   	<input type="radio" name="exportformat" value="word"/>Summary report<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>Detailed report<br/>
-	    			 
-	    <h4>Report coverage</h4>
-	   	<input type="radio" name="exportformat" value="word"/>Current batch<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>All records<br/>
-	    
-	   </form>
+            <span class="alignright"/>
+        </div>
     </div>
-    
-     <div id="splitform" title="Split to.." class="dawidget">
-	   <form>
-	   	
-			<h4>Select batch size</h4>
-	   	<input type="radio" name="exportformat" value="word"/>10<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>20<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>50<br/>
-	    <input type="radio" name="exportformat" value="pdf"/>Custom:<br/>
-	    <input type="text" size="10"/><br/>
-	    			 
-	   </form>
+    <br/>
+    <br/>
+    <div class="dawidget" id="exportform" title="Report options">
+        <form>
+            <h4>Tools</h4>
+            <input name="exportcontent" type="checkbox" value="proposal"/> Exif<br/>
+            <input name="exportcontent" type="checkbox" value="assessment"/> Apache Tika <br/>
+            <input name="exportcontent" type="checkbox" value="assessment"/> Droid <br/>
+            <h4>Report type</h4>
+            <input name="exportformat" type="radio" value="word"/>Summary report<br/>
+            <input name="exportformat" type="radio" value="pdf"/>Detailed report<br/>
+            <h4>Report coverage</h4>
+            <input name="exportformat" type="radio" value="word"/>Current batch<br/>
+            <input name="exportformat" type="radio" value="pdf"/>All records<br/>
+        </form>
+    </div>
+    <div class="dawidget" id="splitform" title="Split to..">
+        <form>
+            <h4>Select batch size</h4>
+            <input name="exportformat" type="radio" value="word"/>10<br/>
+            <input name="exportformat" type="radio" value="pdf"/>20<br/>
+            <input name="exportformat" type="radio" value="pdf"/>50<br/>
+            <input name="exportformat" type="radio" value="pdf"/>Custom:<br/>
+            <input size="10" type="text"/>
+            <br/>
+        </form>
     </div>
     <script>
   

@@ -4,7 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_au_gov_nsw_records_digitalarchives_dashboard_model_Upload" object="${upload}" path="/uploads" z="JjZvTDiOZ6CID8Zvj6G+QcbwISo=">
         <field:display field="fileName" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileName" object="${upload}" z="ubROj+l48gJMU8JNN69jsmjbwI0="/>
-        <field:display field="fileSize" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileSize" object="${upload}" z="P4lZ2OEsBET6MUmu43jxYv3/qCs="/>
         <field:display field="uuid" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_uuid" object="${upload}" z="BtmdzllRkQTVnsrFduK+ZEXxteI="/>
+        <field:display field="extension" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_extension" object="${upload}" z="PEaMb4XwihB44dNSkrfnPKjAb0Y="/>
+        <field:display field="fileType" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileType" object="${upload}" z="FOlIAystAIz1Euu9dnPvYCeWPek="/>
+        <field:display field="PUID" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_PUID" object="${upload}" z="JhusJJdHA7NTERZr0tRi+Xry/7o="/>
+        <field:display field="formatTypeID" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_formatTypeID" object="${upload}" z="AFxgVGXti5jMxqeVrxaPBzsjwg8="/>
+        <field:display field="size" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_size" object="${upload}" z="0vwZkWaH2XVDt4x7I3jwpDr0Gnc="/>
+        <field:display field="status" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_status" object="${upload}" z="UfpROKQYGck/yVcVKENTvsE484c="/>
     </page:show>
 </div>

@@ -5,16 +5,21 @@
     <page:show create="false" delete="false" id="ps_au_gov_nsw_records_digitalarchives_dashboard_model_Project" list="false" object="${project}" path="/projects" render="false" z="user-managed">
         <field:display field="name" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_name" object="${project}" z="H/Ras+XkNdwxdOCU+YO0UhLt67A="/>
         <field:display date="true" dateTimePattern="${project_creationdate_date_format}" field="creationDate" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_creationDate" object="${project}" z="91OhYEJRY3CS0h0oKw0EMtut+bQ="/>
-        <field:display field="migrationPlanDescription" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_migrationPlanDescription" object="${project}" z="Gs/O/bLVa0UAv6I05hQJ3k95/6o="/>
         <field:display field="agencyName" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyName" object="${project}" z="uSZ4Dh+K00UYghMVk/MhaCmD8H0="/>
         <field:display field="agencyNumber" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyNumber" object="${project}" z="onSJQlv5X6D0myPZBDbBIja29oA="/>
         <field:display field="agencyContact" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyContact" object="${project}" z="3VtasefO9EssJr6mGszNuCw7Fu4="/>
         <field:display field="srnswContact" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_srnswContact" object="${project}" z="ujTWtiMq0Hznrm89fsS2o2ZExgw="/>
         <field:display field="srnswFileReference" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_srnswFileReference" object="${project}" z="ZNh3oRe5fhl6N4goekZw9LMbZbI="/>
-        <field:display field="status" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_status" object="${project}" z="nt84bxvKa5+jVIqdDbc44Mxjolw="/>
         <field:display field="lastUpdatedBy" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdatedBy" object="${project}" z="gx/O75bxEHhXqLycOxZcCF+xLo8="/>
         <field:display field="overview" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_overview" object="${project}" z="SDMhK2iFMDXbRoPvPgFZc5LZPQU="/>
-        <field:display date="true" dateTimePattern="${project_lastupdate_date_format}" field="lastUpdate" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdate" object="${project}" z="5z7DYtMj9HCdrSEPNiYQlrPHqF0="/>
+        <field:display field="projectType" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_projectType" object="${project}" z="lOScT/NlwgG89OwdsmykZy5BWXo="/>
+        <field:display date="true" dateTimePattern="${project_lastupdatedate_date_format}" field="lastUpdateDate" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdateDate" object="${project}" z="+sX/2NszWiA+46VR5fCCktgbAJI="/>
+        <field:display date="true" dateTimePattern="${project_closedate_date_format}" field="closeDate" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_closeDate" object="${project}" z="A5po0aNCWiA46Mab7RZO2H2Zju0="/>
+        <field:display field="projectPlan" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_projectPlan" object="${project}" z="WXs3ej3jSckmpPthHeh6E+R7gn4="/>
+        <field:display field="migrationPlan" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_migrationPlan" object="${project}" z="ES8ZJIFHy1rDjQxaxIKR5QFZgJ8="/>
+        <field:display field="requirement" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_requirement" object="${project}" z="3dX3CIVl+4ZVj9F3xMS9+8d1cC4="/>
+        <field:display field="description" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_description" object="${project}" z="1GuEt5d8pSmt4aAWut2N66xfksY="/>
+        <field:display field="records" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_records" object="${project}" z="F9RICmqryO9J2aZEqWJAfOrNp5Q="/>
     </page:show>
     <span class="alignright">
         <form>
@@ -159,13 +164,12 @@
                 </table>
                 <div class="jtable-bottom-panel">
                     <span class="alignright">
-                        <a class="button" id="status_history_btn" href="#">View Status History</a>
+                        <a class="button" href="#" id="status_history_btn">View Status History</a>
                     </span>
                 </div>
             </div>
             <br/>
-            
-           <div class="dawidget" id="prj_status_update_history_popup" title="Project Status History">
+            <div class="dawidget" id="prj_status_update_history_popup" title="Project Status History">
                 <div class="jtable-title">
                     <div class="jtable-title-text">Project Status</div>
                 </div>
@@ -204,8 +208,7 @@
                     </tbody>
                 </table>
                 <div class="jtable-bottom-panel">
-                    <span class="alignright">
-                    </span>
+                    <span class="alignright"/>
                 </div>
             </div>
             <div class="dawidget" id="prj_status_update_popup" title="Update Project Status">
@@ -937,7 +940,6 @@
                     <br/>
                     <br/>
                     <b>File analysis progress</b>
-                    
                     <div id="progressbar">
                         <!--  -->
                     </div>
@@ -997,8 +999,7 @@
                         </div>
                     </div>
                     <br/>
-                    
-                     <span class="alignright">
+                    <span class="alignright">
                         <form>
                             <select class="dk3" name="options3">
                                 <option value="">Pathway Analysis Options</option>

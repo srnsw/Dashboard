@@ -79,3 +79,20 @@ web mvc controller --class ~.web.AdminController
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-22 09:45:01
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-22 16:32:08
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-29 09:24:24
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.ProjectStatus
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.ProjectStakeholder
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-30 12:32:00
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-30 12:34:37
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-04-30 12:49:53
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-04-30 12:50:03
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Requirement
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Record
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Documentation
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.RelationshipWithOtherRecords
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.AccessRequirement
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.SystemAnalysis
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.FileStorage
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.DatabaseStorage
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.DatabaseStorage
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.MigrationStrategyAssessment
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.EventHistory

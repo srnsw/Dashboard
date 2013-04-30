@@ -10,6 +10,18 @@ import org.springframework.roo.addon.tostring.RooToString;
 public class Upload {
 	
 	private String fileName;
-	private long fileSize;
+	
+	private String extension;
+	
+	private String fileType;
+	
+	private String PUID;
+	
+	private String formatTypeID;
+	
+	private long size;
+	
+	private String status;
+	
 	private String uuid;
 }

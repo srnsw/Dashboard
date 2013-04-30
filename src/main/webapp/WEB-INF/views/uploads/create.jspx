@@ -4,8 +4,13 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_au_gov_nsw_records_digitalarchives_dashboard_model_Upload" modelAttribute="upload" path="/uploads" render="${empty dependencies}" z="3+D/tOdntd7QniKbrZOaOh+FRrw=">
         <field:input field="fileName" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileName" z="wUwYV79LshtGJTOeV++9Rxru75s="/>
-        <field:input field="fileSize" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileSize" z="8rwNL8iR0aoPUOIDBZ2zeDSP88s="/>
         <field:input field="uuid" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_uuid" z="/1XIjsDhrr25hezDVYJ1cipRprM="/>
+        <field:input field="extension" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_extension" z="lKdPkApiarp60u7Rn6QlgC/gNVA="/>
+        <field:input field="fileType" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileType" z="EOgbbEgjyM1XLIcHRg6tOLcyTtI="/>
+        <field:input field="PUID" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_PUID" z="MUaUqrHmIFBuUqYBbnYK6pC+AbY="/>
+        <field:input field="formatTypeID" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_formatTypeID" z="RzLGus83kL4tasA1pp1yIR5NyyM="/>
+        <field:input field="size" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_size" z="mzVfCgsah/Ngq78U+AS6gFMsu20="/>
+        <field:input field="status" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_status" z="OeL96mCXmErPcHwqdJAxF63Tm4s="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_au_gov_nsw_records_digitalarchives_dashboard_model_Upload" render="${not empty dependencies}" z="uxw/aqSL5ygoe1Lx4N4WVtOMD+s="/>
 </div>

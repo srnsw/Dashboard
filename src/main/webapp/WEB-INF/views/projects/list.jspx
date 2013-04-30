@@ -119,7 +119,7 @@
             <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyNumber" property="agencyNumber" z="Ju+ornkRWmO5Uff8SHIUgV29QAY="/>
             <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyContact" property="agencyContact" z="JraA6D8CZGMdNxy+5i6xBqNoYcc="/>
             <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_srnswContact" property="srnswContact" z="pZrsMHnGaMSHTwfsB37PkLk2iqs="/>
-            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_srnswFileReference" property="srnswFileReference" z="REa/kavL2QPvBmronv5SRYnUoEg="/>
+            <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_projectType" property="projectType" z="5H4qZ+DQvWGUGIi8HAAKIGiL6nk="/>
         </table:table>
     </page:list>
 </div>

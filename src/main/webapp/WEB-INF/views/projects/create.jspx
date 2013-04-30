@@ -1830,12 +1830,28 @@
         <field:input field="agencyContact" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_agencyContact" z="ymv1cFNKmzGHYEWxul1wg8GGc1M="/>
         <field:input field="srnswContact" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_srnswContact" z="o8epaI7ci8eM9O4aVFj6S/g1vts="/>
         <field:input field="srnswFileReference" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_srnswFileReference" z="Lx21XVgEUShCUbI/tKi/+/dAdhc="/>
-        <field:input field="migrationPlanDescription" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_migrationPlanDescription" z="qAS4N+MYzZD4AnZKVYY9++1sKEU="/>
-        <field:input field="status" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_status" z="snKaGl9Ur8M+thRo78Y5OrAGGi4="/>
         <field:input field="lastUpdatedBy" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdatedBy" z="3RvOIVesD6D7FsxEUl3wFZWoUDI="/>
         <field:input field="overview" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_overview" z="ltrpR15cOPJPWWbcVQ1LIUa2SBE="/>
         <field:datetime dateTimePattern="${project_creationdate_date_format}" field="creationDate" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_creationDate" z="/MHuL/NMAYHJ8LfFERQCXkHn1UI="/>
-        <field:datetime dateTimePattern="${project_lastupdate_date_format}" field="lastUpdate" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdate" z="q1O3eKs6AQKLaWcJWCTVJ09KcWg="/>
+        <field:select field="projectType" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_projectType" items="${projecttypes}" path="projecttypes" z="OWhbkPpAsz/ar9eCuDiLI5AODKY="/>
+        <field:datetime dateTimePattern="${project_lastupdatedate_date_format}" field="lastUpdateDate" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_lastUpdateDate" z="+07delniG7MsCr0bfavAJb8ao8k="/>
+        <field:datetime dateTimePattern="${project_closedate_date_format}" field="closeDate" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_closeDate" z="KCK+RnAFEkd//SuUN13loi5NsfA="/>
+        <field:select field="projectPlan" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_projectPlan" itemValue="id" items="${pages}" path="/pages" z="1AMbI12ADYvG8AIesdn3WxoBFxo="/>
+        <field:select field="migrationPlan" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_migrationPlan" itemValue="id" items="${pages}" path="/pages" z="L8OrwZecKfTBW170GiIMwXaeHrQ="/>
+        <field:simple field="status" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_status" messageCode="entity_reference_not_managed" messageCodeAttribute="Status" z="oMhU9j1TyZWABAxDXWeG+XHMAOg="/>
+        <field:simple field="upload" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_upload" messageCode="entity_reference_not_managed" messageCodeAttribute="Upload" z="VsD8zlum2hQ8g/iVm4HF8RmQXjo="/>
+        <field:select field="requirement" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_requirement" itemValue="id" items="${requirements}" path="/requirements" z="WQRXfJWI0D65iaGTIbQhJMO9J58="/>
+        <field:input field="description" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_description" z="Z9kH7ZCivSagNRnuXfxkvma0icQ="/>
+        <field:simple field="documentation" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_documentation" messageCode="entity_reference_not_managed" messageCodeAttribute="Documentation" z="ZvSBQJ+Fq9IQ0YsPF9krXKacOc8="/>
+        <field:select field="records" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_records" itemValue="id" items="${records}" path="/records" z="SliDQhJn5B9WrtMD2ZA8bjN2z4Y="/>
+        <field:simple field="stakeholders" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_stakeholders" messageCode="entity_reference_not_managed" messageCodeAttribute="Stakeholder" z="2merjlQPVB68rlduNhx1Qcm5SFc="/>
+        <field:simple field="relationship" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_relationship" messageCode="entity_reference_not_managed" messageCodeAttribute="Relationship With Other Records" z="VaLBrKBXt9LxyZulmrep13dQhE4="/>
+        <field:simple field="accessRequirement" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_accessRequirement" messageCode="entity_reference_not_managed" messageCodeAttribute="Access Requirement" z="vNhVaQ8h2b1dNaxIdmSt4j3nUu0="/>
+        <field:simple field="systemAnalysis" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_systemAnalysis" messageCode="entity_reference_not_managed" messageCodeAttribute="System Analysis" z="ipxtXBorgABSF14JwHW65lbSLTI="/>
+        <field:simple field="fileStorage" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_fileStorage" messageCode="entity_reference_not_managed" messageCodeAttribute="File Storage" z="cUrVMs9csd92qA4DUv42i00U/Vk="/>
+        <field:simple field="databaseStorage" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_databaseStorage" messageCode="entity_reference_not_managed" messageCodeAttribute="Database Storage" z="iH2XVR3sRdWYTUyo21HSHh84AZI="/>
+        <field:simple field="migrationStrategyAssessment" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_migrationStrategyAssessment" messageCode="entity_reference_not_managed" messageCodeAttribute="Migration Strategy Assessment" z="m9DIAmJTky8wQ84bZNZcY54oWzE="/>
+        <field:simple field="eventHistory" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_eventHistory" messageCode="entity_reference_not_managed" messageCodeAttribute="Event History" z="0NBEiynDCzQ22+b6LT9LxYVhiP8="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_au_gov_nsw_records_digitalarchives_dashboard_model_Project" render="${not empty dependencies}" z="kk3uGG0JWSEa71JTdxlwYNxdfWE="/>
 </div>

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableSimpleRow;
-import au.gov.nsw.records.digitalarchives.dashboard.model.FileRecord;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
@@ -75,11 +73,11 @@ public class ProjectController {
      return JsonService.toJson(new JTableResponse(Status.OK, Project.findAllProjects()));
   }
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/{id}/records", produces = "application/json")
-  public @ResponseBody String relatedRecords(@PathVariable("id") Long id, Model uiModel) {
-//		 System.out.println("Generating... " + JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords())));
-     return JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords()));
-  }
+//	@RequestMapping(method = RequestMethod.POST, value = "/{id}/records", produces = "application/json")
+//  public @ResponseBody String relatedRecords(@PathVariable("id") Long id, Model uiModel) {
+////		 System.out.println("Generating... " + JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords())));
+//     return JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords()));
+//  }
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}/newrecords", produces = "application/json")
   public @ResponseBody String newRelatedRecords(@PathVariable("id") Long id, Model uiModel) {

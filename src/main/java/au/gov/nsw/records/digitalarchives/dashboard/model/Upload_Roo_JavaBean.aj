@@ -15,12 +15,52 @@ privileged aspect Upload_Roo_JavaBean {
         this.fileName = fileName;
     }
     
-    public long Upload.getFileSize() {
-        return this.fileSize;
+    public String Upload.getExtension() {
+        return this.extension;
     }
     
-    public void Upload.setFileSize(long fileSize) {
-        this.fileSize = fileSize;
+    public void Upload.setExtension(String extension) {
+        this.extension = extension;
+    }
+    
+    public String Upload.getFileType() {
+        return this.fileType;
+    }
+    
+    public void Upload.setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+    
+    public String Upload.getPUID() {
+        return this.PUID;
+    }
+    
+    public void Upload.setPUID(String PUID) {
+        this.PUID = PUID;
+    }
+    
+    public String Upload.getFormatTypeID() {
+        return this.formatTypeID;
+    }
+    
+    public void Upload.setFormatTypeID(String formatTypeID) {
+        this.formatTypeID = formatTypeID;
+    }
+    
+    public long Upload.getSize() {
+        return this.size;
+    }
+    
+    public void Upload.setSize(long size) {
+        this.size = size;
+    }
+    
+    public String Upload.getStatus() {
+        return this.status;
+    }
+    
+    public void Upload.setStatus(String status) {
+        this.status = status;
     }
     
     public String Upload.getUuid() {

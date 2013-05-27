@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse.Status;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
 import au.gov.nsw.records.digitalarchives.dashboard.service.PDFGeneratorService;
@@ -41,9 +42,10 @@ public class HomeController {
     }
 
     @RequestMapping
-    public String index(HttpServletRequest request) {
+    public String index(HttpServletRequest request, Model uiModel) {
     	
     	if (request.isUserInRole("ROLE_ARCHIVIST")) {
+    		uiModel.addAttribute("projects", Project.findAllProjects());
     		return "home/mainindex";
     	}else if (request.isUserInRole("ROLE_AGENCY")) {
     		try {
@@ -58,6 +60,8 @@ public class HomeController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+    		
+    		uiModel.addAttribute("projects", Project.findAllProjects());
     		return "home/externalindex";
     	}
        return "redirect:/";

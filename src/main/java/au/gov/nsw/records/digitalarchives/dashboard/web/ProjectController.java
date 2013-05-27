@@ -40,9 +40,41 @@ public class ProjectController {
     }
 	
 	@RequestMapping(value = "/{id}/files", method =  RequestMethod.GET)
-	public String filemanagement(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response)  {
-		
-		return "projects/file";
+	public String filemanagement(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request, HttpServletResponse response)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/filelist";
+	}
+	
+	@RequestMapping(value = "/{id}/project_plan", method =  RequestMethod.GET)
+	public String projectPlan(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "pages/update";
+	}
+	
+	@RequestMapping(value = "/{id}/migration_plan", method =  RequestMethod.GET)
+	public String migrationPlan(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("page", Project.findProject(id).getMigrationPlan());
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "pages/update";
+	}
+	
+	@RequestMapping(value = "/{id}/file_analysis", method =  RequestMethod.GET)
+	public String fileAnalysis(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/fileanalysis";
+	}
+	
+	@RequestMapping(value = "/{id}/system_assessment", method =  RequestMethod.GET)
+	public String systemAssessment(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/systemassessment";
+	}
+	
+	@RequestMapping(value = "/{id}/metadata_assessment", method =  RequestMethod.GET)
+	public String metadataAssessment(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/metadataassessment";
 	}
 	
 	@RequestMapping(value = "/{id}/files/{file_id}", method =  RequestMethod.GET)

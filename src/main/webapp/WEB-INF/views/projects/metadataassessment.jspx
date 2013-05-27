@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <span class="alignright">
+        <form>
+            <select class="dk" name="options">
+                <option value="">Options</option>
+                <option value="export">Export</option>
+                <option value="upload">Upload files</option>
+                <option value="viewfile">View files</option>
+                <option value="project_plan">Create Project Plan</option>
+                <option value="migration_plan">Create Migration Plan</option>
+                <option value="migration_plan">Create Task</option>
+                <option value="reporting">Reporting</option>
+                <option value="view_task">View Tasks</option>
+                <option value="share">Share</option>
+            </select>
+            <spring:url value="/resources/images/help-browser.png" var="help"/>
+            <a class="noborder" href="#">
+                <img height="30px" src="${help}" style="border:0"/>
+            </a>
+        </form>
+    </span>
+    <h2>Metadata Assessment</h2>
+    <br/>
+    
+    <spring:url value="/" var="root_url"/>
+    <script>
+	    $(function() {
+	    	
+	    	$('.dk').dropkick({
+    			width: 110,
+    		  change: function (value, label) {
+    		    //alert('You picked: ' + label + ':' + value);
+    		    	if (value == "new_prj"){
+    	 		       window.open('${root_url}projects/1', '_blank');
+    	 		    }else if (value == "project_plan"){
+    	 		       window.open('${root_url}pages?form&amp;master=projectplan', '_blank');
+    	 		    }else if (value == "migration_plan"){
+    		    		     window.open('${root_url}pages?form&amp;master=migrationplan', '_blank');
+    	 		    }else if (value == "upload"){
+    		    		       window.open('${root_url}uploads/', '_blank');
+    	 		    }else if (value == "viewfile"){
+    		    		       window.open('${root_url}uploads/', '_blank');
+    	 		    }else {
+    	 		    	//alert('You pickedx: ' + label + ':' + value);
+    	 		    }
+    		    	$('.dk').dropkick('reset');
+    		  }
+    		});
+
+	       	$('.dk2').dropkick({
+    			width: 140,
+    		  change: function (value, label) {
+    		    //alert('You picked: ' + label + ':' + value);
+    		    if (value == "new_prj"){
+    		       window.open('${root_url}projects/1', '_blank');
+    		    }else if (value == "project_plan"){
+    		       //window.open('${root_url}projects/1', '_blank');
+    		    }else if (value == "migration_plan"){
+	    		       //window.open('${root_url}projects/1', '_blank');
+    		    }else if (value == "upload"){
+	    		       //window.open('${root_url}projects/1', '_blank');
+    		    }else {
+    		    	//alert('You pickedx: ' + label + ':' + value);
+    		    }
+    		    $('.dk2').dropkick('reset');
+    		  }
+    		});
+	    	
+	       	
+	    		$('#upload_file_btn').click(function() {
+	    			window.open('${root_url}uploads/');
+	    		});
+	    		$('#view_file_btn').click(function() {
+	    			window.open('${root_url}uploads/');
+	    		});
+	    		
+	    		$('.file_btn').click(function() {
+	    			window.open('${root_url}uploads/');
+	    		});
+	    		
+	        $( "#project_tabs_holder" ).tabs();
+	        $( "#assessment_tabs_holder" ).tabs();
+	        
+	        $( "#proceed" ).button();
+	        $( "#update" ).button();
+	        $( ".button" ).button();
+	        
+	        $('#dl_prj_plan').click(function(e) {
+	            e.preventDefault();  //stop the browser from following
+	            window.location.href = '${root_url}/projects/1/files/1';
+	        });
+	        $('#dl_migration_plan').click(function(e) {
+	            e.preventDefault();  //stop the browser from following
+	            window.location.href = '${root_url}/projects/1/files/1';
+	        });
+	        
+	        $( "#status_history_btn" ).click(function() {
+	  		    $( "#prj_status_update_history_popup" ).dialog( "open" );
+	  		  });
+	        $( "#prj_status_update_history_popup" ).dialog({
+		  	      autoOpen: false,
+		  	      height: 300,
+		  	      width: 600,
+		  	      modal: true,
+		  	      buttons: {
+		  	        "OK": function() {
+		  	        	 $( this ).dialog( "close" );
+		  	        },
+		  	      },
+		  	      close: function() {
+		  	       
+		  	      }
+		  	    });
+	        
+	        $( "#export_btn" ).click(function() {
+	  		    $( "#export_popup" ).dialog( "open" );
+	  		  });
+	        
+	        $( "#export_popup" ).dialog({
+		  	      autoOpen: false,
+		  	      height: 220,
+		  	      width: 350,
+		  	      modal: true,
+		  	      buttons: {
+		  	        "OK": function() {
+		  	        	 $( this ).dialog( "close" );
+		  	        },
+		  	        Cancel: function() {
+		  	        	 $( this ).dialog( "close" );
+		  	        }
+		  	      },
+		  	      close: function() {
+		  	       
+		  	      }
+		  	    });
+	        
+	        $( "#update" ).click(function() {
+	  		    $( "#prj_details_update_popup" ).dialog( "open" );
+	  		  });
+	        
+	        $( "#prj_details_update_popup" ).dialog({
+		  	      autoOpen: false,
+		  	      height: 420,
+		  	      width: 350,
+		  	      modal: true,
+		  	      buttons: {
+		  	        "OK": function() {
+		  	        	 $( this ).dialog( "close" );
+		  	        },
+		  	        Cancel: function() {
+		  	        	 $( this ).dialog( "close" );
+		  	        }
+		  	      },
+		  	      close: function() {
+		  	       
+		  	      }
+		  	    });
+	        
+	        $( "#file_upload_popup" ).dialog({
+		  	      autoOpen: false,
+		  	      height: 200,
+		  	      width: 350,
+		  	      modal: true,
+		  	      buttons: {
+		  	        "OK": function() {
+		  	        	 $( this ).dialog( "close" );
+		  	        },
+		  	        Cancel: function() {
+		  	        	 $( this ).dialog( "close" );
+		  	        }
+		  	      },
+		  	      close: function() {
+		  	       
+		  	      }
+		  	    });
+	        
+	        $( "#upload_prj_plan" ).click(function() {
+	  		    $( "#file_upload_popup" ).dialog( "open" );
+	  		    return false;
+	  		  });
+	        $( "#upload_migration_plan" ).click(function() {
+	  		    $( "#file_upload_popup" ).dialog( "open" );
+	  		    return false;
+	  		  });
+	        
+	        $( ".attach" ).click(function() {
+	  		    $( "#file_upload_popup" ).dialog( "open" );
+	  		    return false;
+	  		  });
+	        
+	        $( "#transfer_req_update_popup" ).dialog({
+	  	      autoOpen: false,
+	  	      height: 300,
+	  	      width: 350,
+	  	      modal: true,
+	  	      buttons: {
+	  	        "Update": function() {
+	  	        	 $( this ).dialog( "close" );
+	  	        },
+	  	        Cancel: function() {
+	  	          $( this ).dialog( "close" );
+	  	        }
+	  	      },
+	  	      close: function() {
+	  	       
+	  	      }
+	  	    });
+	  	 
+	  		  $( ".jtable-command-button.jtable-edit-command-button.req" ).click(function() {
+	  		    $( "#transfer_req_update_popup" ).dialog( "open" );
+	  		  });
+	  		  
+	  		   $( "#prj_status_update_popup" ).dialog({
+	 	  	      autoOpen: false,
+	 	  	      height: 440,
+	 	  	      width: 400,
+	 	  	      modal: true,
+	 	  	      buttons: {
+	 	  	        "Update": function() {
+	 	  	        	 $( this ).dialog( "close" );
+	 	  	        },
+	 	  	        Cancel: function() {
+	 	  	          $( this ).dialog( "close" );
+	 	  	        }
+	 	  	      },
+	 	  	      close: function() {
+	 	  	       
+	 	  	      }
+	 	  	    });
+	  			$( "#project_status_update" ).click(function() {
+	  		    $( "#prj_status_update_popup" ).dialog( "open" );
+	  		  });
+	  		  
+	    });
+	    
+	    
+    </script>
+</div>

@@ -24,12 +24,16 @@
     <span class="alignright">
         <form>
             <select class="dk" name="options">
-                <option value="">Options</option>
+                <option value="">Project Options</option>
                 <option value="export">Export</option>
                 <option value="upload">Upload files</option>
                 <option value="viewfile">View files</option>
                 <option value="project_plan">Create Project Plan</option>
                 <option value="migration_plan">Create Migration Plan</option>
+                <option value="migration_plan">Create Task</option>
+                <option value="reporting">Reporting</option>
+                <option value="view_task">View Tasks</option>
+                <option value="share">Share</option>
             </select>
             <spring:url value="/resources/images/help-browser.png" var="help"/>
             <a class="noborder" href="#">
@@ -45,15 +49,12 @@
                 <a href="#update_tabs-0">Project Overview</a>
             </li>
             <li>
-                <a href="#update_tabs-1">Project Requirements</a>
+                <a href="#update_tabs-1">About the Project</a>
             </li>
             <li>
-                <a href="#update_tabs-2">Project Assessment</a>
+                <a href="#update_tabs-2">Project Tasks</a>
             </li>
-            <li>
-                <a href="#update_tabs-3">Reporting</a>
-            </li>
-            <li>
+           <li>
                 <a href="#update_tabs-4">Event History</a>
             </li>
         </ul>
@@ -83,9 +84,10 @@
                             <td class="">Digital, Physical, Hybrid</td>
                         </tr>
                         <tr class="jtable-row-even">
-                            <td class="">Agency Name</td>
+                            <td class="">Agency</td>
                             <td class="">BOS Details</td>
                         </tr>
+                        <!-- 
                         <tr>
                             <td class="">Agency Number</td>
                             <td class="">[BOS number]</td>
@@ -98,18 +100,21 @@
                             <td class="">SRNSW Contact</td>
                             <td class="">[principal SRNSW contact]</td>
                         </tr>
-                        <tr class="jtable-row-even">
-                            <td class="">Date Created</td>
+                        -->
+                        <tr class="">
+                            <td class="">Created</td>
                             <td class="">1 Feb 2013</td>
                         </tr>
-                        <tr class="">
-                            <td class="">Date Modified</td>
+                        <tr class="jtable-row-even">
+                            <td class="">Last Updated</td>
                             <td class="">21 Feb 2013</td>
                         </tr>
+                        <!-- 
                         <tr class="jtable-row-even">
                             <td class="">Date Closed</td>
                             <td class="">28 Feb 2013</td>
                         </tr>
+                         -->
                         <tr class="">
                             <td class="">SRNSW File Reference</td>
                             <td class="">TRIM/123344</td>
@@ -137,7 +142,7 @@
                             </th>
                             <th class="jtable-column-header" style="width: 20%;">
                                 <div class="jtable-column-header-container">
-                                    <span class="jtable-column-header-text">Date modified</span>
+                                    <span class="jtable-column-header-text">Last Updated</span>
                                     <div class="jtable-column-resize-handler"/>
                                 </div>
                             </th>
@@ -155,8 +160,8 @@
                             <td class="">19 April 2013</td>
                             <td class="">Status changed</td>
                             <td class="jtable-command-column">
-                                <button class="jtable-command-button jtable-edit-command-button" id="project_status_update" title="Edit Record">
-                                    <span>Edit Record</span>
+                                <button class="jtable-command-button jtable-edit-command-button" id="project_status_update" title="Update Status">
+                                    <span>Update Status</span>
                                 </button>
                             </td>
                         </tr>
@@ -183,7 +188,7 @@
                             </th>
                             <th class="jtable-column-header" style="width: 20%;">
                                 <div class="jtable-column-header-container">
-                                    <span class="jtable-column-header-text">Date modified</span>
+                                    <span class="jtable-column-header-text">Last Updated</span>
                                     <div class="jtable-column-resize-handler"/>
                                 </div>
                             </th>
@@ -246,6 +251,11 @@
                     </fieldset>
                 </form>
             </div>
+            
+            <p>
+                <a class="button" href="">Project Plan</a> <a class="button" href="">Migration Plan</a> <a class="button" href="">View files</a>
+            </p> 
+            
             <div class="jtable-main-container">
                 <div class="jtable-title">
                     <div class="jtable-title-text">Project Stakeholders</div>
@@ -314,32 +324,30 @@
                                 <label for="${field}">Project Type</label>
                             </dt>
                             <dd>
-                                <select class="dk">
+                                <select class="dkx">
                                     <option value="volvo">Digital</option>
                                     <option value="mercedes">Physical</option>
                                     <option value="audi">Hybrid</option>
                                 </select>
+                                <br/>
+						                    <br/>
+						                    <br/>
+						                    <br/>
+                                <SCRIPT type="text/javascript">
+							                    $(function() {
+							                       $('.dkx').dropkick({
+											            			width: 80,
+											            		  change: function (value, label) {
+											            			  
+											            		  }
+											            		});
+							                    });
+						                    </SCRIPT>
                             </dd>
                         </dl>
                         <dl>
                             <dt>
-                                <label for="${field}">Agency Name</label>
-                            </dt>
-                            <dd>
-                                <input id="id_dialog_${field}" name="${field}" type="text"/>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt>
-                                <label for="${field}">Agency Contact</label>
-                            </dt>
-                            <dd>
-                                <input id="id_dialog_${field}" name="${field}" type="text"/>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt>
-                                <label for="${field}">SRNSW Contact</label>
+                                <label for="${field}">Agency</label>
                             </dt>
                             <dd>
                                 <input id="id_dialog_${field}" name="${field}" type="text"/>
@@ -357,18 +365,20 @@
                 </form>
             </div>
             <spring:url value="/resources/images/" var="resource_url"/>
-            <p>
-                <a class="button" href="">Project Plan</a>
-            </p>
-            <p>
-                <a class="button" href="">Migration Plan</a>
-            </p>
-            <p>
-                <a class="button" href="">View files</a>
-            </p>
+            
         </div>
         <div id="update_tabs-1">
-            <div class="jtable-main-container">
+           <div id="abt_project_tabs_holder">
+                <ul>
+                    <li>
+                        <a href="#abt_project_tabs-0">Project Requirements</a>
+                    </li>
+                    <li>
+                        <a href="#abt_project_tabs-1">About the Records</a>
+                    </li>
+                </ul>
+                <div id="abt_project_tabs-0">
+                  <div class="jtable-main-container">
                 <div class="jtable-title">
                     <div class="jtable-title-text">Project Requirements</div>
                 </div>
@@ -652,37 +662,18 @@
                 <div class="jtable-bottom-panel">
                     <!-- xx -->
                 </div>
-            </div>
-            <br/>
-            <div class="dawidget" id="transfer_req_update_popup" title="Update Action">
+                <div class="dawidget" id="transfer_req_update_popup" title="Update Action">
                 <form>
                     <fieldset>
                         <label for="${field}">Action</label>
                         <textarea id="id_dialog_${field}" name="${field}" rows="8" type="text">${object}</textarea>
                     </fieldset>
                 </form>
+	            </div>
+	            </div>
+            <br/>
             </div>
-        </div>
-        <div id="update_tabs-2">
-            <div id="assessment_tabs_holder">
-                <ul>
-                    <li>
-                        <a href="#assessment_tabs-0">About the records</a>
-                    </li>
-                    <li>
-                        <a href="#assessment_tabs-1">File Assessment</a>
-                    </li>
-                    <li>
-                        <a href="#assessment_tabs-2">System Assessment</a>
-                    </li>
-                    <li>
-                        <a href="#assessment_tabs-3">Metadata Assessment</a>
-                    </li>
-                    <li>
-                        <a href="#assessment_tabs-4">Repository Storage</a>
-                    </li>
-                </ul>
-                <div id="assessment_tabs-0">
+            <div id="abt_project_tabs-1">
                     <div class="jtable-main-container">
                         <div class="jtable-title">
                             <div class="jtable-title-text">Project description</div>
@@ -924,626 +915,73 @@
                     </div>
                     <br/>
                 </div>
-                <div id="assessment_tabs-1">
-                    <span class="alignright">
-                        <form>
-                            <select class="dk2" name="options2">
-                                <option value="">File Analysis Options</option>
-                                <option value="upload">Run Scan</option>
-                                <option value="viewfile">Rescan</option>
-                                <option value="viewfile2">Refresh</option>
-                                <option value="viewfile3">View Files</option>
-                            </select>
-                        </form>
-                    </span>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <b>File analysis progress</b>
-                    <div id="progressbar">
-                        <!--  -->
-                    </div>
-                    <br/>
-                    <script>
-						  $(function() {
-						    $( "#progressbar" ).progressbar({
-						      value: 37,
-						      width: 400
-						    });
-						  });
-						</script>
-                    <div class="jtable-main-container">
-                        <div class="jtable-title">
-                            <div class="jtable-title-text">File Analysis</div>
-                        </div>
-                        <table class="jtable">
-                            <thead>
-                                <tr>
-                                    <th class="jtable-column-header" style="width:10%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">File extension</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width: 20%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">File type</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width: 15%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">File Type ID</span>
-                                            <div class="jtable-column-resize-handler"/>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:15%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Quantity</span>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="jtable-bottom-panel">
-                            <span class="alignright">
-                                <a class="button" href="#">Update PUIDs</a>
-                                <a class="button" href="#">Clear results</a>
-                            </span>
-                        </div>
-                    </div>
-                    <br/>
-                    <span class="alignright">
-                        <form>
-                            <select class="dk3" name="options3">
-                                <option value="">Pathway Analysis Options</option>
-                                <option value="run_matches">Run Matches</option>
-                                <option value="update_matches">Update Matches</option>
-                                <option value="refresh">Refresh</option>
-                                <option value="view_files">View Files</option>
-                            </select>
-                        </form>
-                    </span>
-                    <SCRIPT type="text/javascript">
-	                    $(function() {
-	                       $('.dk3').dropkick({
-					            			width: 160,
-					            		  change: function (value, label) {
-					            			  $('.dk3').dropkick('reset');
-					            		  }
-					            		});
-	                    });
-                    </SCRIPT>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div class="jtable-main-container">
-                        <div class="jtable-title">
-                            <div class="jtable-title-text">Pathway Analysis</div>
-                        </div>
-                        <table class="jtable">
-                            <thead>
-                                <tr>
-                                    <th class="jtable-column-header" style="width:10%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">File Type ID</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width: 20%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Format</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width: 15%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Pathway</span>
-                                            <div class="jtable-column-resize-handler"/>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:15%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Apply</span>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="jtable-bottom-panel">
-                            <span class="alignright">
-                                <a class="button" href="#">Clear Results</a>
-                            </span>
-                        </div>
-                    </div>
-                    <br/>
-                </div>
-                <div id="assessment_tabs-2">
-                    <div class="jtable-main-container">
-                        <div class="jtable-title">
-                            <div class="jtable-title-text">System Analysis</div>
-                        </div>
-                        <table class="jtable">
-                            <thead>
-                                <tr>
-                                    <th class="jtable-column-header" style="width: 30%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Checklist</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width: 35%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Details</span>
-                                            <div class="jtable-column-resize-handler"/>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:35%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Documentation</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-command-column-header" style="width: 1%;"/>
-                                    <th class="jtable-command-column-header" style="width: 1%;"/>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td class="">System</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="jtable-row-even">
-                                    <td class="">Type</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td class="">Version</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="jtable-row-even">
-                                    <td class="">Export functionality and format</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td class="">Data dictionary</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="jtable-row-even">
-                                    <td class="">Source to target mapping</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td class="">Volume of data</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="jtable-row-even">
-                                    <td class="">Scope of data</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td class="">Decommissioning</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="jtable-row-even">
-                                    <td class="">Detailed mapping design</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td class="">Code migratin logic</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="jtable-row-even">
-                                    <td class="">Testing</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td class="">Migration validation</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="jtable-row-even">
-                                    <td class="">Migration rollback</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td class="">Decommissioning strategy</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="jtable-row-even">
-                                    <td class="">Data migration executin strategy</td>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-attach-command-button" title="Attach">
-                                            <span>Attach</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="jtable-bottom-panel">
-                            <span class="alignright">
-                                <a class="button" href="#">Add New Table</a>
-                            </span>
-                        </div>
-                    </div>
-                    <br/>
-                </div>
-                <div id="assessment_tabs-3">
-          empty
-         </div>
-                <div id="assessment_tabs-4">
-                    <div class="jtable-main-container">
-                        <div class="jtable-title">
-                            <div class="jtable-title-text">File storage</div>
-                        </div>
-                        <table class="jtable">
-                            <thead>
-                                <tr>
-                                    <th class="jtable-column-header" style="width: 15%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Source File Quantity</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width: 15%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Total Source File Size</span>
-                                            <div class="jtable-column-resize-handler"/>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:25%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Preservation File Quantity</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:10%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Total Preservation File Size</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:15%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Access File Quantity</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:10%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Total Access File Size</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:10%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Total Storage Size</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-command-column-header" style="width: 1%;"/>
-                                    <th class="jtable-command-column-header" style="width: 1%;"/>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-delete-command-button" title="Delete">
-                                            <span>Delete</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="jtable-bottom-panel">
-                            <span class="alignright">
-                                <a class="button" href="#">+ Add row</a>
-                            </span>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="jtable-main-container">
-                        <div class="jtable-title">
-                            <div class="jtable-title-text">Database storage</div>
-                        </div>
-                        <table class="jtable">
-                            <thead>
-                                <tr>
-                                    <th class="jtable-column-header" style="width: 30%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Source Database Size</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width: 40%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Migration Size(includes preservation action)</span>
-                                            <div class="jtable-column-resize-handler"/>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:30%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Total Storage Size</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-command-column-header" style="width: 1%;"/>
-                                    <th class="jtable-command-column-header" style="width: 1%;"/>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-delete-command-button" title="Delete">
-                                            <span>Delete</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="jtable-bottom-panel">
-                            <span class="alignright">
-                                <a class="button" href="#">+ Add row</a>
-                            </span>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="jtable-main-container">
-                        <div class="jtable-title">
-                            <div class="jtable-title-text">Migration Strategy Assessment</div>
-                        </div>
-                        <table class="jtable">
-                            <thead>
-                                <tr>
-                                    <th class="jtable-column-header" style="width: 30%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Migration Path Options</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width: 30%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Details</span>
-                                            <div class="jtable-column-resize-handler"/>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:20%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Issues</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-column-header" style="width:20%;">
-                                        <div class="jtable-column-header-container">
-                                            <span class="jtable-column-header-text">Action</span>
-                                        </div>
-                                    </th>
-                                    <th class="jtable-command-column-header" style="width: 1%;"/>
-                                    <th class="jtable-command-column-header" style="width: 1%;"/>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-delete-command-button" title="Delete">
-                                            <span>Delete</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="jtable-bottom-panel">
-                            <span class="alignright">
-                                <a class="button" href="#">+ Add row</a>
-                            </span>
-                        </div>
-                    </div>
-                    <br/>
-                </div>
-            </div>
+          </div>
+            
         </div>
-        <div id="update_tabs-3">
-            N/A
+        <div id="update_tabs-2">
+            <spring:url value="/resources/images/error.png" var="err_img" />
+	     	    <spring:url value="/resources/images/exclamation.png" var="excla_img" />
+	     	 
+			  	  <div class="jtable-main-container">
+							<div class="jtable-title">
+							  <div class="jtable-title-text">Tasks</div>
+							</div>
+							<table class="jtable" >
+							 <thead>
+							   <tr>
+								<th class="jtable-column-header" style="width: 22%;">
+								   <div class="jtable-column-header-container">
+									 <span class="jtable-column-header-text">Task Details</span>
+									 <div class="jtable-column-resize-handler"></div>
+								   </div>
+								</th>
+								<th class="jtable-column-header" style="width:10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Assigned To</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Created</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Created By</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:15%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Due</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:5%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Alerts</span>
+								  </div>
+								</th>
+								
+								<th class="jtable-command-column-header" style="width: 1%;"></th>
+								</tr>
+							 </thead>
+							 <tbody>
+							  <tr class="">
+									 <td class="">Contact State Rocket NSW for ...</td>
+									 <td class="">Richard Lehane</td>
+									 <td class="">14 April 2013</td>
+									 <td class="">Ken Zhai</td>
+									 <td class="">24 April 2013</td>
+									 <td class="">Overdue <!-- <img src="${excla_img}" style="border:0"/> --></td>
+									 <td class="jtable-command-column"><button id="task_1_view_btn" class="jtable-command-button jtable-view-command-button" title="View Task"><span>Edit Record</span></button></td>
+							  </tr>
+							 </tbody>
+							</table>
+							<div class="jtable-bottom-panel">
+							   <!-- <span class="alignright"><a href="#" id="new_task_btn" class="button">View all your tasks</a></span>  -->
+							</div>
+						</div> 
+						
+			  	  <br/>
         </div>
         <div id="update_tabs-4">
             <div class="jtable-main-container">
@@ -1705,6 +1143,7 @@
 	    			window.open('${root_url}uploads/');
 	    		});
 	    		
+	    		$( "#abt_project_tabs_holder" ).tabs();
 	        $( "#project_tabs_holder" ).tabs();
 	        $( "#assessment_tabs_holder" ).tabs();
 	        
@@ -1767,7 +1206,7 @@
 	        
 	        $( "#prj_details_update_popup" ).dialog({
 		  	      autoOpen: false,
-		  	      height: 520,
+		  	      height: 420,
 		  	      width: 350,
 		  	      modal: true,
 		  	      buttons: {

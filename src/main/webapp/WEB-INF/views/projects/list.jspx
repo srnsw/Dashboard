@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:widget="urn:jsptagdir:/WEB-INF/tags/widget" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <span class="alignright">
         <form>
             <select class="dk" name="options">
-                <option value="">Options</option>
+                <option value="">View Projects Options</option>
                 <option value="newprj">Create New Project</option>
                 <option value="reporting">Reporting</option>
-                <option value="share">Share</option>
+                <option value="reporting">Find Project</option>
             </select>
             <spring:url value="/resources/images/help-browser.png" var="help"/>
             <a class="noborder" href="#">
@@ -19,7 +19,7 @@
     <spring:url value="/" var="root_url"/>
     <script>
 	 		$('.dk').dropkick({
-				width: 110,
+				width: 160,
 			  change: function (value, label) {
 			    //alert('You picked: ' + label + ':' + value);
 			    	if (value == "newprj"){
@@ -36,6 +36,14 @@
 			});
  		</script>
     <h2>Projects</h2>
+    
+    <widget:table path="projects" morePage="false" object="${projects}" title="Projects" headers="id:5%,Projec Name:30%,Agency:20%, Created:15%,Status:15%,Last Updated:15%" id="project_table">
+    	 <widget:tablecontent path="projects" fields="id,name,agencyName,creationDate,statusText,lastUpdateDate" id="test_table_id" object="${projects}" >
+    	 	<!--  -->
+    	 </widget:tablecontent>
+    </widget:table>
+    
+    <!-- 
     <div class="jtable-main-container">
         <div class="jtable-title">
             <div class="jtable-title-text">Projects</div>
@@ -50,18 +58,18 @@
                     </th>
                     <th class="jtable-column-header" style="width: 20%;">
                         <div class="jtable-column-header-container">
-                            <span class="jtable-column-header-text">Name</span>
+                            <span class="jtable-column-header-text">Project Name</span>
                             <div class="jtable-column-resize-handler"/>
                         </div>
                     </th>
                     <th class="jtable-column-header" style="width:20%;">
                         <div class="jtable-column-header-container">
-                            <span class="jtable-column-header-text">Agency Name</span>
+                            <span class="jtable-column-header-text">Agency</span>
                         </div>
                     </th>
                     <th class="jtable-column-header" style="width:15%;">
                         <div class="jtable-column-header-container">
-                            <span class="jtable-column-header-text">Date Created</span>
+                            <span class="jtable-column-header-text">Created</span>
                         </div>
                     </th>
                     <th class="jtable-column-header" style="width:15%;">
@@ -107,11 +115,15 @@
             </tbody>
         </table>
         <div class="jtable-bottom-panel">
-            <span class="alignright"> Page 1 of 4 <a href="#">&gt;&gt;</a>
+            <span class="alignright"> <input type="text" size="10"/> <span class="button">filter</span> Page 1 of 4 <a href="#">&gt;&gt;</a>
             </span>
         </div>
+        <script>
+        $('.button').button();
+        </script>
     </div>
     <br/>
+     -->
     <page:list id="pl_au_gov_nsw_records_digitalarchives_dashboard_model_Project" items="${projects}" render="false" z="user-managed">
         <table:table data="${projects}" id="l_au_gov_nsw_records_digitalarchives_dashboard_model_Project" path="/projects" z="hD6t+8wa7cPCTmDnUMAMtFHBhL0=">
             <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_name" property="name" z="mvlt8v0VUondl4mQjSX4mpNV5Dg="/>

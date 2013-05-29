@@ -59,10 +59,22 @@ public class ProjectController {
 		return "pages/update";
 	}
 	
-	@RequestMapping(value = "/{id}/file_analysis", method =  RequestMethod.GET)
+	@RequestMapping(value = "/{id}/format_assessment", method =  RequestMethod.GET)
 	public String fileAnalysis(@PathVariable("id") Long id, Model uiModel)  {
 		uiModel.addAttribute("project", Project.findProject(id));
-		return "projects/fileanalysis";
+		return "projects/formatassessment";
+	}
+	
+	@RequestMapping(value = "/{id}/migration_process", method =  RequestMethod.GET)
+	public String migrationProcess(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/migrationprocess";
+	}
+	
+	@RequestMapping(value = "/{id}/pathway_assessment", method =  RequestMethod.GET)
+	public String pathwayAssessment(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/pathwayassessment";
 	}
 	
 	@RequestMapping(value = "/{id}/system_assessment", method =  RequestMethod.GET)

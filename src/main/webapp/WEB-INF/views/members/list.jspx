@@ -15,6 +15,8 @@
         </table:table>
     </page:list>
     
+    <spring:url value="/" var="rooturl" />
+    
     <div class="jtable-main-container">
 							<div class="jtable-title">
 							  <div class="jtable-title-text">Registered Dashboard Users</div>
@@ -35,7 +37,7 @@
 								</th>
 								<th class="jtable-column-header" style="width:20%;">
 								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Role</span>
+									<span class="jtable-column-header-text">Position Title</span>
 								  </div>
 								</th>
 								<th class="jtable-column-header" style="width:15%;">
@@ -48,13 +50,8 @@
 									<span class="jtable-column-header-text">Telephone</span>
 								  </div>
 								</th>
-								<th class="jtable-column-header" style="width:15%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Status</span>
-								  </div>
-								</th>
-								<th class="jtable-command-column-header" style="width: 1%;"></th>
-								<th class="jtable-command-column-header" style="width: 1%;"></th>
+								
+								<!-- <th class="jtable-command-column-header" style="width: 1%;"></th>  -->
 								</tr>
 							 </thead>
 							 <tbody>
@@ -71,11 +68,12 @@
 							    	 </c:otherwise>
 							    </c:choose>
 								  <tr class="${trclass}">
-									   <td class="">${member.name}</td>
-									   <td class="">${member.agencyText}</td>
+									   <td class=""><a href="${rooturl}members/${member.id}">${member.name}</a></td>
+									   <td class=""><a href="#">${member.agencyText}</a></td>
 										 <td class="">${member.jobtitle}</td>
 										 <td class="">${member.email}</td>
 										 <td class="">${member.telephone}</td>
+										 <!-- 
 										 <td class="">
 											 <c:choose>
 									    	 <c:when test="${member.approved eq true}">
@@ -86,8 +84,9 @@
 									    	 </c:otherwise>
 								    	 </c:choose>
 										 </td>
-										 <td class="jtable-command-column"><button class="jtable-command-button jtable-edit-command-button" title="Edit User"><span>Edit Member</span></button></td>
+										  
 		 							   <td class="jtable-command-column"><button class="jtable-command-button jtable-view-command-button" title="View"><span>View</span></button></td>
+		 							   -->
 								  </tr>
 							   </c:forEach>
 							 </tbody>

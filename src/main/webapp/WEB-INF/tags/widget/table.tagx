@@ -1,0 +1,67 @@
+<jsp:root xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="yes" />
+
+  <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="Id of this table" />
+  <jsp:directive.attribute name="headers" type="java.lang.String" required="true" rtexprvalue="true" description="Header of the columns in the specific format i.e id:5,action:15,usage:30" />
+  <jsp:directive.attribute name="object" type="java.util.ArrayList" required="true" rtexprvalue="true" description="The form backing object" />
+  <jsp:directive.attribute name="title" type="java.lang.String" required="false" rtexprvalue="true" description="Title of the table" />
+  <jsp:directive.attribute name="showbydefault" type="java.lang.String" required="false" rtexprvalue="true" description="Show the table initially" />
+  <jsp:directive.attribute name="morePage" type="java.lang.Boolean" required="false" rtexprvalue="true" description="" />
+  <jsp:directive.attribute name="path" type="java.lang.String" required="true" rtexprvalue="true" description="Path to the object" />
+ 
+ <c:if test="${empty showbydefault}" >
+  <c:set value="false" var="showbydefault" ></c:set>
+ </c:if>
+ 
+		<div class="jtable-main-container">
+        <div class="jtable-title">
+            <div class="jtable-title-text">${title}</div>
+        </div>
+        <table class="jtable">
+            <thead>
+                <tr>
+                 <c:forEach items="${fn:split(headers, ',')}" var="headerpair">
+                    <c:set value="${fn:split(headerpair, ':')}" var="column_header" />
+                    <c:set value="${column_header[0]}" var="column_title" />
+                    <c:set value="${column_header[1]}" var="column_width" />
+                   <c:choose>
+						        <c:when test="${headerpair eq '-'}">
+						          <th class="jtable-command-column-header" style="width: 1%;"></th>
+						        </c:when>
+						        <c:otherwise>
+						          <th class="jtable-column-header" style="width: ${column_width};">
+                      <div class="jtable-column-header-container">
+                          <span class="jtable-column-header-text">${column_title}</span>
+                      </div>
+                    </th>
+						        </c:otherwise>
+						      </c:choose>
+                 </c:forEach>
+                </tr>
+            </thead>
+            <tbody>
+                <jsp:doBody />
+            </tbody>
+        </table>
+        <div class="jtable-bottom-panel">
+        		<c:if test="${morePage}">
+        			<span class="alignright button" id="${id}_view_all_btn"> View all ${ab}</span>
+        			<script>
+					        $(function() {
+			 							$("#${id}_view_all_btn").click(function(e) {
+			 								window.location.href = "${root_url}${path}";
+			 							});
+		 							});
+					    </script>
+        		</c:if>
+        </div>
+    </div>
+    <br/>
+    
+	<br/>
+	<script>
+	 $(function() {
+		 
+	 });
+	</script>
+</jsp:root>

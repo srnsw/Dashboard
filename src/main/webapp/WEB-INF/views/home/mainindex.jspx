@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:widget="urn:jsptagdir:/WEB-INF/tags/widget" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <jsp:output omit-xml-declaration="yes"/>
   <spring:message code="label_home_index" htmlEscape="false" var="title"/>
@@ -8,80 +8,31 @@
 		<span class="alignright">
 		<form>
 			<select name="options" class="dk">
-			  <option value="">Options</option>
-			  <option value="new_prj">New Project</option>
-			  <option value="new_task">New Task</option>
-			  <option value="share">Share</option>
-			  <option value="export">Reporting</option>
+			  <option value="">Dashboard Home Options</option>
+			  <option value="new_prj">Create New Project</option>
+			  <option value="new_task">Create New Task</option>
+			  <option value="new_task">Find Project</option>
 			</select>
 			<spring:url value="/resources/images/help-browser.png" var="help" />
 			<a href="#" class="noborder" ><img src="${help}" style="border:0" height="30px"></img></a>
 			</form>
  		</span>
-    <h2>
-      Dashboard
+ 		
+    <h2>  
+    	Dashboard Home  
     </h2>
-   <div class="jtable-main-container">
-							<div class="jtable-title">
-							  <div class="jtable-title-text">Projects</div>
-							</div>
-							<table class="jtable" >
-							 <thead>
-							   <tr>
-							  <th class="jtable-column-header" style="width: 10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">id</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width: 20%;">
-								   <div class="jtable-column-header-container">
-									 <span class="jtable-column-header-text">Project Name</span>
-									 <div class="jtable-column-resize-handler"></div>
-								   </div>
-								</th>
-								<th class="jtable-column-header" style="width:20%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Agency Name</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:15%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Agency Number</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:15%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Status</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:15%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Last Updated</span>
-								  </div>
-								</th>
-								<th class="jtable-command-column-header" style="width: 1%;"></th>
-								</tr>
-							 </thead>
-							 <tbody>
-							  <tr class="">
-								   <td class="">1</td>
-								   <td class="">Demo Project 1</td>
-									 <td class="">State Robot NSW</td>
-									 <td class="">115000</td>
-									 <td class="">Open</td>
-									 <td class="">14 April 2013</td>
-									 <td class="jtable-command-column"><button id="prj_1_edit_btn" class="jtable-command-button jtable-view-command-button" title="View Project"><span>Edit Record</span></button></td>
-							  </tr>
-							 </tbody>
-							</table>
-							<div class="jtable-bottom-panel">
-							   <span class="alignright"><a href="#" id="view_prj_btn" class="button">View all projects</a></span>
-							</div>
-						</div>
-			  	  <br/>
+     
+    <widget:table path="projects" morePage="true" object="${projects}" title="Projects" headers="id:5%,Projec Name:40%,Agency:30%,Status:10%,Last Updated:15%" id="project_table">
+    	 <widget:tablecontent path="projects" fields="id,name,agencyName,statusText,lastUpdateDate" id="test_table_id" object="${projects}" >
+    	 	<!--  -->
+    	 </widget:tablecontent>
+    </widget:table>
+    
+   <br/>
+   <br/>
 			  	  
-			  	   <spring:url value="/resources/images/error.png" var="err_img" />
-	     	     <spring:url value="/resources/images/exclamation.png" var="excla_img" />
+			  	  <spring:url value="/resources/images/error.png" var="err_img" />
+	     	    <spring:url value="/resources/images/exclamation.png" var="excla_img" />
 	     	 
 			  	  <div class="jtable-main-container">
 							<div class="jtable-title">
@@ -90,25 +41,26 @@
 							<table class="jtable" >
 							 <thead>
 							   <tr>
-							  <th class="jtable-column-header" style="width: 5%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">id</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width: 15%;">
+								<th class="jtable-column-header" style="width: 22%;">
 								   <div class="jtable-column-header-container">
-									 <span class="jtable-column-header-text">Task Name</span>
+									 <span class="jtable-column-header-text">Task Details</span>
 									 <div class="jtable-column-resize-handler"></div>
 								   </div>
 								</th>
-								<th class="jtable-column-header" style="width:20%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Details</span>
-								  </div>
+								<th class="jtable-column-header" style="width: 15%;">
+								   <div class="jtable-column-header-container">
+									 <span class="jtable-column-header-text">Project</span>
+									 <div class="jtable-column-resize-handler"></div>
+								   </div>
 								</th>
 								<th class="jtable-column-header" style="width:10%;">
 								  <div class="jtable-column-header-container">
 									<span class="jtable-column-header-text">Assigned To</span>
+								  </div>
+								</th>
+								<th class="jtable-column-header" style="width:10%;">
+								  <div class="jtable-column-header-container">
+									<span class="jtable-column-header-text">Created</span>
 								  </div>
 								</th>
 								<th class="jtable-column-header" style="width:10%;">
@@ -118,7 +70,7 @@
 								</th>
 								<th class="jtable-column-header" style="width:15%;">
 								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Due Date</span>
+									<span class="jtable-column-header-text">Due</span>
 								  </div>
 								</th>
 								<th class="jtable-column-header" style="width:5%;">
@@ -126,33 +78,74 @@
 									<span class="jtable-column-header-text">Alerts</span>
 								  </div>
 								</th>
-								<th class="jtable-column-header" style="width:10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Status</span>
-								  </div>
-								</th>
+								
 								<th class="jtable-command-column-header" style="width: 1%;"></th>
 								</tr>
 							 </thead>
 							 <tbody>
 							  <tr class="">
-								   <td class="">1</td>
-								   <td class="">Contact Agency</td>
 									 <td class="">Contact State Rocket NSW for ...</td>
+									 <td class=""><a href="">1:Demo Project 1</a></td>
 									 <td class="">Richard Lehane</td>
+									 <td class="">14 April 2013</td>
 									 <td class="">Ken Zhai</td>
 									 <td class="">24 April 2013</td>
-									 <td class=""><img src="${excla_img}" style="border:0"/></td>
-									 <td class="">Overdue</td>
-									 <td class="jtable-command-column"><button id="prj_1_edit_btn" class="jtable-command-button jtable-view-command-button" title="View Task"><span>Edit Record</span></button></td>
+									 <td class="">Overdue <!-- <img src="${excla_img}" style="border:0"/> --></td>
+									 <td class="jtable-command-column"><button id="task_1_view_btn" class="jtable-command-button jtable-view-command-button" title="View Task"><span>Edit Record</span></button></td>
 							  </tr>
 							 </tbody>
 							</table>
 							<div class="jtable-bottom-panel">
-							   <span class="alignright"><a href="#" id="new_task_btn" class="button">View all tasks</a></span>
+							   <span class="alignright"><a href="#" id="new_task_btn" class="button">View all your tasks</a></span>
 							</div>
 						</div>
+						<div class="dawidget" id="task_update_popup" title="Update task">
+                <form>
+                    <fieldset>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Assign task</label>
+                            </dt>
+                            <dd>
+                                <input type="text" />
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Status change</label>
+                            </dt>
+                            <dd>
+                                <input type="checkbox" /> completed <br/>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Due date</label>
+                            </dt>
+                            <dd>
+                                <input type="text" id="datepicker" />
+                            </dd>
+                            <script>
+                            	$('#datepicker').datepicker();
+                            </script>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Due date change comment</label>
+                            </dt>
+                            <dd>
+                                <textarea rows="" cols=""> <!--  --></textarea>
+                            </dd>
+                            <script>
+                            	$('#datepicker').datepicker();
+                            </script>
+                        </dl>
+                    </fieldset>
+                </form>
+            </div>
 			  	  <br/>
+			  	  
+			 <!-- 
 			 <table width="100%">
 	     <tbody>
 		     <td class="dashboard" width="50%">
@@ -161,12 +154,11 @@
 		     			<p> 11/12/2012: <a href="#">Richard Lehane</a> created <a href="#">Demo Project 1</a></p>
 		     			<p> 10/12/2012: <a href="#">Paul Elliott</a> updated <a href="#">Demo Project 2</a> </p>
 		     			<p> 09/12/2012: <a href="#">Ken Zhai</a> uploaded 50 files to <a href="#">Demo Project 3</a></p>
-		     			<p> 08/12/2012: <a href="#">Cassie Findlay</a> approved user <a href="#">Damien Juhasz</a></p>
 		     		</fieldset>
 		     </td>
 	     </tbody>
 	    </table>
-	    
+	     -->
   </util:panel>
   
   <spring:url value="/" var="root_url"></spring:url>
@@ -174,7 +166,7 @@
 	    $(function() {
 	    	
 	    	$('.dk').dropkick({
-	    			width: 70,
+	    			width: 160,
 	    		  change: function (value, label) {
 	    		    //alert('You picked: ' + label + ':' + value);
 	    		    if (value == "new_prj"){
@@ -201,6 +193,28 @@
 	            e.preventDefault();  //stop the browser from following
 	            window.location.href = '${root_url}projects/1';
 	      });
+    	  
+    	  $( "#task_1_view_btn" ).click(function() {
+	  		    $( "#task_update_popup" ).dialog( "open" );
+	  		    return 1;
+	  		  });
+	        $( "#task_update_popup" ).dialog({
+		  	      autoOpen: false,
+		  	      height: 400,
+		  	      width: 600,
+		  	      modal: true,
+		  	      buttons: {
+		  	        "OK": function() {
+		  	        	 $( this ).dialog( "close" );
+		  	        },
+		  	      	cancel: function() {
+		  	        	 $( this ).dialog( "close" );
+		  	        },
+		  	      },
+		  	      close: function() {
+		  	       
+		  	      }
+		  	    });
 
 	    });
 	</script>

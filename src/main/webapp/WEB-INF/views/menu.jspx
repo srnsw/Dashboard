@@ -3,8 +3,28 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+    		
+    		<menu:category id="c_workspace_static" label="Digital Archives" url="/" z="user-managed">
+     		</menu:category>
+     		
+     		<menu:category id="c_workspace_guidance" label="Guidance &amp; Advice" url="/" z="user-managed">
+     			<menu:item id="i_methodology" url="#"/>
+     		</menu:category> 
+     		
+     		<menu:category id="c_tool_and_services" z="user-managed">
+          <menu:item id="i_metadata_registry" url="#"/>
+          <menu:item id="i_preservation_pathways" url="#"/>
+     		</menu:category>
+        <sc:authorize access="not isAuthenticated()">
+        		<menu:category id="c_workspace_static" label="Dashboard Login" url="/" z="user-managed"> </menu:category>
+        </sc:authorize>        		
         <!-- resticted area -->
         <sc:authorize access="isAuthenticated()">
+             <spring:url value="/" var="rooturl" />
+             <spring:url value="/resources/images/spacer.png" var="spacer" />
+             <spring:url value="/resources/images/corner_blank.png" var="corner_blank" />
+             <spring:url value="/resources/images/corner.png" var="corner" />
+                  
             <menu:category id="c_workspace" url="/workspace" z="user-managed">
                 <!-- only agency can see this -->
                 <sc:authorize ifAllGranted="ROLE_AGENCY">
@@ -12,46 +32,73 @@
                 </sc:authorize>
                 <menu:item id="i_migration_project" url="/projects?page=1&amp;size=${empty param.size ? 10 : param.size}"/>
                 <c:if test="${not empty project}">
-                
-                  <spring:url value="/resources/images/bullet_arrow_go.png" var="go_bullet" />
-                  <!-- <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
-	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="/projects/${project.id}">
-	                  	<span><img src="${go_bullet}" /> ${project.name}</span>
+                 
+                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}">
+	                  	<span><img src="${corner}" />${project.name}</span>
 	                  </a>
                   </li>
-                  -->
-                  <menu:item id="i_migration_project" label="» ${project.name}" url="/projects/${project.id}"/>
-                	<menu:item id="i_migration_project" label=" »» Project Plan" url="/projects/${project.id}/project_plan"/>
-                	<menu:item id="i_migration_project" label=" »» Migration Plan" url="/projects/${project.id}/migration_plan"/>
-                	<menu:item id="i_migration_project" label=" »» File Management" url="/projects/${project.id}/files"/>
-                	<menu:item id="i_migration_project" label=" »» File Analysis" url="/projects/${project.id}/file_analysis"/>
-                	<menu:item id="i_migration_project" label=" »» System Assessment" url="/projects/${project.id}/system_assessment"/>
-                	<menu:item id="i_migration_project" label=" »» Metadata Assessment" url="/projects/${project.id}/metadata_assessment"/>
+                  
+                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/project_plan">
+	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner}" />Project Plan</span>
+	                  </a>
+                  </li> 
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/migration_plan">
+	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />Migration Plan</span>
+	                  </a> 
+                  </li>
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/files">
+	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />File Management</span>
+	                  </a> 
+                  </li>
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/format_assessment">
+	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />Format Assessment</span>
+	                  </a> 
+                  </li>
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/system_assessment">
+	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />System Assessment</span>
+	                  </a> 
+                  </li>
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/pathway_assessment">
+	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />Pathway Assessment</span>
+	                  </a> 
+                  </li>
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/metadata_assessment">
+	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />Metadata Assessment</span>
+	                  </a> 
+                  </li>
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/migration_process">
+	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />Migration Process</span>
+	                  </a> 
+                  </li>
                 </c:if>
+                
+                <menu:item id="i_user_profile" url="/members/myprofile"/>
+                
                 <!-- only archivist can see this -->
                 <sc:authorize ifAllGranted="ROLE_ARCHIVIST">
-                    <menu:item id="i_workflow_application" url="#"/>
-                    <menu:item id="i_reporting" url="#"/>
                     <menu:item id="i_controller__adminindex_id" messageCode="global_generic" url="/admin/index" z="Vqqut04Ar2YjWWvud7/zWavBC+8="/>
+                    <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                    <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}members?page=1&amp;size=${empty param.size ? 10 : param.size}">
+	                  	  <span><img src="${corner}" />Dashboard Users</span>
+	                    </a> 
+                    </li>
+				             <menu:item render="false" id="i_member_list" url="/members?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 </sc:authorize>
             </menu:category>
         </sc:authorize>
-        <menu:category id="c_home" z="user-managed">
+        <menu:category render="false" id="c_home" z="user-managed">
             <menu:item id="i_user_profile" url="/members/myprofile"/>
-            <!-- only archivist can see this -->
-            <sc:authorize ifAllGranted="ROLE_ARCHIVIST">
-                <menu:item id="i_member_list" url="/members?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
-            </sc:authorize>
-            <menu:item id="i_howtouse" url="#"/>
-            <menu:item id="i_faqs" url="#"/>
             <menu:item id="i_guidance" url="#"/>
-            <menu:item id="i_methodology" url="#"/>
-            <menu:item id="i_contact" url="#"/>
-        </menu:category>
-        <menu:category id="c_tool_and_services" z="user-managed">
-            <menu:item id="i_howtouse_tools" url="#"/>
-            <menu:item id="i_metadata_registry" url="#"/>
-            <menu:item id="i_preservation_pathways" url="#"/>
+            <menu:item render="false" id="i_contact" url="#"/>
         </menu:category>
         <menu:category id="c_project" render="false" z="user-managed">
             <menu:item id="i_project_new" messageCode="global_menu_new" url="/projects?form" z="1BazRC1rLnod0a+MpP1flWTvehA="/>

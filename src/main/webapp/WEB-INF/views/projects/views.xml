@@ -13,7 +13,22 @@
 <definition extends="default" name="projects/update">
         <put-attribute name="body" value="/WEB-INF/views/projects/update.jspx"/>
     </definition>
-<definition extends="default" name="projects/file">
-    <put-attribute name="body" value="/WEB-INF/views/projects/file.jspx"/>
+<definition extends="default" name="projects/filelist">
+    <put-attribute name="body" value="/WEB-INF/views/projects/filelist.jspx"/>
+</definition>
+<definition extends="default" name="projects/formatassessment">
+    <put-attribute name="body" value="/WEB-INF/views/projects/formatassessment.jspx"/>
+</definition>
+<definition extends="default" name="projects/systemassessment">
+    <put-attribute name="body" value="/WEB-INF/views/projects/systemassessment.jspx"/>
+</definition>
+<definition extends="default" name="projects/metadataassessment">
+    <put-attribute name="body" value="/WEB-INF/views/projects/metadataassessment.jspx"/>
+</definition>
+<definition extends="default" name="projects/pathwayassessment">
+    <put-attribute name="body" value="/WEB-INF/views/projects/pathwayassessment.jspx"/>
+</definition>
+<definition extends="default" name="projects/migrationprocess">
+    <put-attribute name="body" value="/WEB-INF/views/projects/migrationprocess.jspx"/>
 </definition>
 </tiles-definitions>

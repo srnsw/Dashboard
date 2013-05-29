@@ -469,7 +469,7 @@ div.formControls input.hidden {display:none;}
 .portletHeader {margin-top: 1.3em; color: #B8474B; border:0; padding:0; text-transform:none; font-weight:600; line-height:1.4em; font-size: 1.5em}
 .portletHeader a {color: #B8474B;}
 .portletHeader a:hover, .portletHeader a:active, .portletHeader a:focus {color:#410C0C; border-bottom:none; background:transparent;}
-.portlet img {border: 0; padding-top: 5px; padding-bottom: 3px; }
+.portlet img {border: 0; padding-top: 0px; padding-bottom: 0px; }
 .fifty img {padding: 1.5em 0 1em .5em; border: 0;}
 .portlet-static-photo-book {margin-top:1em; margin-bottom: 0}
 .portlet h5 {margin-bottom:0}

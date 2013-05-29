@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -25,9 +26,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public class UploadController {
 	
   @ResponseStatus(HttpStatus.OK)
-  @RequestMapping(value = "/create", method =  RequestMethod.POST)
-	public void upload(MultipartFile content, HttpServletRequest request) throws Exception{
-  	
+  @ResponseBody
+  @RequestMapping(value = "/create", method =  RequestMethod.POST, produces = "application/xml")
+	public String upload(MultipartFile content, HttpServletRequest request) throws Exception{
+  	System.out.println("filename:" + content.getOriginalFilename());
   	try{
   	if (!(request instanceof MultipartHttpServletRequest)) {
       //error(resp, "Invalid request (multipart request expected)");
@@ -52,7 +54,18 @@ public class UploadController {
   		e.printStackTrace();
   		throw e;
   	}
-	}
+  	return "{\"files\": [" +
+  		" {" +
+	  			"\"name\": \"" + content.getOriginalFilename() + "\"," +
+	  			"\"size\": 902604," +
+	  			"\"url\": \"http://example.org/files/picture1.jpg\"," +
+	  			"\"thumbnail_url\": \"http://example.org/files/thumbnail/picture1.jpg\"," +
+	  			"\"delete_url\": \"http://example.org/files/picture1.jpg\"," +
+	  			"\"delete_type\": \"DELETE\"" +
+  		"}" +
+  		
+  	"]}";
+ }
   
 
 	@RequestMapping(produces = "text/html")

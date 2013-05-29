@@ -6,7 +6,7 @@
     <span class="alignright">
         <form>
             <select class="dk" name="options">
-                <option value="">Options</option>
+                <option value="">Metadata Assessment Options</option>
                 <option value="export">Export</option>
                 <option value="upload">Upload files</option>
                 <option value="viewfile">View files</option>
@@ -31,7 +31,7 @@
 	    $(function() {
 	    	
 	    	$('.dk').dropkick({
-    			width: 110,
+    			width: 180,
     		  change: function (value, label) {
     		    //alert('You picked: ' + label + ':' + value);
     		    	if (value == "new_prj"){

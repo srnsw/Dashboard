@@ -38,23 +38,16 @@
   <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
   <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
-
+  
 	<spring:url value="/resources" var="resourcepath"></spring:url>
 	<style type="text/css">@import url("${resourcepath}/scripts/pupload/jquery.ui.plupload/css/jquery.ui.plupload.css");</style>
 	<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"><!-- required for FF3 and Opera --></script>
 	
-	<!-- Load plupload and all it's runtimes and finally the jQuery UI queue widget -->
-	<script type="text/javascript" src="${resourcepath}/scripts/pupload/plupload.full.js"><!-- required for FF3 and Opera --></script>
-	<script type="text/javascript" src="${resourcepath}/scripts/pupload/jquery.ui.plupload/jquery.ui.plupload.js"><!-- required for FF3 and Opera --></script>
-	
+	<!-- TinyMCE text editor -->
+	<script type="text/javascript" src="http://tinymce.cachefly.net/4.0/tinymce.min.js"><!-- required for FF3 and Opera --></script>
+ 
 	<!-- load jquery dropdown -->
 	<script type="text/javascript" src="${resourcepath}/scripts/dropkick/jquery.dropkick-1.0.0.js"><!-- required for FF3 and Opera --></script>
 	<link rel="stylesheet" type="text/css" href="${resourcepath}/scripts/dropkick/dropkick.css" />
-	
-	<!-- load jquery rte (rich text editor) -->
-	<script type="text/javascript" src="${resourcepath}/scripts/jquery_rte/jquery.ocupload-1.1.4.js"><!-- required for FF3 and Opera --></script>
-	<script type="text/javascript" src="${resourcepath}/scripts/jquery_rte/jquery.rte.js"><!-- required for FF3 and Opera --></script>
-	<script type="text/javascript" src="${resourcepath}/scripts/jquery_rte/jquery.rte.tb.js"><!-- required for FF3 and Opera --></script>
-	<link rel="stylesheet" type="text/css" href="${resourcepath}/scripts/jquery_rte/jquery.rte.css" />
 	
 </jsp:root>

@@ -13,9 +13,9 @@
         </table:table>
     </page:list>
     <span class="alignright">
-        <form>
+        <form> 
             <select class="dk" name="options">
-                <option value="">Options</option>
+                <option value="">File Management Options</option>
                 <option value="upload">Upload files</option>
                 <option value="fileanalysis">File analysis</option>
                 <option value="metadataanalysis">Metadata analysis</option>
@@ -53,7 +53,7 @@
     <script>
 	
 	 		$('.dk').dropkick({
-				width: 110,
+				width: 190,
 			  change: function (value, label) {
 			    	if (value == "upload"){
 			    		 //$( "#splitform" ).dialog( "open" );
@@ -67,12 +67,39 @@
 			});
  		</script>
     <h2>File Management</h2>
-    <spring:url value="/resources" var="resourcepath"/>
-    <input name="filter_input" type="text"/>
-    <SPAN id="filter">Filter</SPAN>
+    	<spring:url value="/resources" var="resourcepath"/>
+    	<div>
+    	<div style="float:left;padding-left:4px;">
+	    	<input name="filter_input" type="text"/>
+		    <span id="filter">Filter</span>
+	    </div>  
+	    <div style="float:left">
+		    <form> 
+		        <select class="dk2" name="options2">
+		        		<option value="">Filter By</option>
+		            <option value="">File Extension</option>
+		            <option value="upload">File Type</option>
+		            <option value="fileanalysis">File Type ID</option>
+		        </select>
+		    </form>
+	    </div>
+	   <br/>
+	   <br/>
+    	</div>
+	    
     <SCRIPT type="text/javascript">
 			$("#filter").button().click(function() {
    		//$( "#exportform" ).dialog( "open" );
+			});  
+			$('.dk2').dropkick({
+				width: 80,
+			  change: function (value, label) {
+			    	if (value == "upload"){
+			    		 //$( "#splitform" ).dialog( "open" );
+		 		    }else if (value == "fileanalysis"){
+		 		    }else if (value == "metadataanalysis"){
+		 		    }
+			  }
 			});
 		</SCRIPT>
     <br/>

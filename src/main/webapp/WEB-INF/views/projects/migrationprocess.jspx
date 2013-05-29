@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+      <span class="alignright">
+        <form>
+            <select class="dk" name="options2">
+                <option value="">Migration Process Options</option>
+            </select>
+        </form>
+    </span>
+    <SCRIPT type="text/javascript">
+      $(function() {
+         $('.dk').dropkick({
+  			width: 190,
+  		  change: function (value, label) {
+  			  $('.dk').dropkick('reset');
+  		  }
+  		});
+      });
+     </SCRIPT>
+    <h2>Migration Process</h2> 
+    <br/>
+                  
+    <!-- <input type="checkbox"> Quarantine </input> --> 
+    Quarantine <input type="number" size="5" min="0" value="0" /> days
+    <spring:url value="/" var="root_url"/>
+    <script>
+	    $(function() {
+	    	
+	        $( "#proceed" ).button();
+	        $( "#update" ).button();
+	        $( ".button" ).button();
+	    });
+    </script>
+</div>

@@ -26,10 +26,10 @@
 							<div class="visualPadding">
 							  <dl class="portlet portletNavigationTree">
 									<dt class="portletHeader">
-										<span class="portletTopLeft"></span><a
+										<span class="portletTopLeft"></span><a 
 											name="portlet-navigation-tree"></a> <a
 											href="#"
-											class="tile">Digital Archives</a> <span class="portletTopRight"></span>
+											class="tile">Recordkeeping</a> <span class="portletTopRight"></span>
 									</dt>
 									<dd class="portletItem lastItem">
 										<tiles:insertAttribute name="menu" ignore="true" />

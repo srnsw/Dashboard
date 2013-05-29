@@ -51,6 +51,10 @@ public class Project {
     @OneToMany
     private List<Status> status;
     
+    public String getStatusText(){ 
+    	return status.get(0).getProjectStatusType().toString();
+    }
+    
     @Expose
     private String lastUpdatedBy;
     

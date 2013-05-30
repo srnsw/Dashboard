@@ -92,7 +92,9 @@
 							 </tbody>
 							</table>
 							<div class="jtable-bottom-panel">
+								<c:if test="${empty a}">								  
 							  <span class="alignright"> Page 1 of 4 <a href="#">>></a></span>
+							  </c:if>
 							</div>
 						</div>
 			  	  <br/>

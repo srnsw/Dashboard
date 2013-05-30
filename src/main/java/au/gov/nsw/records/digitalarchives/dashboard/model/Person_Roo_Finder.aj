@@ -9,6 +9,13 @@ import javax.persistence.TypedQuery;
 
 privileged aspect Person_Roo_Finder {
     
+    public static TypedQuery<Person> Person.findPeopleByApprovedNot(boolean approved) {
+        EntityManager em = Person.entityManager();
+        TypedQuery<Person> q = em.createQuery("SELECT o FROM Person AS o WHERE o.approved IS NOT :approved", Person.class);
+        q.setParameter("approved", approved);
+        return q;
+    }
+    
     public static TypedQuery<Person> Person.findPeopleByEmailEquals(String email) {
         if (email == null || email.length() == 0) throw new IllegalArgumentException("The email argument is required");
         EntityManager em = Person.entityManager();

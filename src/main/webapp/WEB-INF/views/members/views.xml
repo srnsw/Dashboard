@@ -28,4 +28,7 @@
 <definition extends="default" name="members/retrieve">
         <put-attribute name="body" value="/WEB-INF/views/members/retrieve.jspx"/>
     </definition>
+    <definition extends="default" name="members/post_create">
+        <put-attribute name="body" value="/WEB-INF/views/members/post_create.jspx"/>
+    </definition>
 </tiles-definitions>

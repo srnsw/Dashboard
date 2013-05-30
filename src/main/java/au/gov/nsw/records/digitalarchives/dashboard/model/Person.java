@@ -14,7 +14,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = { "findPeopleByEmailEquals" })
+@RooJpaActiveRecord(finders = { "findPeopleByEmailEquals", "findPeopleByApprovedNot" })
 public class Person {
 
     @Expose
@@ -27,8 +27,6 @@ public class Person {
     @NotEmpty
     private String email;
 
-    @NotNull
-    @NotEmpty
     private String password;
 
     @Expose
@@ -44,11 +42,11 @@ public class Person {
 
     @Expose
     private String jobtitle;
-    
+
     @Expose
     @NotNull
     private String agencyText;
-    
+
     @Expose
     @NotEmpty
     private String address;

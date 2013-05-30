@@ -104,3 +104,15 @@ entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.EventHisto
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-05-16 15:57:48
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-05-20 15:00:01
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-05-20 16:20:56
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-05-29 13:17:41
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-05-29 13:25:25
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-05-29 14:29:09
+email sender setup --hostServer emailhost --protocol SMTP --port 587 --username emailuser --password passwd
+email template setup --from dashboard@record.nsw.gov.au --subject "Registration Confirmation"
+// [failed] field email template --fieldName mailTemplate --class ~.email.NotificationServiceImpl
+email sender setup --hostServer molineux.records.nsw.gov.au --protocol POP
+email sender setup --protocol SMTP --hostServer molineux.records.nsw.gov.au
+// [failed] finder list 
+focus --class ~.model.Person
+finder list  
+finder add --finderName findPeopleByApprovedNot

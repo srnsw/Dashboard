@@ -3,10 +3,12 @@ package au.gov.nsw.records.digitalarchives.dashboard.web;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,9 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,10 +35,7 @@ import au.gov.nsw.records.digitalarchives.dashboard.bean.AutocompleteResponse;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.email.NotificationService;
-import au.gov.nsw.records.digitalarchives.dashboard.email.NotificationServiceImpl;
-import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
-import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
 import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
 
@@ -43,6 +44,9 @@ import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
 @RooWebScaffold(path = "members", formBackingObject = Person.class)
 public class MemberController {
 	
+	@Autowired
+	private NotificationService notificationService;
+	
 	//@Secured("ROLE_ADMIN")
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid Person people, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -50,6 +54,11 @@ public class MemberController {
 			populateEditForm(uiModel, people);
 			return "members/create";
 		}
+		
+		//password generation
+		String passwd = RandomStringUtils.randomAlphanumeric(8);
+		people.setPassword(passwd);
+		
 		//password encryption
 		MessageDigest md;
 		try {
@@ -65,10 +74,17 @@ public class MemberController {
 		}
 		
 		people.persist();
-
-		NotificationService email = new NotificationServiceImpl();
-		email.sendMessage("wisanu.promthong@records.nsw.gov.au", "test mail");
-		return "redirect:/members/" + encodeUrlPathSegment(people.getId().toString(), httpServletRequest);
+		
+		System.out.println("passwd:" + passwd);
+		
+		// mail to the user
+		notificationService.sendMessage("wisanu.promthong@records.nsw.gov.au", "test mail passwd is:" + passwd);
+		// mail to administrator
+		notificationService.sendMessage("wisanu.promthong@records.nsw.gov.au", "test mail passwd is:" + passwd);
+		
+		// TODO redirect to register completed with text
+		return "members/post_create";
+		//return "redirect:/members/" + encodeUrlPathSegment(people.getId().toString(), httpServletRequest);
 	}
 	
 	@RequestMapping(value = "/myprofile", method = RequestMethod.GET, produces = "text/html")

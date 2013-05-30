@@ -93,7 +93,7 @@
 					</table>
 					<div class="jtable-bottom-panel">
 						<span class="alignright">
-							<util:pagination maxPages="${maxpage}" page="${page}" pageParam="${pageParam}" size="${size}"/>
+							<util:pagination maxPages="${maxpage}" page="${page}" pageParam="${pageParam}" size="${size}"/>					
 						</span>
 					</div>
 				</div>

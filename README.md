@@ -1,4 +1,4 @@
 Dashboard
 =========
 
-Digital Archive Dashboard
+Digital Archive Dashboard 

@@ -13,6 +13,11 @@
     
     <h4>User management</h4> <hr/>
 
+    	<dashboard:users_table object="${user_appr}" title="Registration Request" approve_user="true" id="_registration_request_users" page="${user_appr_page}" size="${user_appr_size}" maxpage="${user_appr_maxpage}"/>
+    	
+    	<h6>Registration Request</h6>
+
+
     	<dashboard:users_table object="${user_appr}" title="Registration Request" pageParam="user_appr_page" approve_user="true" id="_registration_request_users" page="${user_appr_page}" size="${user_appr_size}" maxpage="${user_appr_maxpage}"/>
     	<br/>
 

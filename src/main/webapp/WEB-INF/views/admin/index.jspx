@@ -12,110 +12,25 @@
     <br/>
     
     <h4>User management</h4> <hr/>
-    	<dashboard:users_table object="${user_appr}" title="Registration Request" approve_user="true" id="_registration_request_users" page="${user_appr_page}" size="${user_appr_size}" maxpage="${user_appr_maxpage}"/>
-    	
-    	<h6>Registration Request</h6>
 
-			<h6>Retrieve Login Details Request</h6>
-				<p>Retrieve login details request from <a href="#"> Wayne Swan <img src="${image_url}user_edit.png" /></a> <br/></p>
-				<p>Retrieve login details request from <a href="#"> Kevin Rudd <img src="${image_url}user_edit.png" /></a> <br/></p>
+    	<dashboard:users_table object="${user_appr}" title="Registration Request" pageParam="user_appr_page" approve_user="true" id="_registration_request_users" page="${user_appr_page}" size="${user_appr_size}" maxpage="${user_appr_maxpage}"/>
+    	<br/>
+
+			<dashboard:users_table object="${user_login_req}" title="Retrieve Login Details Request" approve_user="true" id="_registration_request_users" page="${user_login_req_page}" size="${user_login_req_size}" maxpage="${user_login_req_maxpage}"/>
+			<br/>
 			
-			<h6>Update My Profile Request</h6>
-				<p>Update profile request from <a href="#"> Mark Vaile <img src="${image_url}user_edit.png" /></a> <br/></p>
-				<p>Update profile request from <a href="#"> Jenny Macklin <img src="${image_url}user_edit.png" /></a> <br/></p>
-				
-		
-		 <br/>
+			<dashboard:users_table object="${user_update_req}" title="Update My Profile Request" approve_user="true" id="_registration_request_users" page="${user_update_req_page}" size="${user_update_req_size}" maxpage="${user_update_req_maxpage}"/>
+  		<br/>
+  		
 		 <h4>Task management</h4> <hr/>
-				<div class="jtable-main-container">
-							<div class="jtable-title">
-							  <div class="jtable-title-text">Tasks</div>
-							</div>
-							<table class="jtable" >
-							 <thead>
-							   <tr>
-							  <th class="jtable-column-header" style="width: 5%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">id</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width: 25%;">
-								   <div class="jtable-column-header-container">
-									 <span class="jtable-column-header-text">Task Details</span>
-									 <div class="jtable-column-resize-handler"></div>
-								   </div>
-								</th>
-								<th class="jtable-column-header" style="width: 10%;">
-								   <div class="jtable-column-header-container">
-									 <span class="jtable-column-header-text">Project Id</span>
-									 <div class="jtable-column-resize-handler"></div>
-								   </div>
-								</th>
-								<th class="jtable-column-header" style="width:10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Assigned To</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Created</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Created By</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:15%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Due</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:5%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Alerts</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:5%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Status</span>
-								  </div>
-								</th>
-								<th class="jtable-command-column-header" style="width: 1%;"></th>
-								</tr>
-							 </thead>
-							 <tbody>
-							  <tr class=""> 
-								   <td class="">1</td>
-									 <td class="">Contact State Rocket NSW for ...</td>
-									 <td class=""><a href="">1</a></td>
-									 <td class="">Richard Lehane</td>
-									 <td class="">14 April 2013</td>
-									 <td class="">Ken Zhai</td>
-									 <td class="">24 April 2013</td>
-									 <td class="">Overdue <!-- <img src="${excla_img}" style="border:0"/> --></td>
-									 <td class="">Open</td>
-									 <td class="jtable-command-column"><button id="prj_1_edit_btn" class="jtable-command-button jtable-view-command-button" title="View Task"><span>Edit Record</span></button></td>
-							  </tr>
-							 </tbody>
-							</table>
-							<div class="jtable-bottom-panel">
-							   <!-- <span class="alignright"><a href="#" id="new_task_btn" class="button"></a></span>  -->
-							   <span class="alignright"><input type="text" size="8"/><a href="#" id="new_task_btn" class="button">Filter</a></span>
-							       <script>
-									    $(function() {
-									        $('.button').button();
-									     });
-									    </script>
-							</div>
-						</div>
-			  	  <br/>
+		 
+		 	 <dashboard:tasks_table object="${tasks}" title="Tasks" id="_registration_request_users" page="${user_update_req_page}" size="${user_update_req_size}" maxpage="${user_update_req_maxpage}"/>
+		 
 			  	  
-	    <h4>Project Templates</h4> <hr/>
+	   <h4>Project Templates</h4> <hr/>
 	    
 	     <p><a href="${root_url}pages/projectplan"> Project Plan Template <img src="${image_url}table_edit.png" /></a> <a href="${root_url}pages/1"><img src="${image_url}view.png" /></a><br/></p> 
 	     <p><a href="${root_url}pages/migrationplan"> Migration Plan Template  <img src="${image_url}table_edit.png" /></a> <a href="${root_url}pages/2"><img src="${image_url}view.png" /></a> <br/></p>
-    
     
   </util:panel>
 </div>

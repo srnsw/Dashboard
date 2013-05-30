@@ -6,7 +6,6 @@
   <jsp:directive.attribute name="title" type="java.lang.String" required="true" rtexprvalue="true" description="Title of the table" />
   <jsp:directive.attribute name="approve_user" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Link to approve the user registration request" />
   <jsp:directive.attribute name="page" type="java.lang.String" required="false" rtexprvalue="true" description="Current pagination page" />
-  <jsp:directive.attribute name="pageParam" type="java.lang.String" required="false" rtexprvalue="true" description="Page parameter name" />
   <jsp:directive.attribute name="size" type="java.lang.String" required="false" rtexprvalue="true" description="Pagination size" />
   <jsp:directive.attribute name="maxpage" type="java.lang.String" required="false" rtexprvalue="true" description="Maximum page" />
   
@@ -93,7 +92,7 @@
 					</table>
 					<div class="jtable-bottom-panel">
 						<span class="alignright">
-							<util:pagination maxPages="${maxpage}" page="${page}" pageParam="${pageParam}" size="${size}"/>
+							<util:pagination maxPages="${maxpage}" page="${page}" pageParam="user_page" size="${size}"/>
 						</span>
 					</div>
 				</div>

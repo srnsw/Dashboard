@@ -13,6 +13,4 @@
         <field:select field="roleType" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_roleType" items="${roletypes}" path="roletypes" z="A3jR7rCQ4B6V0RJgPOFSMTTVSRU="/>
         <field:checkbox field="approved" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_approved" z="Ne8CG0/6ozsUUFwnm1n4JYyoWTM="/>
     </form:update>
-    Please fill in the following form:
-    ...
 </div>

@@ -148,4 +148,22 @@ public class MemberController {
   public @ResponseBody String listMembers(Model uiModel) {
      return JsonService.toJson(new JTableResponse(Status.OK, Person.findAllPeople()));
   }
+
+	@RequestMapping(produces = "text/html")
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+       // if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+
+          	List<Person> persons = Person.findPersonEntries(firstResult, sizeNo);
+          	float nrOfPages = (float) Person.countPeople() / sizeNo;
+            uiModel.addAttribute("user_maxpage", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+            uiModel.addAttribute("user_page", page);
+            uiModel.addAttribute("user_size", sizeNo);
+            uiModel.addAttribute("user", persons);
+     //   } else {
+      //      uiModel.addAttribute("people", Person.findAllPeople());
+     //   }
+        return "members/list";
+    }
 }

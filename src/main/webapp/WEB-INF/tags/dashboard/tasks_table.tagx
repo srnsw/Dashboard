@@ -101,6 +101,9 @@
 					 </tbody>
 					</table>
 					<div class="jtable-bottom-panel">
+					 
+					  <span class="button" id="${id}_new_task">new</span>
+					  
 						<span class="alignright">
 							<input type="text" size="8"/><span href="#" id="${id}_filter_btn" class="button">Filter</span>
 			        <script>
@@ -112,5 +115,104 @@
 						</span>
 					</div>
 				</div>
+				
+				<!-- Popup for the new task -->
+				<div class="dawidget" id="${id}_task_create_popup" title="New task">
+                <form>
+                    <fieldset>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Assign to</label>
+                            </dt>
+                            <dd>
+                                <input id="${id}_assign_to" type="text" />
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Details</label>
+                            </dt>
+                            <dd>
+                                <textarea id="${id}_details" rows="" cols=""> <!--  --></textarea>
+                            </dd>
+                        </dl>
+                        <!-- 
+                        <dl>
+                            <dt>
+                                <label for="${field}">Status</label>
+                            </dt>
+                            <dd>
+                                <input type="checkbox" /> completed <br/>
+                            </dd>
+                        </dl>
+                         -->
+                        <dl>
+                            <dt>
+                                <label for="${field}">Due date</label>
+                            </dt>
+                            <dd>
+                                <input type="text" id="${id}_due" />
+                            </dd>
+                            <script>
+                            	$('#${id}_due').datepicker();
+                            </script>
+                        </dl>
+                    </fieldset>
+                </form>
+                <div id="${id}_dialog_error" class="errors">Error occured during submit</div>
+            </div>
+			  	  
 	  	  <br/>
+	  	  
+	  	  <spring:url value="/" var="root_url"></spring:url>
+	  	  <script>
+	  			$(function() {
+                	$( "#${id}_new_task" ).button();
+                
+	                $( "#${id}_new_task" ).click(function() {
+	    	  		    	 $( "#${id}_task_create_popup" ).dialog( "open" );
+			    	  		   return 1;
+			    	  		});
+	                
+	                $('#${id}_dialog_error').hide();
+	                
+			            $( "#${id}_task_create_popup" ).dialog({
+		    	  	      autoOpen: false,
+		    	  	      height: 400,
+		    	  	      width: 600,
+		    	  	      modal: true,
+		    	  	      buttons: {
+		    	  	        "OK": function() {
+		    	  	        	
+		    	  	        	var description = $("#${id}_details").val(); 
+		    	  	        	var due = $("#${id}_due").val();
+		    	  	        	var assignedTo = $("#${id}_assign_to").val(); 
+		    	  	        	
+		    	  	        	var dataString = 'description='+ description + '&amp;due=' + due + '&amp;assignedTo=' + assignedTo;
+		    	  	        	
+		    	  	        	$('#${id}_dialog_error').hide();
+		    	  	        	
+		    	  	        	$.ajax({
+		    	  	              type: "POST",
+		    	  	              url: "${root_url}projects/${1}/tasks/",
+		    	  	              data: dataString,
+		    	  	              success: function(data) {
+		    	  	            		$( this ).dialog( "close" );     
+		    	  	              },
+		    	  	              error: function() {
+		    	  	            		$('#${id}_dialog_error').show();
+	    	  	              	}
+		    	  	            });
+		    	  	        	
+		    	  	        },
+		    	  	      	cancel: function() {
+		    	  	        	 $( this ).dialog( "close" );
+		    	  	        },
+		    	  	      },
+		    	  	      close: function() {
+		    	  	       
+		    	  	      }
+		    	  	    });
+	  			});
+       </script>
 </jsp:root>

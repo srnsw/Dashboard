@@ -18,6 +18,7 @@ import au.gov.nsw.records.digitalarchives.dashboard.model.Requirement;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Stakeholder;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.model.SystemAnalysis;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Upload;
 import au.gov.nsw.records.digitalarchives.dashboard.web.ProjectController;
 import java.io.UnsupportedEncodingException;
@@ -121,6 +122,7 @@ privileged aspect ProjectController_Roo_Controller {
         uiModel.addAttribute("stakeholders", Stakeholder.findAllStakeholders());
         uiModel.addAttribute("statuses", Status.findAllStatuses());
         uiModel.addAttribute("systemanalyses", SystemAnalysis.findAllSystemAnalyses());
+        uiModel.addAttribute("tasks", Task.findAllTasks());
         uiModel.addAttribute("uploads", Upload.findAllUploads());
     }
     

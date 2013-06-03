@@ -6,8 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.QueryHint;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse;
@@ -25,7 +28,10 @@ import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableSimpleRow;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
+import au.gov.nsw.records.digitalarchives.dashboard.model.TaskStatusType;
 import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
+import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
 
 @RequestMapping("/projects")
 @Controller
@@ -43,6 +49,46 @@ public class ProjectController {
 	public String filemanagement(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request, HttpServletResponse response)  {
 		uiModel.addAttribute("project", Project.findProject(id));
 		return "projects/filelist";
+	}
+	
+	//TODO
+	@RequestMapping(value = "/{id}/tasks", method =  RequestMethod.POST)
+	@ResponseBody
+	public String createTask(@PathVariable("id") Long id, Model uiModel,
+			 @RequestParam String description,
+			 @RequestParam Date due,
+			 @RequestParam int assignedTo)  {
+		
+		Project project = Project.findProject(id);
+		
+		Task task = new Task();
+		task.setProject(project);
+		task.setCreated(new Date());
+		//task.setCreatedBy(UserService.getLoggedinUser());
+		task.setDescription(description);
+		task.setStatus(TaskStatusType.Startup);
+		task.setDue(due);
+		//task.setAssignedTo(null);
+		task.persist();
+		project.persist();
+		//uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
+		//uiModel.addAttribute("project", Project.findProject(id));
+		return "ok";
+	}
+	
+	//TODO
+	@RequestMapping(value = "/{id}/tasks", method =  RequestMethod.GET)
+	public String getTask(@PathVariable("id") Long id, Model uiModel)  {
+//		Project project = Project.findProject(id);
+//		
+//		Task task = new Task();
+//		task.setProject(project);
+//		
+//		task.persist();
+//		
+//		uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
+//		uiModel.addAttribute("project", Project.findProject(id));
+		return "pages/update";
 	}
 	
 	@RequestMapping(value = "/{id}/project_plan", method =  RequestMethod.GET)

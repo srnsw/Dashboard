@@ -46,8 +46,5 @@
 	<!-- TinyMCE text editor -->
 	<script type="text/javascript" src="http://tinymce.cachefly.net/4.0/tinymce.min.js"><!-- required for FF3 and Opera --></script>
  
-	<!-- load jquery dropdown -->
-	<script type="text/javascript" src="${resourcepath}/scripts/dropkick/jquery.dropkick-1.0.0.js"><!-- required for FF3 and Opera --></script>
-	<link rel="stylesheet" type="text/css" href="${resourcepath}/scripts/dropkick/dropkick.css" />
 	
 </jsp:root>

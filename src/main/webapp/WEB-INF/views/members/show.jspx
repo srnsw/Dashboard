@@ -5,6 +5,7 @@
     <h2>My Profile</h2>
     <page:show create="false" delete="false" id="ps_au_gov_nsw_records_digitalarchives_dashboard_model_Person" list="false" object="${person}" path="/members" update="false" z="user-managed">
         <field:display field="name" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_name" object="${person}" z="8yWjSUo2vPlV7XZQoALWUkMfHQA="/>
+        <field:display field="lastName" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_lastName" object="${person}" z="bMfpfbOWNGWM2+f+1qLg6O9aQdY="/>
         <field:display field="email" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_email" object="${person}" z="9/VsHI4AS7vj0AzYbXVOjCtYX+M="/>
         <field:display field="agencyText" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyText" object="${person}" z="9ZmBjNKhy03Nz+3HeBSz0zDsqk0="/>
         <field:display field="jobtitle" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_jobtitle" object="${person}" z="AlPRbQ0KW1fR+Y8C1dBmdNy4es0="/>

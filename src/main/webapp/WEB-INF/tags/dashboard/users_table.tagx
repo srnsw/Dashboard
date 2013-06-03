@@ -10,6 +10,8 @@
   <jsp:directive.attribute name="size" type="java.lang.String" required="false" rtexprvalue="true" description="Pagination size" />
   <jsp:directive.attribute name="maxpage" type="java.lang.String" required="false" rtexprvalue="true" description="Maximum page" />
   
+  <spring:url value="/" var="rooturl" />
+  
 	<div class="jtable-main-container">
 					<div class="jtable-title">
 					  <div class="jtable-title-text">${title}</div>
@@ -63,10 +65,10 @@
 						  <tr class="${trclass}">
 						     <c:choose>
 						     	 <c:when test="${approve_user}">
-						     	 		<td class=""><a href="${rooturl}members/${member.id}/approve">${member.name}</a></td>
+						     	 		<td class=""><a href="${rooturl}members/${member.id}/approve">${member.name} ${member.lastName}</a></td>
 						     	 </c:when>
 						     	 <c:otherwise>
-						     	 		<td class=""><a href="${rooturl}members/${member.id}">${member.name}</a></td>
+						     	 		<td class=""><a href="${rooturl}members/${member.id}">${member.name} ${member.lastName}</a></td>
 						     	 </c:otherwise>
 						     </c:choose>
 							   <td class=""><a href="#">${member.agencyText}</a></td>

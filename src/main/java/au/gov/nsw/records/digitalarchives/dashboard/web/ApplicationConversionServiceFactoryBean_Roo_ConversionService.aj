@@ -70,7 +70,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Person, String> ApplicationConversionServiceFactoryBean.getPersonToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<au.gov.nsw.records.digitalarchives.dashboard.model.Person, java.lang.String>() {
             public String convert(Person person) {
-                return new StringBuilder().append(person.getEmail()).append(" ").append(person.getPassword()).append(" ").append(person.getName()).append(" ").append(person.getTelephone()).toString();
+                return new StringBuilder().append(person.getEmail()).append(" ").append(person.getPassword()).append(" ").append(person.getName()).append(" ").append(person.getLastName()).toString();
             }
         };
     }

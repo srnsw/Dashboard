@@ -12,6 +12,11 @@ p.collection_navigation
 text-align:center;
 }
 
+.errors{
+	color: red;
+	font-weight:bold;
+}
+
 a.noborder {
 	border-bottom: none !important;
 }

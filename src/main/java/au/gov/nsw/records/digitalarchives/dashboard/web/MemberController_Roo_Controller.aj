@@ -9,9 +9,7 @@ import au.gov.nsw.records.digitalarchives.dashboard.web.MemberController;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,25 +23,6 @@ privileged aspect MemberController_Roo_Controller {
     public String MemberController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Person());
         return "members/create";
-    }
-    
-    @RequestMapping(value = "/{id}", produces = "text/html")
-    public String MemberController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("person", Person.findPerson(id));
-        uiModel.addAttribute("itemId", id);
-        return "members/show";
-    }
-    
-        
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String MemberController.update(@Valid Person person, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, person);
-            return "members/update";
-        }
-        uiModel.asMap().clear();
-        person.merge();
-        return "redirect:/members/" + encodeUrlPathSegment(person.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")

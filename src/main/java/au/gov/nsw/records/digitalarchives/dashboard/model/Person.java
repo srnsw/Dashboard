@@ -38,6 +38,11 @@ public class Person {
     private String name;
 
     @Expose
+    @NotNull
+    @NotEmpty
+    private String lastName;
+    
+    @Expose
     private String telephone;
 
     @Expose

@@ -116,7 +116,11 @@ email sender setup --protocol SMTP --hostServer molineux.records.nsw.gov.au
 focus --class ~.model.Person
 finder list  
 finder add --finderName findPeopleByApprovedNot
+
 entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Task
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-05-30 15:38:03
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-05-30 15:42:05
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-05-30 15:53:35
+
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-06-03 11:16:27
+perform package

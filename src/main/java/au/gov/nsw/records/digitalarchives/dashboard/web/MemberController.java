@@ -3,12 +3,10 @@ package au.gov.nsw.records.digitalarchives.dashboard.web;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +24,7 @@ import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +45,20 @@ public class MemberController {
 	
 	@Autowired
 	private NotificationService notificationService;
+	
+	@RequestMapping(value = "/{id}/approve",method = RequestMethod.GET, produces = "text/html")
+  public String approveForm(@PathVariable("id") Long id, Model uiModel) {
+     
+		 Person person = Person.findPerson(id);
+		 if (person!=null){
+			 populateEditForm(uiModel, person);
+			 return "members/update";
+		 }
+
+		 uiModel.asMap().clear();
+
+      return "projects/update";
+  }
 	
 	//@Secured("ROLE_ADMIN")
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
@@ -150,20 +163,60 @@ public class MemberController {
   }
 
 	@RequestMapping(produces = "text/html")
-    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-       // if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+    public String list(@RequestParam(value = "page", defaultValue="1", required = false) Integer page, @RequestParam(value = "size", defaultValue="10",  required = false) Integer size, Model uiModel) {
 
-          	List<Person> persons = Person.findPersonEntries(firstResult, sizeNo);
-          	float nrOfPages = (float) Person.countPeople() / sizeNo;
+            List<Person> persons = Person.findPeopleByApprovedNot(false).getResultList();
+            float nrOfPages = (float) persons.size() / size;
+            persons = new ArrayList<Person>(persons.subList(Math.max((page-1)*size, 0), Math.min(page*size, persons.size())));
             uiModel.addAttribute("user_maxpage", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
             uiModel.addAttribute("user_page", page);
-            uiModel.addAttribute("user_size", sizeNo);
+            uiModel.addAttribute("user_size", size);
             uiModel.addAttribute("user", persons);
-     //   } else {
-      //      uiModel.addAttribute("people", Person.findAllPeople());
-     //   }
+
         return "members/list";
+    }
+
+	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
+    public String update(@Valid Person person, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, person);
+            return "members/update";
+        }
+        
+        uiModel.asMap().clear();
+        
+        // TODO password comparison
+        //password encryption
+    		MessageDigest md;
+    		try {
+    			uiModel.asMap().clear();
+    			md = MessageDigest.getInstance("md5");
+    			md.update(person.getPassword().getBytes("UTF-8"));
+    			byte[] result =  md.digest();
+    			person.setPassword(Hex.encodeHexString(result));
+    		} catch (NoSuchAlgorithmException e) {
+    			e.printStackTrace();
+    		} catch (UnsupportedEncodingException e) {
+    			e.printStackTrace();
+    		}
+    		
+        person.merge();
+        return "redirect:/members/" + encodeUrlPathSegment(person.getId().toString(), httpServletRequest);
+    }
+
+	//@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/{id}", produces = "text/html")
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+				Person person = Person.findPerson(id);
+//				
+//				if (person.getEmail().equals(UserService.getLoggedinUser().getEmail())){
+//					uiModel.addAttribute("ismyuser", "true");
+//				}else{
+//					
+//				}
+				
+        uiModel.addAttribute("person", Person.findPerson(id));
+        uiModel.addAttribute("itemId", id);
+        return "members/admin_show";
     }
 }

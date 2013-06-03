@@ -48,6 +48,14 @@ privileged aspect Person_Roo_JavaBean {
         this.name = name;
     }
     
+    public String Person.getLastName() {
+        return this.lastName;
+    }
+    
+    public void Person.setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
     public String Person.getTelephone() {
         return this.telephone;
     }

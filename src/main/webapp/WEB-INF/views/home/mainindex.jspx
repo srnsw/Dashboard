@@ -99,6 +99,7 @@
 							   <span class="alignright"><a href="#" id="new_task_btn" class="button">View all your tasks</a></span>
 							</div>
 						</div>
+						
 						<div class="dawidget" id="task_update_popup" title="Update task">
                 <form>
                     <fieldset>
@@ -165,24 +166,24 @@
   <script>
 	    $(function() {
 	    	
-	    	$('.dk').dropkick({
-	    			width: 160,
-	    		  change: function (value, label) {
+	    //	$('.dk').dropkick({
+	    //			width: 160,
+	    //		  change: function (value, label) {
 	    		    //alert('You picked: ' + label + ':' + value);
-	    		    if (value == "new_prj"){
-	    		       window.open('${root_url}projects?form', '_blank');
-	    		    }else if (value == "new_task"){
+	    //		    if (value == "new_prj"){
+	    //		       window.open('${root_url}projects?form', '_blank');
+	    //		    }else if (value == "new_task"){
 	    		       //window.open('${root_url}projects/1', '_blank');
-	    		    }else if (value == "share"){
+	    //		    }else if (value == "share"){
 		    		       //window.open('${root_url}projects/1', '_blank');
-	    		    }else if (value == "export"){
+	    //		    }else if (value == "export"){
 		    		       //window.open('${root_url}projects/1', '_blank');
-	    		    }else {
+	    //		    }else {
 	    		    	//alert('You pickedx: ' + label + ':' + value);
-	    		    }
-	    		    $('.dk').dropkick('reset');
-	    		  }
-	    		});
+	    //		    }
+	    //		    $('.dk').dropkick('reset');
+	    //		  }
+	    //		});
 	    	
 	    	$('.button').button();
     	  $('#view_prj_btn').click(function(e) {
@@ -198,23 +199,24 @@
 	  		    $( "#task_update_popup" ).dialog( "open" );
 	  		    return 1;
 	  		  });
-	        $( "#task_update_popup" ).dialog({
-		  	      autoOpen: false,
-		  	      height: 400,
-		  	      width: 600,
-		  	      modal: true,
-		  	      buttons: {
-		  	        "OK": function() {
-		  	        	 $( this ).dialog( "close" );
-		  	        },
-		  	      	cancel: function() {
-		  	        	 $( this ).dialog( "close" );
-		  	        },
-		  	      },
-		  	      close: function() {
-		  	       
-		  	      }
-		  	    });
+    	  
+        $( "#task_update_popup" ).dialog({
+	  	      autoOpen: false,
+	  	      height: 400,
+	  	      width: 600,
+	  	      modal: true,
+	  	      buttons: {
+	  	        "OK": function() {
+	  	        	 $( this ).dialog( "close" );
+	  	        },
+	  	      	cancel: function() {
+	  	        	 $( this ).dialog( "close" );
+	  	        },
+	  	      },
+	  	      close: function() {
+	  	       
+	  	      }
+	  	    });
 
 	    });
 	</script>

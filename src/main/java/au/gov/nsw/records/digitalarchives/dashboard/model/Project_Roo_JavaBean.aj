@@ -18,6 +18,7 @@ import au.gov.nsw.records.digitalarchives.dashboard.model.Requirement;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Stakeholder;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.model.SystemAnalysis;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Upload;
 import java.util.Date;
 import java.util.List;
@@ -166,6 +167,14 @@ privileged aspect Project_Roo_JavaBean {
     
     public void Project.setUpload(List<Upload> upload) {
         this.upload = upload;
+    }
+    
+    public List<Task> Project.getTask() {
+        return this.task;
+    }
+    
+    public void Project.setTask(List<Task> task) {
+        this.task = task;
     }
     
     public Requirement Project.getRequirement() {

@@ -124,3 +124,6 @@ entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Task
 
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-06-03 11:16:27
 perform package
+focus --class au.gov.nsw.records.digitalarchives.dashboard.model.Task
+finder list
+finder add --finderName findTasksByStatus

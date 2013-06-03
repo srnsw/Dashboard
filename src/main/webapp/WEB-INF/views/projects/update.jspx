@@ -173,5 +173,6 @@
         <field:simple field="databaseStorage" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_databaseStorage" messageCode="entity_reference_not_managed" messageCodeAttribute="Database Storage" z="iH2XVR3sRdWYTUyo21HSHh84AZI="/>
         <field:simple field="migrationStrategyAssessment" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_migrationStrategyAssessment" messageCode="entity_reference_not_managed" messageCodeAttribute="Migration Strategy Assessment" z="m9DIAmJTky8wQ84bZNZcY54oWzE="/>
         <field:simple field="eventHistory" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_eventHistory" messageCode="entity_reference_not_managed" messageCodeAttribute="Event History" z="0NBEiynDCzQ22+b6LT9LxYVhiP8="/>
+        <field:simple field="task" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_task" messageCode="entity_reference_not_managed" messageCodeAttribute="Task" z="FPiVb8ZAHSSlQ/urW9bKRS9zgB0="/>
     </form:update>
 </div>

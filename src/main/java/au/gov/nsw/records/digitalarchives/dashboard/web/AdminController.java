@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
+import au.gov.nsw.records.digitalarchives.dashboard.model.TaskStatusType;
 
 @RequestMapping("/admin/**")
 @Controller
@@ -27,7 +29,8 @@ public class AdminController {
     }
 
     @RequestMapping
-    public String index(@RequestParam(value = "user_appr_page", required = false, defaultValue="1") Integer user_appr_page, @RequestParam(value = "user_appr_size", required = false, defaultValue="30") Integer user_appr_size, Model uiModel) {
+    public String index(@RequestParam(value = "task_page", required = false, defaultValue="1") Integer task_page,
+    		@RequestParam(value = "user_appr_page", required = false, defaultValue="1") Integer user_appr_page, @RequestParam(value = "user_appr_size", required = false, defaultValue="30") Integer user_appr_size, Model uiModel) {
     	
     	List<Person> persons = Person.findPeopleByApprovedNot(true).getResultList();
     	List<Person> person_result = new ArrayList<Person>(persons.subList(Math.max((user_appr_page-1)*sizeNo, 0), Math.min(user_appr_page*sizeNo, persons.size())));
@@ -36,6 +39,15 @@ public class AdminController {
       uiModel.addAttribute("user_appr_page", user_appr_page);
       uiModel.addAttribute("user_appr_size", sizeNo);
       uiModel.addAttribute("user_appr", person_result);
+      
+      List<Task> tasks = Task.findTasksByStatus(TaskStatusType.Startup).getResultList();
+    	List<Task> task_result = new ArrayList<Task>(tasks.subList(Math.max((task_page-1)*sizeNo, 0), Math.min(task_page*sizeNo, tasks.size())));
+    	nrOfPages = (float) tasks.size() / sizeNo;
+      uiModel.addAttribute("tasks_maxpage", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+      uiModel.addAttribute("tasks_page", task_page);
+      uiModel.addAttribute("tasks_size", sizeNo);
+      uiModel.addAttribute("tasks", task_result);
+      
       return "admin/index";
     }
 }

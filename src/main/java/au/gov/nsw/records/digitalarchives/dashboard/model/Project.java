@@ -88,6 +88,9 @@ public class Project {
     @OneToMany
     private List<Upload> upload;
     
+    @OneToMany
+    private List<Task> task;
+    
     // link to another tables
     @ManyToOne
     private Requirement requirement;

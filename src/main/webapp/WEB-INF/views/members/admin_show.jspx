@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <h2>User Profile</h2>
+    <page:show create="false" delete="false" id="ps_au_gov_nsw_records_digitalarchives_dashboard_model_Person" list="false" object="${person}" path="/members" update="false" z="user-managed">
+        <field:display field="name" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_name" object="${person}" z="8yWjSUo2vPlV7XZQoALWUkMfHQA="/>
+        <field:display field="lastName" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_lastName" object="${person}" z="bMfpfbOWNGWM2+f+1qLg6O9aQdY="/>
+        <field:display field="email" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_email" object="${person}" z="9/VsHI4AS7vj0AzYbXVOjCtYX+M="/>
+        <field:display field="agencyText" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyText" object="${person}" z="9ZmBjNKhy03Nz+3HeBSz0zDsqk0="/>
+        <field:display field="jobtitle" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_jobtitle" object="${person}" z="AlPRbQ0KW1fR+Y8C1dBmdNy4es0="/>
+        <field:display field="password" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_password" object="${person}" render="false" z="user-managed"/>
+        <field:display field="approved" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_approved" object="${person}" render="false" z="user-managed"/>
+        <field:display field="telephone" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_telephone" object="${person}" z="ll7/sGGG0WwPvWD0oKsxuY92SyA="/>
+        <field:display field="address" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_address" object="${person}" render="true" z="user-managed"/>
+        <field:display field="agencyNumber" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyNumber" object="${person}" render="false" z="user-managed"/>
+        <field:display field="roleType" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_roleType" object="${person}" render="false" z="user-managed"/>
+    </page:show> 
+    <span class="button" id="request_update_btn">Edit User</span>
+    <spring:url value="/" var="root_url"/>
+    <script>
+    $(function() {
+        $('.button').button();
+        $('#request_update_btn').click(function() {
+        	window.open('${root_url}members/${person.id}/approve', '_self');
+        });
+     });
+    </script>
+</div>

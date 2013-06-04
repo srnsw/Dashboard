@@ -26,10 +26,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse.Status;
-import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
 import au.gov.nsw.records.digitalarchives.dashboard.service.PDFGeneratorService;
+import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
 
 import com.itextpdf.text.DocumentException;
 
@@ -46,7 +47,11 @@ public class HomeController {
     	
     	if (request.isUserInRole("ROLE_ARCHIVIST")) {
     		uiModel.addAttribute("projects", Project.findAllProjects());
+    		
+    		uiModel.addAttribute("tasks", Task.findTasksByAssignedTo(UserService.getLoggedinUser()));
+    		
     		return "home/mainindex";
+    		
     	}else if (request.isUserInRole("ROLE_AGENCY")) {
     		try {
 					PDFGeneratorService.createPDF();

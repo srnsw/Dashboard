@@ -2,6 +2,7 @@ package au.gov.nsw.records.digitalarchives.dashboard.model;
 
 import com.google.gson.annotations.Expose;
 import java.util.Date;
+import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
@@ -17,7 +19,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = { "findTasksByStatus" })
+@RooJpaActiveRecord(finders = { "findTasksByStatus", "findTasksByAssignedTo" })
 public class Task {
 
     @Id
@@ -49,4 +51,12 @@ public class Task {
 
     @Enumerated(EnumType.STRING)
     private TaskStatusType status;
+
+    public static TypedQuery<au.gov.nsw.records.digitalarchives.dashboard.model.Task> findTasksByStatusNot(TaskStatusType status) {
+        if (status == null) throw new IllegalArgumentException("The status argument is required");
+        EntityManager em = Task.entityManager();
+        TypedQuery<Task> q = em.createQuery("SELECT o FROM Task AS o WHERE o.status <> :status", Task.class);
+        q.setParameter("status", status);
+        return q;
+    }
 }

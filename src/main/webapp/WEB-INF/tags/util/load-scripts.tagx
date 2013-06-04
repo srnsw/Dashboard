@@ -42,9 +42,11 @@
 	<spring:url value="/resources" var="resourcepath"></spring:url>
 	<style type="text/css">@import url("${resourcepath}/scripts/pupload/jquery.ui.plupload/css/jquery.ui.plupload.css");</style>
 	<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"><!-- required for FF3 and Opera --></script>
-	
+	 
 	<!-- TinyMCE text editor -->
 	<script type="text/javascript" src="http://tinymce.cachefly.net/4.0/tinymce.min.js"><!-- required for FF3 and Opera --></script>
  
-	
+	<!-- select2 -->
+	<script type="text/javascript" src="${resourcepath}/scripts/select2/select2.js"><!-- required for FF3 and Opera --></script>
+	<link rel="stylesheet" type="text/css" href="${resourcepath}/scripts/select2/select2.css" />
 </jsp:root>

@@ -23,7 +23,7 @@
     </page:show>
     <span class="alignright">
         <form>
-            <select class="dk" name="options">
+            <select class="dk" name="options" width="200">
                 <option value="">Project Options</option>
                 <option value="export">Export</option>
                 <option value="upload">Upload files</option>
@@ -334,14 +334,14 @@
 						                    <br/>
 						                    <br/>
                                 <SCRIPT type="text/javascript">
-							                    $(function() {
+							                   /* $(function() {
 							                       $('.dkx').dropkick({
 											            			width: 80,
 											            		  change: function (value, label) {
 											            			  
 											            		  }
 											            		});
-							                    });
+							                    });*/
 						                    </SCRIPT>
                             </dd>
                         </dl>
@@ -1090,7 +1090,10 @@
     <spring:url value="/" var="root_url"/>
     <script>
 	    $(function() {
-	    	
+	    	$('.dk').select2({
+	    	});
+	    	$('.dk2').select2();
+	    	/*
 	    	$('.dk').dropkick({
     			width: 110,
     		  change: function (value, label) {
@@ -1130,7 +1133,7 @@
     		    $('.dk2').dropkick('reset');
     		  }
     		});
-	    	
+	    	*/
 	       	
 	    		$('#upload_file_btn').click(function() {
 	    			window.open('${root_url}uploads/');

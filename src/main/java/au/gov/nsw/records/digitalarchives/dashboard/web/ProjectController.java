@@ -61,14 +61,16 @@ public class ProjectController {
 		
 		Project project = Project.findProject(id);
 		
+		Person person = Person.findPerson(Long.valueOf(assignedTo)); 
+		
 		Task task = new Task();
 		task.setProject(project);
 		task.setCreated(new Date());
-		//task.setCreatedBy(UserService.getLoggedinUser());
+		task.setCreatedBy(UserService.getLoggedinUser());
 		task.setDescription(description);
-		task.setStatus(TaskStatusType.Startup);
+		task.setStatus(TaskStatusType.Open);
 		task.setDue(due);
-		//task.setAssignedTo(null);
+		task.setAssignedTo(person);
 		task.persist();
 		project.persist();
 		//uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());

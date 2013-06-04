@@ -34,34 +34,34 @@
 									 <div class="jtable-column-resize-handler"></div>
 								   </div>
 								</th>
-								<th class="jtable-column-header" style="width:10%;">
+								<th class="jtable-column-header" style="width:13%;">
 								  <div class="jtable-column-header-container">
 									<span class="jtable-column-header-text">Assigned To</span>
 								  </div>
 								</th>
-								<th class="jtable-column-header" style="width:15%;">
+								<th class="jtable-column-header" style="width:12%;">
 								  <div class="jtable-column-header-container">
 									<span class="jtable-column-header-text">Created</span>
 								  </div>
 								</th>
-								<th class="jtable-column-header" style="width:10%;">
+								<th class="jtable-column-header" style="width:13%;">
 								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Created By</span>
+									<span class="jtable-column-header-text">Assigned By</span>
 								  </div>
 								</th>
-								<th class="jtable-column-header" style="width:15%;">
+								<th class="jtable-column-header" style="width:12%;">
 								  <div class="jtable-column-header-container">
 									<span class="jtable-column-header-text">Due</span>
 								  </div>
 								</th>
 								<th class="jtable-column-header" style="width:5%;">
 								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Alerts</span>
+									<span class="jtable-column-header-text">Status</span>
 								  </div>
 								</th>
 								<th class="jtable-column-header" style="width:5%;">
 								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Status</span>
+									<span class="jtable-column-header-text"></span>
 								  </div>
 								</th>
 								</tr>
@@ -81,22 +81,15 @@
 					    	 </c:otherwise>
 					    </c:choose>
 						  <tr class="${trclass}">
-						     <!-- 
-						     <c:choose>
-						     	 <c:when test="${approve_user}">
-						     	 </c:when>
-						     	 <c:otherwise>
-						     	 </c:otherwise>
-						     </c:choose> -->
 						      <td class="">${task.id}</td>
 									 <td class="">${task.description}</td>
 									 <td class="">${task.project.id}</td>
-									 <td class="">${task.assignedTo}</td>
+									 <td class="">${task.assignedTo.name} ${task.assignedTo.lastName}</td>
 									 <td class=""><fmt:formatDate pattern="dd MMMM yyyy" value="${task.created}" /></td>
-									 <td class="">${task.createdBy}</td>
+									 <td class="">${task.createdBy.name} ${task.createdBy.lastName}</td>
 									 <td class=""><fmt:formatDate pattern="dd MMMM yyyy" value="${task.due}" /></td>
-									 <td class=""><!--${task.alert}  <img src="${excla_img}" style="border:0"/> --></td>
 									 <td class="">${task.status}</td>
+									 <td class="">update</td> 
 						  </tr>
 					   </c:forEach>
 					 </tbody>
@@ -126,7 +119,11 @@
                                 <label for="${field}">Assign to</label>
                             </dt>
                             <dd>
-                                <input id="${id}_assign_to" type="text" />
+                                <select style="width:40%" id="${id}_assign_to" class="select2" name="options" width="200">
+									                <option value="3">Richard Lehane</option>
+									                <option value="4">Ken Zhai</option>
+									                <option value="5">Paul Elloitt</option>
+									              </select>
                             </dd>
                         </dl>
                         <dl>
@@ -134,7 +131,19 @@
                                 <label for="${field}">Details</label>
                             </dt>
                             <dd>
-                                <textarea id="${id}_details" rows="" cols=""> <!--  --></textarea>
+                                <textarea id="${id}_details" rows="3" cols=""> <!--  --></textarea>
+                            </dd>
+                        </dl>
+                         <dl>
+                            <dt>
+                                <label for="${field}">Project</label>
+                            </dt>
+                            <dd >
+                                <select style="width:40%" id="${id}_project" class="select2" name="options">
+									                <option value="3">Demo Project2</option>
+									                <option value="4">Demo Project3</option>
+									                <option value="5">Demo Project4</option>
+									              </select>
                             </dd>
                         </dl>
                         <!-- 
@@ -168,6 +177,9 @@
 	  	  <spring:url value="/" var="root_url"></spring:url>
 	  	  <script>
 	  			$(function() {
+	  				      
+	  				      $( ".select2" ).select2();
+	  				      
                 	$( "#${id}_new_task" ).button();
                 
 	                $( "#${id}_new_task" ).click(function() {
@@ -179,7 +191,7 @@
 	                
 			            $( "#${id}_task_create_popup" ).dialog({
 		    	  	      autoOpen: false,
-		    	  	      height: 400,
+		    	  	      height: 410,
 		    	  	      width: 600,
 		    	  	      modal: true,
 		    	  	      buttons: {
@@ -187,15 +199,16 @@
 		    	  	        	
 		    	  	        	var description = $("#${id}_details").val(); 
 		    	  	        	var due = $("#${id}_due").val();
-		    	  	        	var assignedTo = $("#${id}_assign_to").val(); 
+		    	  	        	var assignedTo = $("#${id}_assign_to").val();
+		    	  	        	var project = $("#${id}_project").val();
 		    	  	        	
-		    	  	        	var dataString = 'description='+ description + '&amp;due=' + due + '&amp;assignedTo=' + assignedTo;
+		    	  	        	var dataString = 'description='+ description + '&amp;due=' + due + '&amp;assignedTo=' + assignedTo ;
 		    	  	        	
 		    	  	        	$('#${id}_dialog_error').hide();
 		    	  	        	
 		    	  	        	$.ajax({
 		    	  	              type: "POST",
-		    	  	              url: "${root_url}projects/${1}/tasks/",
+		    	  	              url: "${root_url}projects/" + project + "/tasks/",
 		    	  	              data: dataString,
 		    	  	              success: function(data) {
 		    	  	            		$( '#${id}_task_create_popup' ).dialog( "close" );     
@@ -204,7 +217,6 @@
 		    	  	            		$('#${id}_dialog_error').show();
 	    	  	              	}
 		    	  	            });
-		    	  	        	
 		    	  	        },
 		    	  	      	cancel: function() {
 		    	  	        	 $( this ).dialog( "close" );

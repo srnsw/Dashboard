@@ -3,12 +3,21 @@
 
 package au.gov.nsw.records.digitalarchives.dashboard.model;
 
+import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.model.TaskStatusType;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 privileged aspect Task_Roo_Finder {
+    
+    public static TypedQuery<Task> Task.findTasksByAssignedTo(Person assignedTo) {
+        if (assignedTo == null) throw new IllegalArgumentException("The assignedTo argument is required");
+        EntityManager em = Task.entityManager();
+        TypedQuery<Task> q = em.createQuery("SELECT o FROM Task AS o WHERE o.assignedTo = :assignedTo", Task.class);
+        q.setParameter("assignedTo", assignedTo);
+        return q;
+    }
     
     public static TypedQuery<Task> Task.findTasksByStatus(TaskStatusType status) {
         if (status == null) throw new IllegalArgumentException("The status argument is required");

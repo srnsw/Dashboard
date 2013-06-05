@@ -3,6 +3,7 @@
 
 package au.gov.nsw.records.digitalarchives.dashboard.model;
 
+import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.model.StatusType;
 import java.util.Date;
@@ -31,6 +32,14 @@ privileged aspect Status_Roo_JavaBean {
     
     public void Status.setComment(String comment) {
         this.comment = comment;
+    }
+    
+    public Project Status.getProject() {
+        return this.project;
+    }
+    
+    public void Status.setProject(Project project) {
+        this.project = project;
     }
     
 }

@@ -5,11 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.QueryHint;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,14 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse;
-import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse.Status;
-import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableSimpleRow;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
+import au.gov.nsw.records.digitalarchives.dashboard.model.ProjectType;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Status;
+import au.gov.nsw.records.digitalarchives.dashboard.model.StatusType;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.model.TaskStatusType;
-import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
 import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
 
 @RequestMapping("/projects")
@@ -158,12 +154,47 @@ public class ProjectController {
 		}
 	}
 
-
+	@RequestMapping(value = "/{id}/details", method =  RequestMethod.POST)
+	@ResponseBody
+	public String updateDetails(@PathVariable("id") Long id, Model uiModel,
+			 @RequestParam String name,
+			 @RequestParam String type,
+			 @RequestParam String agencyName,
+			 @RequestParam String srnswFileReference)  {
+		
+		Project project = Project.findProject(id);
+		
+		project.setName(name);
+		if (type.equalsIgnoreCase("physical")){
+			project.setProjectType(ProjectType.Physical);
+		} else if (type.equalsIgnoreCase("digital")){
+			project.setProjectType(ProjectType.Digital);
+		} else if (type.equalsIgnoreCase("hybrid")){
+			project.setProjectType(ProjectType.Hybrid);
+		}
+		//project.setProjectType(type);
+		project.setAgencyName(agencyName);
+		project.setSrnswFileReference(srnswFileReference);
+		
+		project.persist();
+		
+		return "ok";
+	}
+	
+	
 	@RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel, HttpServletRequest httpServletRequest) {
+				
 				Project project = new Project();
+				Status status = new Status();
+				status.setProjectStatusType(StatusType.Startup);
+				status.setLastUpdateDate(new Date());
+				status.setProject(project);
+        
+				project.persist();
+        status.persist();
+        
         populateEditForm(uiModel, project);
-        project.persist();
-        return "redirect:/projects/" + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
+        return "redirect:/projects/" + project.getId().toString(); // + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:project="urn:jsptagdir:/WEB-INF/tags/project" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show create="false" delete="false" id="ps_au_gov_nsw_records_digitalarchives_dashboard_model_Project" list="false" object="${project}" path="/projects" render="false" z="user-managed">
@@ -54,74 +54,8 @@
             </li>
         </ul>
         <div id="update_tabs-0">
-            <div class="jtable-main-container">
-                <div class="jtable-title">
-                    <div class="jtable-title-text">Project Details</div>
-                </div>
-                <table class="jtable">
-                    <thead>
-                        <tr>
-                            <th class="jtable-column-header" style="width: 30%;"/>
-                            <th class="jtable-column-header" style="width: 70%;"/>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="">Project Number</td>
-                            <td class="">[unique ID]</td>
-                        </tr>
-                        <tr class="jtable-row-even">
-                            <td class="">Project Name</td>
-                            <td class="">[project name]</td>
-                        </tr>
-                        <tr>
-                            <td class="">Project Type</td>
-                            <td class="">Digital, Physical, Hybrid</td>
-                        </tr>
-                        <tr class="jtable-row-even">
-                            <td class="">Agency</td>
-                            <td class="">BOS Details</td>
-                        </tr>
-                        <!-- 
-                        <tr>
-                            <td class="">Agency Number</td>
-                            <td class="">[BOS number]</td>
-                        </tr>
-                        <tr class="jtable-row-even">
-                            <td class="">Agency Contact</td>
-                            <td class="">[principal agency contact]</td>
-                        </tr>
-                        <tr class="">
-                            <td class="">SRNSW Contact</td>
-                            <td class="">[principal SRNSW contact]</td>
-                        </tr>
-                        -->
-                        <tr class="">
-                            <td class="">Created</td>
-                            <td class="">1 Feb 2013</td>
-                        </tr>
-                        <tr class="jtable-row-even">
-                            <td class="">Last Updated</td>
-                            <td class="">21 Feb 2013</td>
-                        </tr>
-                        <!-- 
-                        <tr class="jtable-row-even">
-                            <td class="">Date Closed</td>
-                            <td class="">28 Feb 2013</td>
-                        </tr>
-                         -->
-                        <tr class="">
-                            <td class="">SRNSW File Reference</td>
-                            <td class="">TRIM/123344</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="jtable-bottom-panel">
-                    <span class="alignright">
-                        <a class="button" href="#" id="update"> Update </a>
-                    </span>
-                </div>
-            </div>
+             
+            <project:details id="project_details" object="${project}" title="Project Details"/>
             <br/>
             <div class="jtable-main-container">
                 <div class="jtable-title">

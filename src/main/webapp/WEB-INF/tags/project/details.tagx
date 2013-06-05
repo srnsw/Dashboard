@@ -1,0 +1,157 @@
+<jsp:root xmlns:jquery="urn:jsptagdir:/WEB-INF/tags/jquery" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="yes" />
+
+  <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="Id of this table" />
+  <jsp:directive.attribute name="object" type="java.lang.Object" required="true" rtexprvalue="true" description="The form backing object" />
+  <jsp:directive.attribute name="title" type="java.lang.String" required="true" rtexprvalue="true" description="Title of the table" />
+  
+	<div class="jtable-main-container">
+					<div class="jtable-title">
+					  <div class="jtable-title-text">${title}</div>
+					</div>
+					<table class="jtable" >
+					 <thead>
+              <tr>
+                   <th class="jtable-column-header" style="width: 30%;"/>
+                   <th class="jtable-column-header" style="width: 70%;"/>
+               </tr>
+           </thead>
+           <tbody>
+              <tr>
+                  <td class="">Project Number</td>
+                  <td class="">${object.id}</td>
+              </tr>
+              <tr class="jtable-row-even">
+                  <td class="">Project Name</td>
+                  <td class="">${object.name}</td>
+              </tr>
+              <tr>
+                  <td class="">Project Type</td>
+                  <td class="">${object.projectType}</td>
+              </tr>
+              <tr class="jtable-row-even">
+                  <td class="">Agency</td>
+                  <td class=""><a href="http://search.api.records.nsw.gov.au/agencies/${object.agencyNumber}">${object.agencyName}</a></td>
+              </tr>
+              <tr class="">
+                  <td class="">Created</td>
+                  <td class="">${object.creationDate}</td>
+              </tr>
+              <tr class="jtable-row-even">
+                  <td class="">Last Updated</td>
+                  <td class="">${object.lastUpdateDate}</td>
+              </tr>
+              <tr class="">
+                  <td class="">SRNSW File Reference</td>
+                  <td class="">${object.srnswFileReference}</td>
+              </tr>
+          </tbody>
+					</table>
+					<div class="jtable-bottom-panel">
+						<span class="alignright">
+							<span id="${id}_update" class="button">Update</span>
+						</span>
+					</div>
+				</div>
+				
+				<!-- update dialog -->
+				<div class="dawidget" id="${id}_update_popup" title="Update Project Details">
+                <form>
+                    <fieldset>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Project Name</label>
+                            </dt>
+                            <dd>
+                                <input id="${id}_name" size="40" name="${field}" type="text"/>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Project Type</label>
+                            </dt>
+                            <dd>
+                                <select id="${id}_type" style="width:50%" class="select2">
+                                    <option value="digital">Digital</option>
+                                    <option value="physical">Physical</option>
+                                    <option value="hybrid">Hybrid</option>
+                                </select>
+						                    <br/>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Agency</label>
+                            </dt>
+                            <dd>
+                                <select id="${id}_agency" style="width:50%" class="select2">
+                                    <option value="AgencyA">Agency A</option>
+                                    <option value="AgencyB">Agency B</option>
+                                    <option value="AgencyC">Agency C</option>
+                                </select>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">SRNSW File Reference</label>
+                            </dt>
+                            <dd>
+                                <input id="${id}_filereference" name="${field}" type="text"/>
+                            </dd>
+                        </dl>
+                    </fieldset>
+                </form>
+                <div id="${id}_dialog_error" class="errors">Error occured during submit</div>
+            </div>
+            
+	  	  <br/>
+	  	  
+	  	  <spring:url value="/" var="root_url"></spring:url>
+	  	  <script>
+	  	   
+	  	   $('#${id}_dialog_error').hide();
+	  	   $( ".button" ).button();
+	  	   $( ".select2" ).select2();
+	  	   
+		  	 $( "#${id}_update" ).click(function() {
+		  		   $( "#${id}_update_popup" ).dialog( "open" );
+	  		  });
+	        
+	        $( "#${id}_update_popup" ).dialog({
+		  	      autoOpen: false,
+		  	      height: 420,
+		  	      width: 400,
+		  	      modal: true,
+		  	      buttons: {
+		  	        "OK": function() {
+		  	        	var name = $("#${id}_name").val(); 
+    	  	        var type = $("#${id}_type").val();
+    	  	        var agency = $("#${id}_agency").val();
+    	  	        var filereference = $("#${id}_filereference").val();
+    	  	        	
+    	  	        var dataString = 'name='+ name + '&amp;type=' + type + '&amp;agencyName=' + agency + "&amp;srnswFileReference=" + filereference ;
+    	  	        	
+    	  	        	$('#${id}_dialog_error').hide();
+    	  	        	 
+    	  	        	$.ajax({
+    	  	              type: "POST",
+    	  	              url: "${root_url}projects/" + ${project.id} + "/details/",
+    	  	              data: dataString,
+    	  	              success: function(data) {
+    	  	            		$( '#${id}_update_popup' ).dialog( "close" );     
+    	  	              },
+    	  	              error: function() {
+    	  	            		$('#${id}_dialog_error').show();
+	  	              	}
+    	  	            });
+    	  	        },
+    	  	      	cancel: function() {
+    	  	        	 $( this ).dialog( "close" );
+    	  	        },
+		  	      },
+		  	      close: function() {
+		  	       
+		  	      }
+		  	    });
+	  	  </script>
+</jsp:root>

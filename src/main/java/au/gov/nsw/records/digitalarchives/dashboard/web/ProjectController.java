@@ -51,7 +51,7 @@ public class ProjectController {
 		return "projects/filelist";
 	}
 	
-	//TODO
+	//TODO user role validation
 	@RequestMapping(value = "/{id}/tasks", method =  RequestMethod.POST)
 	@ResponseBody
 	public String createTask(@PathVariable("id") Long id, Model uiModel,
@@ -158,60 +158,12 @@ public class ProjectController {
 		}
 	}
 
-	
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
-  public @ResponseBody String listProjects(Model uiModel) {
-//		 System.out.println("Generating... " + JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords())));
-     return JsonService.toJson(new JTableResponse(Status.OK, Project.findAllProjects()));
-  }
-	
-//	@RequestMapping(method = RequestMethod.POST, value = "/{id}/records", produces = "application/json")
-//  public @ResponseBody String relatedRecords(@PathVariable("id") Long id, Model uiModel) {
-////		 System.out.println("Generating... " + JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords())));
-//     return JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords()));
-//  }
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/{id}/newrecords", produces = "application/json")
-  public @ResponseBody String newRelatedRecords(@PathVariable("id") Long id, Model uiModel) {
-//		 System.out.println("Generating... " + JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords())));
-     return JsonService.toJson(new JTableResponse(Status.OK, null));
-  }
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/{id}/stakeholders", produces = "application/json")
-  public @ResponseBody String relatedStakeholders(@PathVariable("id") Long id, Model uiModel) {
-//		 System.out.println("Generating... " + JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords())));
-     return JsonService.toJson(new JTableResponse(Status.OK, Person.findAllPeople()));
-  }
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/{id}/projectdrivers", produces = "application/json")
-  public @ResponseBody String projectDrivers(@PathVariable("id") Long id, Model uiModel) {
-//		 System.out.println("Generating... " + JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords())));
-		List<JTableSimpleRow> rows = new ArrayList<JTableSimpleRow>();
-		Project proj = Project.findProject(id);
-		if (proj!=null){
-			
-			rows.add(new JTableSimpleRow("1", "Project driver 1"));
-			rows.add(new JTableSimpleRow("2", "Another project driver"));
-		}
-		return JsonService.toJson(new JTableResponse(Status.OK, rows));
-	}
-		
-	@RequestMapping(method = RequestMethod.POST, value = "/{id}/projectdetails", produces = "application/json")
-  public @ResponseBody String projectDetails(@PathVariable("id") Long id, Model uiModel) {
-//		 System.out.println("Generating... " + JsonService.toJson(new JTableResponse(Status.OK, FileRecord.findAllFileRecords())));
-		List<JTableSimpleRow> rows = new ArrayList<JTableSimpleRow>();
-		Project proj = Project.findProject(id);
-		if (proj!=null){
-			
-			rows.add(new JTableSimpleRow("Migration Project Number", String.valueOf(id)));
-			rows.add(new JTableSimpleRow("Migration Project", proj.getName()));
-			rows.add(new JTableSimpleRow("Agency Name", proj.getAgencyName()));
-			rows.add(new JTableSimpleRow("Agency Number", proj.getAgencyNumber()));
-			rows.add(new JTableSimpleRow("Agency Contact", proj.getAgencyContact()));
-			rows.add(new JTableSimpleRow("SRNSW Contact", proj.getSrnswContact()));
-			rows.add(new JTableSimpleRow("SRNSW File Reference", proj.getSrnswFileReference()));
-		}
-		
-     return JsonService.toJson(new JTableResponse(Status.OK, rows));
-  }
+
+	@RequestMapping(params = "form", produces = "text/html")
+    public String createForm(Model uiModel, HttpServletRequest httpServletRequest) {
+				Project project = new Project();
+        populateEditForm(uiModel, project);
+        project.persist();
+        return "redirect:/projects/" + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
+    }
 }

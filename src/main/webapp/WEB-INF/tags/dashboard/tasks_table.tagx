@@ -69,6 +69,7 @@
 							 
 					 <tbody>
 					  <c:set value="true" var="iseven" />
+					  <spring:url value="/resources/images/update.png" var="update_img"/>
 					  <c:forEach items="${object}" var="task">
 					    <c:choose>
 					    	 <c:when test="${iseven eq true}">
@@ -89,7 +90,7 @@
 									 <td class="">${task.createdBy.name} ${task.createdBy.lastName}</td>
 									 <td class=""><fmt:formatDate pattern="dd MMMM yyyy" value="${task.due}" /></td>
 									 <td class="">${task.status}</td>
-									 <td class="">update</td> 
+									 <td class=""><a href="#" title="Update Task" ><img style="border:0" id="${id}_row_${task.id}" src="${update_img}"/></a></td> 
 						  </tr>
 					   </c:forEach>
 					 </tbody>

@@ -22,27 +22,22 @@
         <field:display field="records" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_records" object="${project}" z="F9RICmqryO9J2aZEqWJAfOrNp5Q="/>
     </page:show>
     <span class="alignright">
-        <form>
-            <select class="dk" name="options" width="200">
-                <option value="">Project Options</option>
-                <option value="export">Export</option>
-                <option value="upload">Upload files</option>
-                <option value="viewfile">View files</option>
-                <option value="project_plan">Create Project Plan</option>
-                <option value="migration_plan">Create Migration Plan</option>
-                <option value="migration_plan">Create Task</option>
-                <option value="reporting">Reporting</option>
-                <option value="view_task">View Tasks</option>
-                <option value="share">Share</option>
-            </select>
+        
             <spring:url value="/resources/images/help-browser.png" var="help"/>
             <a class="noborder" href="#">
                 <img height="30px" src="${help}" style="border:0"/>
             </a>
-        </form>
+        
     </span>
     <h2>Project</h2>
-    <br/>
+   
+     <p><a href="#" class="button">New Project</a> <a href="#" class="button">Upload Files</a> <a href="#" class="button">Assign Task</a> <a href="#" class="button">Export Project</a></p>
+    <script>
+	    $(function() {
+	    	$('.button').button();
+	    });
+    </script>
+    
     <div id="project_tabs_holder">
         <ul>
             <li>

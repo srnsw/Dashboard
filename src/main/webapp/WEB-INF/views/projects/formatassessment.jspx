@@ -4,28 +4,16 @@
     <jsp:output omit-xml-declaration="yes"/>
     
       <span class="alignright">
-        <form>
-            <select class="dk" name="options2">
-                <option value="">Format Assessment Options</option>
-                <option value="upload">Run Scan</option>
-                <option value="viewfile2">Clear Results</option>
-                <option value="viewfile3">View Files</option>
-            </select>
-        </form>
+        
     </span>
-    <SCRIPT type="text/javascript">
-      $(function() {
-         $('.dk').dropkick({
-  			width: 190,
-  		  change: function (value, label) {
-  			  $('.dk').dropkick('reset');
-  		  }
-  		});
-      });
-     </SCRIPT>
-    <h2>Format Assessment</h2>
-    <br/>
     
+    <h2>Format Assessment</h2>
+     <p><a href="#" class="button">Run Scan</a> <a href="#" class="button">Confirm Changes</a> <a href="#" class="button">Clear Results</a> <a href="#" class="button">View Files</a></p>
+    <script>
+	    $(function() {
+	    	$('.button').button();
+	    });
+    </script>
     <div class="jtable-main-container">
                         <div class="jtable-title">
                             <div class="jtable-title-text">Format Assessment</div>
@@ -74,7 +62,7 @@
                         </table>
                         <div class="jtable-bottom-panel">
                             <span class="alignright">
-                                <a class="button" href="#">Confirm Changes</a>
+                                
                             </span>
                         </div>
                     </div>

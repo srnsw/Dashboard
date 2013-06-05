@@ -4,29 +4,17 @@
     <jsp:output omit-xml-declaration="yes"/>
     
     <span class="alignright">
-         <form>
-             <select class="dk3" name="options3">
-                 <option value="">Pathway Assessment Options</option>
-                 <option value="run_matches">Run Matches</option>
-                 <option value="update_matches">Update Matches</option>
-                 <option value="refresh">Refresh</option>
-                 <option value="view_files">View Files</option>
-             </select>
-         </form>
+       
      </span>
-     <SCRIPT type="text/javascript">
-      $(function() {
-         $('.dk3').dropkick({
-  			width: 200,
-  		  change: function (value, label) {
-  			  $('.dk3').dropkick('reset');
-  		  }
-  		});
-      });
-     </SCRIPT>
-                    
+                   
     <h2>Pathway Assessment</h2>
-    <br/>
+    
+    <p><a href="#" class="button">Run Matches</a> <a href="#" class="button">Update Matches</a> <a href="#" class="button">Refresh</a> <a href="#" class="button">Confirm Changes</a> <a href="#" class="button">View Files</a> </p>
+    <script>
+	    $(function() {
+	    	$('.button').button();
+	    });
+    </script>
     
     <div class="jtable-main-container">
       <div class="jtable-title">
@@ -69,7 +57,7 @@
       </table>
       <div class="jtable-bottom-panel">
           <span class="alignright">
-              <a class="button" href="#">Confirm Changes</a>
+              
           </span>
       </div>
   </div>

@@ -48,25 +48,25 @@ public class HomeController {
     	if (request.isUserInRole("ROLE_ARCHIVIST")) {
     		uiModel.addAttribute("projects", Project.findAllProjects());
     		
-    		uiModel.addAttribute("tasks", Task.findTasksByAssignedTo(UserService.getLoggedinUser()));
+    		uiModel.addAttribute("tasks", Task.findTasksByAssignedTo(UserService.getLoggedinUser()).getResultList());
     		
     		return "home/mainindex";
     		
     	}else if (request.isUserInRole("ROLE_AGENCY")) {
-    		try {
-					PDFGeneratorService.createPDF();
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (DocumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-    		
-    		uiModel.addAttribute("projects", Project.findAllProjects());
+//    		try {
+//					PDFGeneratorService.createPDF();
+//				} catch (MalformedURLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (DocumentException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//    		
+//    		uiModel.addAttribute("projects", Project.findAllProjects());
     		return "home/externalindex";
     	}
        return "redirect:/";

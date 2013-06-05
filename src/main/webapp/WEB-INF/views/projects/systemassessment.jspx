@@ -4,25 +4,17 @@
     <jsp:output omit-xml-declaration="yes"/>
     
     <span class="alignright">
-         <form>
-             <select class="dk3" name="options3">
-                 <option value="">System Assessment Options</option>
-             </select>
-         </form>
+      
      </span>
-     <SCRIPT type="text/javascript">
-      $(function() {
-         $('.dk3').dropkick({
-  			width: 200,
-  		  change: function (value, label) {
-  			  $('.dk3').dropkick('reset');
-  		  }
-  		});
-      });
-     </SCRIPT>
-    
+     
     <h2>System Assessment</h2>
-    <br/>
+    
+    <p><a href="#" class="button">Edit</a> <a href="#" class="button">Save</a> </p>
+    <script>
+	    $(function() {
+	    	$('.button').button();
+	    });
+    </script>
     
     <div id="assessment_tabs-2">
                     <div class="jtable-main-container">
@@ -49,7 +41,6 @@
                                         </div>
                                     </th>
                                     <th class="jtable-command-column-header" style="width: 1%;"/>
-                                    <th class="jtable-command-column-header" style="width: 1%;"/>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,11 +48,6 @@
                                     <td class="">System</td>
                                     <td class=""/>
                                     <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
                                     <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
@@ -73,11 +59,6 @@
                                     <td class=""/>
                                     <td class=""/>
                                     <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
                                         </button>
@@ -87,11 +68,6 @@
                                     <td class="">Version</td>
                                     <td class=""/>
                                     <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
                                     <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
@@ -103,11 +79,6 @@
                                     <td class=""/>
                                     <td class=""/>
                                     <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
                                         </button>
@@ -117,11 +88,6 @@
                                     <td class="">Data dictionary</td>
                                     <td class=""/>
                                     <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
                                     <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
@@ -133,11 +99,6 @@
                                     <td class=""/>
                                     <td class=""/>
                                     <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
                                         </button>
@@ -147,11 +108,6 @@
                                     <td class="">Volume of data</td>
                                     <td class=""/>
                                     <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
                                     <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
@@ -163,11 +119,6 @@
                                     <td class=""/>
                                     <td class=""/>
                                     <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
                                         </button>
@@ -177,11 +128,6 @@
                                     <td class="">Decommissioning</td>
                                     <td class=""/>
                                     <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
                                     <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
@@ -193,11 +139,6 @@
                                     <td class=""/>
                                     <td class=""/>
                                     <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
                                         </button>
@@ -207,11 +148,6 @@
                                     <td class="">Code migratin logic</td>
                                     <td class=""/>
                                     <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
                                     <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
@@ -223,11 +159,6 @@
                                     <td class=""/>
                                     <td class=""/>
                                     <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
                                         </button>
@@ -237,11 +168,6 @@
                                     <td class="">Migration validation</td>
                                     <td class=""/>
                                     <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
                                     <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
@@ -253,11 +179,6 @@
                                     <td class=""/>
                                     <td class=""/>
                                     <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
                                         </button>
@@ -268,11 +189,6 @@
                                     <td class=""/>
                                     <td class=""/>
                                     <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
-                                    <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>
                                         </button>
@@ -282,11 +198,6 @@
                                     <td class="">Data migration executin strategy</td>
                                     <td class=""/>
                                     <td class=""/>
-                                    <td class="jtable-command-column">
-                                        <button class="jtable-command-button jtable-edit-command-button" title="Edit Record">
-                                            <span>Edit Record</span>
-                                        </button>
-                                    </td>
                                     <td class="jtable-command-column">
                                         <button class="jtable-command-button jtable-attach-command-button" title="Attach">
                                             <span>Attach</span>

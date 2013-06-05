@@ -127,3 +127,4 @@ perform package
 focus --class au.gov.nsw.records.digitalarchives.dashboard.model.Task
 finder list
 finder add --finderName findTasksByStatus
+finder add --finderName findTasksByAssignedTo

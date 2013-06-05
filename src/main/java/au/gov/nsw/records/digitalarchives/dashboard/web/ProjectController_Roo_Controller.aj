@@ -49,12 +49,6 @@ privileged aspect ProjectController_Roo_Controller {
         return "redirect:/projects/" + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
     }
     
-    @RequestMapping(params = "form", produces = "text/html")
-    public String ProjectController.createForm(Model uiModel) {
-        populateEditForm(uiModel, new Project());
-        return "projects/create";
-    }
-    
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ProjectController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);

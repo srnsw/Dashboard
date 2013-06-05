@@ -3,40 +3,23 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <span class="alignright">
-        <form>
-            <select class="dk" name="options">
-                <option value="">View Projects Options</option>
-                <option value="newprj">Create New Project</option>
-                <option value="reporting">Reporting</option>
-                <option value="reporting">Find Project</option>
-            </select>
-            <spring:url value="/resources/images/help-browser.png" var="help"/>
-            <a class="noborder" href="#">
-                <img height="30px" src="${help}" style="border:0"/>
-            </a>
-        </form>
+        
+       <spring:url value="/resources/images/help-browser.png" var="help"/>
+       <a class="noborder" href="#">
+           <img height="30px" src="${help}" style="border:0"/>
+       </a>
+        
     </span>
     <spring:url value="/" var="root_url"/>
-    <script>
-	 		$('.dk').dropkick({
-				width: 160,
-			  change: function (value, label) {
-			    //alert('You picked: ' + label + ':' + value);
-			    	if (value == "newprj"){
-		 		       window.open('${root_url}projects?form', '_self');
-		 		    }else if (value == "reporting"){
-		 		       //window.open('${root_url}pages?form&amp;master=projectplan', '_blank');
-		 		    }else if (value == "share"){
-			    		  //  window.open('${root_url}pages?form&amp;master=migrationplan', '_blank');
-		 		    }else {
-		 		    	//alert('You pickedx: ' + label + ':' + value);
-		 		    }
-			    	$('.dk').dropkick('reset');
-			  }
-			});
- 		</script>
+    
     <h2>Projects</h2>
     
+    <p><a href="#" class="button">New Project</a> <a href="#" class="button">Find Project</a> <a href="#" class="button">Reporting</a></p>
+    <script>
+	    $(function() {
+	    	$('.button').button();
+	    });
+    </script>
     <widget:table path="projects" morePage="false" object="${projects}" title="Projects" headers="id:5%,Projec Name:30%,Agency:20%, Created:15%,Status:15%,Last Updated:15%" id="project_table">
     	 <widget:tablecontent path="projects" fields="id,name,agencyName,creationDate,statusText,lastUpdateDate" id="test_table_id" object="${projects}" >
     	 	<!--  -->

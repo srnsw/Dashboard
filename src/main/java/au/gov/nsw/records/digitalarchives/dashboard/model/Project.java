@@ -52,7 +52,10 @@ public class Project {
     private List<Status> status;
     
     public String getStatusText(){ 
-    	return status.get(0).getProjectStatusType().toString();
+    	if (status.get(0)!=null){
+    		return status.get(0).getProjectStatusType().toString();
+    	}
+    	return "none";
     }
     
     @Expose

@@ -172,9 +172,9 @@ public class ProjectController {
 		} else if (type.equalsIgnoreCase("hybrid")){
 			project.setProjectType(ProjectType.Hybrid);
 		}
-		//project.setProjectType(type);
 		project.setAgencyName(agencyName);
 		project.setSrnswFileReference(srnswFileReference);
+		project.setLastUpdateDate(new Date());
 		
 		project.persist();
 		

@@ -10,10 +10,11 @@
 
   <h2>Dashboard Login</h2>
   <h4>Important</h4>
-  <p>This is a secure site that is available for use only by registered users who are employees of NSW Public Offices. It is the responsibility of registered users to ensure that all account details are managed securely. State Records NSW accepts no responsibility for unauthorised access to this site due to failure to keep account details secure.</p>
+  <p>The Dashboard is a secure site available for use only by registered users who are employees of NSW Public Offices. Select the Register option below if you would like to become a registered user. If you are not an employee of a NSW Public Office please do not attempt to register for a login to this site.</p>
   
-  <p>By logging in to this system you are acknowledging that you have understood and accepted the conditions under which State Records NSW offers this service.</p>
   <!-- 
+  <p>By logging in to this system you are acknowledging that you have understood and accepted the conditions under which State Records NSW offers this service.</p>
+   
   <p>The Dashboard is the workspace for managing and processing migrations of NSW Government digital records to the Digital Archives.
    The digital records of the NSW Government that are migrated to the Digital Archives are those that are identified as required for permanent retention as NSW State archives.</p>
    

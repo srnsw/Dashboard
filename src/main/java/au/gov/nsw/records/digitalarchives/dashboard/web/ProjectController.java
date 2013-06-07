@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.model.ProjectType;
@@ -34,6 +35,9 @@ import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
 @RooWebScaffold(path = "projects", formBackingObject = Project.class)
 public class ProjectController {
 
+	private static final long PROJECTPLAN_TEMPLATE = 1L;
+	private static final long MIGRATIONPLAN_TEMPLATE = 2L;
+	
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, Project.findProject(id));
@@ -164,6 +168,10 @@ public class ProjectController {
 		
 		Project project = Project.findProject(id);
 		
+		project.setAgencyName(agencyName);
+		project.setSrnswFileReference(srnswFileReference);
+		project.setLastUpdateDate(new Date());
+		
 		project.setName(name);
 		if (type.equalsIgnoreCase("physical")){
 			project.setProjectType(ProjectType.Physical);
@@ -172,9 +180,6 @@ public class ProjectController {
 		} else if (type.equalsIgnoreCase("hybrid")){
 			project.setProjectType(ProjectType.Hybrid);
 		}
-		project.setAgencyName(agencyName);
-		project.setSrnswFileReference(srnswFileReference);
-		project.setLastUpdateDate(new Date());
 		
 		project.persist();
 		
@@ -186,13 +191,34 @@ public class ProjectController {
     public String createForm(Model uiModel, HttpServletRequest httpServletRequest) {
 				
 				Project project = new Project();
+				
+				Page migrationPlanTemplate = Page.findPage(MIGRATIONPLAN_TEMPLATE);
+				Page migrationPlan = new Page();
+				migrationPlan.setContent(migrationPlanTemplate.getContent());
+				migrationPlan.setTitle(migrationPlanTemplate.getTitle());
+				migrationPlan.persist();
+				
+				project.setMigrationPlan(migrationPlan);
+				
+				Page projectPlanTemplate = Page.findPage(PROJECTPLAN_TEMPLATE);
+				Page projectPlan = new Page();
+				projectPlan.setContent(projectPlanTemplate.getContent());
+				projectPlan.setTitle(projectPlanTemplate.getTitle());
+				projectPlan.persist();
+				
+				project.setProjectPlan(projectPlan);
+
+				project.persist();
+				
 				Status status = new Status();
 				status.setProjectStatusType(StatusType.Startup);
 				status.setLastUpdateDate(new Date());
 				status.setProject(project);
         
-				project.persist();
         status.persist();
+        
+        //project.getStatus().add(status);
+        //project.persist();
         
         populateEditForm(uiModel, project);
         return "redirect:/projects/" + project.getId().toString(); // + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);

@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RooWebScaffold(path = "pages", formBackingObject = Page.class)
 public class PageController {
 
+	private static final long PROJECTPLAN_TEMPLATE = 1L;
+	private static final long MIGRATIONPLAN_TEMPLATE = 2L;
+	
 	@RequestMapping(value = "/projectplan", method = RequestMethod.GET, produces = "text/html")
   public String projectplan(Model uiModel) {
 		// TODO validate role

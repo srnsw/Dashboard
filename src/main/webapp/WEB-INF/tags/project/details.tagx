@@ -139,6 +139,7 @@
     	  	              data: dataString,
     	  	              success: function(data) {
     	  	            		$( '#${id}_update_popup' ).dialog( "close" );     
+    	  	            		
     	  	              },
     	  	              error: function() {
     	  	            		$('#${id}_dialog_error').show();

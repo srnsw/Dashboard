@@ -30,6 +30,7 @@ import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
 import au.gov.nsw.records.digitalarchives.dashboard.service.PDFGeneratorService;
+import au.gov.nsw.records.digitalarchives.dashboard.service.PaginatorService;
 import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
 
 import com.itextpdf.text.DocumentException;
@@ -46,8 +47,11 @@ public class HomeController {
     public String index(HttpServletRequest request, Model uiModel) {
     	
     	if (request.isUserInRole("ROLE_ARCHIVIST")) {
-    		uiModel.addAttribute("projects", Project.findAllProjects());
+    		//uiModel.addAttribute("projects", Project.findAllProjects());
     		
+    		PaginatorService paginaotr = new PaginatorService();
+    		paginaotr.populatePaginationResponse(Project.findAllProjects(), 1, 5, "projects", uiModel);
+
     		uiModel.addAttribute("tasks", Task.findTasksByAssignedTo(UserService.getLoggedinUser()).getResultList());
     		
     		return "home/mainindex";

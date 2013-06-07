@@ -32,14 +32,15 @@
                 </sc:authorize>
                 <menu:item id="i_migration_project" url="/projects?page=1&amp;size=${empty param.size ? 10 : param.size}"/>
                 <c:if test="${not empty project}">
-                 
                    <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}">
 	                  	<span><img src="${corner}" />${project.name}</span>
 	                  </a>
                   </li>
                   
-                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+                  <c:set var="physical" value="Physical"><!--  --></c:set>
+                  <c:if test="${project.projectType ne physical}" >
+                  	<li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/project_plan">
 	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner}" />Project Plan</span>
 	                  </a>
@@ -79,6 +80,7 @@
 	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />Migration Process</span>
 	                  </a> 
                   </li>
+                  </c:if>
                 </c:if>
                 
                 <menu:item id="i_user_profile" url="/members/myprofile"/>
@@ -146,16 +148,4 @@
             <menu:item id="i_page_list" messageCode="global_menu_list" url="/pages?page=1&amp;size=${empty param.size ? 10 : param.size}" z="5H2HXd2x+XdB6APVEzPJ/jygGPY="/>
         </menu:category>
     </menu:menu>
-    <script>
-			$('#_menu li span').click(function(e) {
-					
-			    /*Close all -div- but the -div- right after the clicked -a-*/
-			    /*$(e.target).next('li').siblings('li').slideUp('fast');*/
-
-			    /*Toggle open/close on the -div- after the -h3- , opening it if not open.*/
-			    /*$(e.target).next('ul').slideToggle('fast');*/
-			    $(".menu_sub").slideUp('fast');
-			});
-			
-    </script>
 </div>

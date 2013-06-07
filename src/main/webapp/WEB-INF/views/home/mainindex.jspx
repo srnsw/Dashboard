@@ -28,14 +28,8 @@
      
     <p><a href="${root_url}projects?form" class="button">New Project</a> <a href="#" class="button">Assign Task</a> <a href="#" class="button">Find Project</a></p> 
     
-    <widget:table path="projects" morePage="true" object="${projects}" title="Projects" headers="id:5%,Projec Name:40%,Agency:30%,Status:10%,Last Updated:15%" id="project_table">
-    	 <widget:tablecontent path="projects" fields="id,name,agencyName,statusText,lastUpdateDate" id="test_table_id" object="${projects}" >
-    	 	<!--  -->
-    	 </widget:tablecontent>
-    </widget:table>
-    
-   <br/>
-   
+     
+   <dashboard:projects_table object="${projects}" page="${projects_page}" pageParam="project_page" size="${projects_size}" browseLink="/projects" maxpage="${projects_maxpage}" title="Projects" id="project_table" viewall="true"/>
    <dashboard:tasks_table object="${tasks}" title="Tasks" pageParam="task_page" id="task_archivist" page="${tasks_page}" size="${tasks_size}" maxpage="${tasks_maxpage}"/>
     	
    

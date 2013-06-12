@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:widget="urn:jsptagdir:/WEB-INF/tags/widget" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:dashboard="urn:jsptagdir:/WEB-INF/tags/dashboard" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <span class="alignright">
@@ -20,93 +20,9 @@
 	    	$('.button').button();
 	    });
     </script>
-    <widget:table path="projects" morePage="false" object="${projects}" title="Projects" headers="id:5%,Projec Name:30%,Agency:20%, Created:15%,Status:15%,Last Updated:15%" id="project_table">
-    	 <widget:tablecontent path="projects" fields="id,name,agencyName,creationDate,statusText,lastUpdateDate" id="test_table_id" object="${projects}" >
-    	 	<!--  -->
-    	 </widget:tablecontent>
-    </widget:table>
-    
-    <!-- 
-    <div class="jtable-main-container">
-        <div class="jtable-title">
-            <div class="jtable-title-text">Projects</div>
-        </div>
-        <table class="jtable">
-            <thead>
-                <tr>
-                    <th class="jtable-column-header" style="width: 5%;">
-                        <div class="jtable-column-header-container">
-                            <span class="jtable-column-header-text">id</span>
-                        </div>
-                    </th>
-                    <th class="jtable-column-header" style="width: 20%;">
-                        <div class="jtable-column-header-container">
-                            <span class="jtable-column-header-text">Project Name</span>
-                            <div class="jtable-column-resize-handler"/>
-                        </div>
-                    </th>
-                    <th class="jtable-column-header" style="width:20%;">
-                        <div class="jtable-column-header-container">
-                            <span class="jtable-column-header-text">Agency</span>
-                        </div>
-                    </th>
-                    <th class="jtable-column-header" style="width:15%;">
-                        <div class="jtable-column-header-container">
-                            <span class="jtable-column-header-text">Created</span>
-                        </div>
-                    </th>
-                    <th class="jtable-column-header" style="width:15%;">
-                        <div class="jtable-column-header-container">
-                            <span class="jtable-column-header-text">Status</span>
-                        </div>
-                    </th>
-                    <th class="jtable-column-header" style="width:20%;">
-                        <div class="jtable-column-header-container">
-                            <span class="jtable-column-header-text">Last Updated</span>
-                        </div>
-                    </th>
-                    <th class="jtable-command-column-header" style="width: 1%;"/>
-                </tr>
-            </thead>
-            <tbody>
-                <c:set value="true" var="iseven"/>
-                <c:forEach items="${projects}" var="project">
-                    <c:choose>
-                        <c:when test="${iseven eq true}">
-                            <c:set value="jtable-row-even" var="trclass"/>
-                            <c:set value="false" var="iseven"/>
-                        </c:when>
-                        <c:otherwise>
-                            <c:set value="" var="trclass"/>
-                            <c:set value="true" var="iseven"/>
-                        </c:otherwise>
-                    </c:choose>
-                    <tr class="${trclass}">
-                        <td class="">${project.id}</td>
-                        <td class="">${project.name}</td>
-                        <td class="">${project.agencyName}</td>
-                        <td class="">8 April 2013</td>
-                        <td class="">${project.status}</td>
-                        <td class="">15 April 2013</td>
-                        <td class="jtable-command-column">
-                            <button class="jtable-command-button jtable-view-command-button" title="View">
-                                <span>View</span>
-                            </button>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <div class="jtable-bottom-panel">
-            <span class="alignright"> <input type="text" size="10"/> <span class="button">filter</span> Page 1 of 4 <a href="#">&gt;&gt;</a>
-            </span>
-        </div>
-        <script>
-        $('.button').button();
-        </script>
-    </div>
-    <br/>
-     -->
+ 
+   <dashboard:projects_table object="${projects}" page="${projects_page}" pageParam="project_page" size="${projects_size}" maxpage="${projects_maxpage}" title="Projects" id="project_table" viewall="true"/>
+
     <page:list id="pl_au_gov_nsw_records_digitalarchives_dashboard_model_Project" items="${projects}" render="false" z="user-managed">
         <table:table data="${projects}" id="l_au_gov_nsw_records_digitalarchives_dashboard_model_Project" path="/projects" z="hD6t+8wa7cPCTmDnUMAMtFHBhL0=">
             <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Project_name" property="name" z="mvlt8v0VUondl4mQjSX4mpNV5Dg="/>

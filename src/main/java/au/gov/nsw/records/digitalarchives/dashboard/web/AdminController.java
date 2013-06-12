@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.model.TaskStatusType;
 
@@ -48,6 +49,9 @@ public class AdminController {
       uiModel.addAttribute("tasks_size", sizeNo);
       uiModel.addAttribute("tasks", task_result);
       
+      uiModel.addAttribute("all_members", Person.findPeopleByApprovedNot(false).getResultList());
+  		uiModel.addAttribute("all_projects",Project.findAllProjects());
+  		
       return "admin/index";
     }
 }

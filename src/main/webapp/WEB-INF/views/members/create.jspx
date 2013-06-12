@@ -10,7 +10,7 @@
         <hr/>
         <field:simpleinput field="password" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_password" render="false" required="true" type="password" z="user-managed"/>
         <field:simpleinput field="name" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_name" required="true" size="30" z="user-managed"/>
-        <field:simpleinput field="lastName" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_lastName" required="true" z="E0HdPThbSy93J6VouJTK+KgV+FY="/>
+        <field:simpleinput field="lastName" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_lastName" required="true" z="user-managed"/>
         <field:simpleinput field="jobtitle" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_jobtitle" size="30" z="user-managed"/>
         <field:simpleinput field="agencyText" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyText" required="true" size="50" z="user-managed"/>
         <h4>Contact Detials</h4>
@@ -21,7 +21,6 @@
         <field:checkbox field="approved" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_approved" render="false" z="user-managed"/>
         <field:select field="roleType" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_roleType" items="${roletypes}" path="roletypes" render="false" z="user-managed"/>
         <field:input field="agencyNumber" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyNumber" render="false" z="user-managed"/>
-        
     </form:create>
     <!-- <jquery:autocomplete field="agencyNumber" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Person_agencyNumber" searchUrl="${search}" size="40" z="user-managed"/>  -->
     <form:dependency dependencies="${dependencies}" id="d_au_gov_nsw_records_digitalarchives_dashboard_model_Person" render="${not empty dependencies}" z="4LRKYP/+0VFNQ6R4VXFTwBp31ic="/>

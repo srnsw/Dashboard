@@ -15,7 +15,11 @@
     <h2>  Dashboard Home  </h2>
     
     <!-- Link buttons -> [new project], [assign task], [find project] -->  
-    <p><a href="${root_url}projects?form" class="button">New Project</a> <a href="#" class="button">Assign Task</a> <a href="#" class="button">Find Project</a></p> 
+    <p>
+       <a href="${root_url}projects?form" class="button">New Project</a> 
+       <a href="#" id="assign_task_btn" class="button">Assign Task</a> 
+       <a href="#" id="find_project_btn" class="button">Find Project</a>
+    </p> 
 
 		<!-- Projects Table, display all active projects -->    
     <dashboard:projects_table object="${projects}" page="${projects_page}" pageParam="project_page" size="${projects_size}" browseLink="/projects" maxpage="${projects_maxpage}" title="Projects" id="project_table" viewall="true"/>
@@ -27,17 +31,11 @@
   
   <script>
 	    $(function() {
-	    	
 	    	$('.button').button();
-    	  $('#view_prj_btn').click(function(e) {
-	            e.preventDefault();  //stop the browser from following
-	            window.location.href = '${root_url}projects';
+	    	$('#assign_task_btn').click(function(e) {
+	    		$('#task_archivist_new_task').click();
 	      });
-    	  $('#prj_1_edit_btn').click(function(e) {
-	            e.preventDefault();  //stop the browser from following
-	            window.location.href = '${root_url}projects/1';
-	      });
-    	  
+	    	
 	    });
 	</script>
 </div>

@@ -27,7 +27,7 @@
   		
 		 <h4>Task management</h4> <hr/>
 		 
-		 	<dashboard:tasks_table object="${tasks}" title="Tasks" pageParam="task_page" id="_registration_request_users" page="${tasks_page}" size="${tasks_size}" maxpage="${tasks_maxpage}"/>
+		 	<dashboard:tasks_table members="${all_members}" projects="${all_projects}" object="${tasks}" title="Tasks" pageParam="task_page" id="_registration_request_users" page="${tasks_page}" size="${tasks_size}" maxpage="${tasks_maxpage}"/>
     	
 			  	  
 	   <h4>Project Templates</h4> <hr/>

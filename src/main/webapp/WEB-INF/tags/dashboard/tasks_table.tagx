@@ -92,7 +92,7 @@
 									 <td class="">${task.createdBy.name} ${task.createdBy.lastName}</td>
 									 <td class=""><fmt:formatDate pattern="dd MMMM yyyy" value="${task.due}" /></td>
 									 <td class="">${task.status}</td>
-									 <td class=""><a href="#" title="Update Task" ><img style="border:0" id="${id}_row_${task.id}" src="${update_img}"/></a></td> 
+									 <td class=""><a href="#" id="${id}_${task.id}_update" class="${id}_update" title="Update Task" ><img style="border:0" id="${id}_row_${task.id}" src="${update_img}"/></a></td> 
 						  </tr>
 					   </c:forEach>
 					 </tbody>
@@ -175,6 +175,54 @@
                 <div id="${id}_dialog_error" class="errors">Error occured during submit</div>
             </div>
 			  	  
+			  	  <!-- Popup for editing task -->
+				<div class="dawidget" id="${id}_task_update_popup" title="Update task">
+                <form>
+                    <fieldset>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Assign to</label>
+                            </dt>
+                            <dd>
+                                <select style="width:40%" id="${id}_assign_to" class="select2" name="options" width="200">
+									                <c:forEach items="${members}" var="memb">
+										                <option value="${memb.id}">${memb.name} ${memb.lastName}</option>
+									                </c:forEach>
+									              </select>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Details</label>
+                            </dt>
+                            <dd>
+                                <textarea id="${id}_details" rows="3" cols=""> <!--  --></textarea>
+                            </dd>
+                        </dl>
+                        
+                        <dl>
+                            <dt>
+                                <label for="${field}">Status</label>
+                            </dt>
+                            <dd>
+                                <input type="checkbox" /> completed <br/>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Due date</label>
+                            </dt>
+                            <dd>
+                                <input type="text" id="${id}_due" />
+                            </dd>
+                            <script>
+                            	$('#${id}_due').datepicker();
+                            </script>
+                        </dl>
+                    </fieldset>
+                </form>
+                <div id="${id}_dialog_error" class="errors">Error occured during submit</div>
+            </div>
 	  	  <br/>
 	  	  
 	  	  <spring:url value="/" var="root_url"></spring:url>
@@ -229,6 +277,50 @@
 		    	  	       
 		    	  	      }
 		    	  	    });
+			            
+
+	                $( ".${id}_update" ).click(function() {
+	    	  		    	 $( "#${id}_task_update_popup" ).dialog( "open" );
+			    	  		   return 1;
+			    	  		});
+			            
+			            $( "#${id}_task_update_popup" ).dialog({
+			    	  	      autoOpen: false,
+			    	  	      height: 410,
+			    	  	      width: 600,
+			    	  	      modal: true,
+			    	  	      buttons: {
+			    	  	        "OK": function() {
+			    	  	        	
+			    	  	        	var description = $("#${id}_details").val(); 
+			    	  	        	var due = $("#${id}_due").val();
+			    	  	        	var assignedTo = $("#${id}_assign_to").val();
+			    	  	        	var project = $("#${id}_project").val();
+			    	  	        	
+			    	  	        	var dataString = 'description='+ description + '&amp;due=' + due + '&amp;assignedTo=' + assignedTo ;
+			    	  	        	
+			    	  	        	$('#${id}_dialog_error').hide();
+			    	  	        	
+			    	  	        	$.ajax({
+			    	  	              type: "POST",
+			    	  	              url: "${root_url}projects/" + project + "/tasks/",
+			    	  	              data: dataString,
+			    	  	              success: function(data) {
+			    	  	            		$( '#${id}_task_create_popup' ).dialog( "close" );     
+			    	  	              },
+			    	  	              error: function() {
+			    	  	            		$('#${id}_dialog_error').show();
+		    	  	              	}
+			    	  	            });
+			    	  	        },
+			    	  	      	cancel: function() {
+			    	  	        	 $( this ).dialog( "close" );
+			    	  	        },
+			    	  	      },
+			    	  	      close: function() {
+			    	  	       
+			    	  	      }
+			    	  	    });
 	  			});
        </script>
 </jsp:root>

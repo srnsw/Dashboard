@@ -59,4 +59,12 @@ public class Task {
         q.setParameter("status", status);
         return q;
     }
+    
+    public static TypedQuery<Task> findTasksByAssignedToOrCreatedBy(Person person) {
+      if (person == null) throw new IllegalArgumentException("The assignedTo argument is required");
+      EntityManager em = Task.entityManager();
+      TypedQuery<Task> q = em.createQuery("SELECT o FROM Task AS o WHERE o.assignedTo = :person or o.createdBy = :person", Task.class);
+      q.setParameter("person", person);
+      return q;
+  }
 }

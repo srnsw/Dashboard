@@ -53,7 +53,7 @@ public class HomeController {
     		PaginatorService paginaotr = new PaginatorService();
     		paginaotr.populatePaginationResponse(Project.findAllProjects(), 1, 5, "projects", uiModel);
 
-    		uiModel.addAttribute("tasks", Task.findTasksByAssignedTo(UserService.getLoggedinUser()).getResultList());
+    		uiModel.addAttribute("tasks", Task.findTasksByAssignedToOrCreatedBy(UserService.getLoggedinUser()).getResultList());
     		uiModel.addAttribute("all_members", Person.findPeopleByApprovedNot(false).getResultList());
     		uiModel.addAttribute("all_projects",Project.findAllProjects());
     		

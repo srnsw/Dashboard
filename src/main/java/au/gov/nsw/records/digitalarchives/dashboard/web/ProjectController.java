@@ -192,34 +192,40 @@ public class ProjectController {
 				
 				Project project = new Project();
 				
+				// migration plan population
 				Page migrationPlanTemplate = Page.findPage(MIGRATIONPLAN_TEMPLATE);
 				Page migrationPlan = new Page();
 				migrationPlan.setContent(migrationPlanTemplate.getContent());
 				migrationPlan.setTitle(migrationPlanTemplate.getTitle());
 				migrationPlan.persist();
-				
 				project.setMigrationPlan(migrationPlan);
-				
+
+				// project plan population
 				Page projectPlanTemplate = Page.findPage(PROJECTPLAN_TEMPLATE);
 				Page projectPlan = new Page();
 				projectPlan.setContent(projectPlanTemplate.getContent());
 				projectPlan.setTitle(projectPlanTemplate.getTitle());
 				projectPlan.persist();
-				
 				project.setProjectPlan(projectPlan);
 
+				// save project
 				project.persist();
 				
+				// default status population
 				Status status = new Status();
 				status.setProjectStatusType(StatusType.Startup);
 				status.setLastUpdateDate(new Date());
 				status.setProject(project);
-        
         status.persist();
         
-        //project.getStatus().add(status);
-        //project.persist();
+        // twoway population
+        project.getStatus().add(status);
+        project.setName("[new project]");
+        project.persist();
         
+        //TODO generate UUID for this project
+        //TODO create folder structure for the new project in the backend
+              
         populateEditForm(uiModel, project);
         return "redirect:/projects/" + project.getId().toString(); // + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
     }

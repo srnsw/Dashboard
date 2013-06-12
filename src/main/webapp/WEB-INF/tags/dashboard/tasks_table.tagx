@@ -3,6 +3,8 @@
 
   <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="Id of this table" />
   <jsp:directive.attribute name="object" type="java.util.ArrayList" required="true" rtexprvalue="true" description="The form backing object" />
+  <jsp:directive.attribute name="projects" type="java.util.ArrayList" required="true" rtexprvalue="true" description="The Project's form backing object" />
+  <jsp:directive.attribute name="members" type="java.util.ArrayList" required="true" rtexprvalue="true" description="The Member's form backing object" />
   <jsp:directive.attribute name="title" type="java.lang.String" required="true" rtexprvalue="true" description="Title of the table" />
   <jsp:directive.attribute name="edit" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Link to approve the user registration request" />
   <jsp:directive.attribute name="page" type="java.lang.String" required="false" rtexprvalue="true" description="Current pagination page" />
@@ -121,9 +123,9 @@
                             </dt>
                             <dd>
                                 <select style="width:40%" id="${id}_assign_to" class="select2" name="options" width="200">
-									                <option value="3">Richard Lehane</option>
-									                <option value="4">Ken Zhai</option>
-									                <option value="5">Paul Elloitt</option>
+									                <c:forEach items="${members}" var="memb">
+										                <option value="${memb.id}">${memb.name} ${memb.lastName}</option>
+									                </c:forEach>
 									              </select>
                             </dd>
                         </dl>
@@ -141,9 +143,9 @@
                             </dt>
                             <dd >
                                 <select style="width:40%" id="${id}_project" class="select2" name="options">
-									                <option value="3">Demo Project2</option>
-									                <option value="4">Demo Project3</option>
-									                <option value="5">Demo Project4</option>
+                                  <c:forEach items="${projects}" var="proj">
+										                <option value="${proj.id}">${proj.name}</option>
+									                </c:forEach>
 									              </select>
                             </dd>
                         </dl>

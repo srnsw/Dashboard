@@ -41,7 +41,7 @@ public class Person {
     @NotNull
     @NotEmpty
     private String lastName;
-    
+
     @Expose
     private String telephone;
 

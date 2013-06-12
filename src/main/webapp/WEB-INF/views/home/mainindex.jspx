@@ -8,37 +8,25 @@
   <util:panel id="title" title="${title}">
     <spring:message code="application_name" htmlEscape="false" var="app_name"/>
 		<span class="alignright">
-		<!-- 
-		  <form>
-				<select name="options" class="dk">
-				  <option value="">Dashboard Home Options</option>
-				  <option value="new_prj">Create New Project</option>
-				  <option value="new_task">Create New Task</option>
-				  <option value="new_task">Find Project</option>
-				</select>
-			</form>
-		-->
-			 <spring:url value="/resources/images/help-browser.png" var="help" />
+			<spring:url value="/resources/images/help-browser.png" var="help" />
 			<a href="#" class="noborder" ><img src="${help}" style="border:0" height="30px"></img></a>
  		</span>
  		
-    <h2>  
-    	Dashboard Home  
-    </h2>
-     
-    <p><a href="${root_url}projects?form" class="button">New Project</a> <a href="#" class="button">Assign Task</a> <a href="#" class="button">Find Project</a></p> 
+    <h2>  Dashboard Home  </h2>
     
-     
-   <dashboard:projects_table object="${projects}" page="${projects_page}" pageParam="project_page" size="${projects_size}" browseLink="/projects" maxpage="${projects_maxpage}" title="Projects" id="project_table" viewall="true"/>
-   <dashboard:tasks_table object="${tasks}" title="Tasks" pageParam="task_page" id="task_archivist" page="${tasks_page}" size="${tasks_size}" maxpage="${tasks_maxpage}"/>
+    <!-- Link buttons -> [new project], [assign task], [find project] -->  
+    <p><a href="${root_url}projects?form" class="button">New Project</a> <a href="#" class="button">Assign Task</a> <a href="#" class="button">Find Project</a></p> 
+
+		<!-- Projects Table, display all active projects -->    
+    <dashboard:projects_table object="${projects}" page="${projects_page}" pageParam="project_page" size="${projects_size}" browseLink="/projects" maxpage="${projects_maxpage}" title="Projects" id="project_table" viewall="true"/>
+    
+    <!-- Tasks Table, display all tasks related to the logged in user -->
+    <dashboard:tasks_table object="${tasks}" title="Tasks" members="${all_members}" projects="${all_projects}" pageParam="task_page" id="task_archivist" page="${tasks_page}" size="${tasks_size}" maxpage="${tasks_maxpage}"/>
     	
-   
   </util:panel>
   
   <script>
 	    $(function() {
-	    	
-	    	$('.dk').select2();
 	    	
 	    	$('.button').button();
     	  $('#view_prj_btn').click(function(e) {

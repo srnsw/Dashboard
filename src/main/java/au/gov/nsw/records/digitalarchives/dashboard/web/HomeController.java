@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse.Status;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
@@ -53,6 +54,8 @@ public class HomeController {
     		paginaotr.populatePaginationResponse(Project.findAllProjects(), 1, 5, "projects", uiModel);
 
     		uiModel.addAttribute("tasks", Task.findTasksByAssignedTo(UserService.getLoggedinUser()).getResultList());
+    		uiModel.addAttribute("all_members", Person.findPeopleByApprovedNot(false).getResultList());
+    		uiModel.addAttribute("all_projects",Project.findAllProjects());
     		
     		return "home/mainindex";
     		

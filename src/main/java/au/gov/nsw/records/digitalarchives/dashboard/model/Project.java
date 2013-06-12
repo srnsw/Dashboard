@@ -1,5 +1,6 @@
 package au.gov.nsw.records.digitalarchives.dashboard.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class Project {
     private String srnswFileReference;
     
     @OneToMany
-    private List<Status> status;
+    private List<Status> status = new ArrayList<Status>();
     
     public String getStatusText(){ 
     	if (status!=null && !status.isEmpty() && status.get(0)!=null){

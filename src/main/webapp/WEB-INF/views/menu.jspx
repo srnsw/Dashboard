@@ -39,17 +39,18 @@
                   </li>
                   
                   <c:set var="physical" value="Physical"><!--  --></c:set>
-                  <c:if test="${project.projectType ne physical}" >
-                  	<li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+                  
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/project_plan">
 	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner}" />Project Plan</span>
 	                  </a>
-                  </li> 
-                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+                  </li>
+                  <c:if test="${project.projectType ne physical}" > 
+                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/migration_plan">
 	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />Migration Plan</span>
 	                  </a> 
-                  </li>
+                   </li>
                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/files">
 	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />File Management</span>

@@ -61,11 +61,13 @@
 									<span class="jtable-column-header-text">Status</span>
 								  </div>
 								</th>
-								<th class="jtable-column-header" style="width:5%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text"></span>
-								  </div>
-								</th>
+								<c:if test="${edit}">
+									<th class="jtable-column-header" style="width:5%;">
+									  <div class="jtable-column-header-container">
+										<span class="jtable-column-header-text"></span>
+									  </div>
+									</th>
+								</c:if>
 								</tr>
 							 </thead>
 							 
@@ -86,13 +88,23 @@
 						  <tr class="${trclass}">
 						      <td class="">${task.id}</td>
 									 <td class="">${task.description}</td>
-									 <td class="">${task.project.id}</td>
-									 <td class="">${task.assignedTo.name} ${task.assignedTo.lastName}</td>
-									 <td class=""><fmt:formatDate pattern="dd MMMM yyyy" value="${task.created}" /></td>
-									 <td class="">${task.createdBy.name} ${task.createdBy.lastName}</td>
+									 <td class=""> 
+									   <a href="${root_url}projects/${task.project.id}">${task.project.id}</a>
+									 </td>
+									 <td class="">
+									   <a href="${root_url}members/${task.assignedTo.id}"> ${task.assignedTo.name} ${task.assignedTo.lastName} </a>
+									 </td>
+									 <td class="">
+									   <fmt:formatDate pattern="dd MMMM yyyy" value="${task.created}" />
+									 </td>
+									 <td class="">
+									   <a href="${root_url}members/${task.createdBy.id}"> ${task.createdBy.name} ${task.createdBy.lastName}</a>
+									 </td>
 									 <td class=""><fmt:formatDate pattern="dd MMMM yyyy" value="${task.due}" /></td>
 									 <td class="">${task.status}</td>
-									 <td class=""><a href="#" id="${id}_${task.id}_update" class="${id}_update" title="Update Task" ><img style="border:0" id="${id}_row_${task.id}" src="${update_img}"/></a></td> 
+									 <c:if test="${edit}">
+									 	  <td class=""><a href="#" id="${id}_${task.id}_update" class="${id}_update" title="Update Task" ><img style="border:0" id="${id}_row_${task.id}" src="${update_img}"/></a></td>
+									 </c:if> 
 						  </tr>
 					   </c:forEach>
 					 </tbody>
@@ -286,7 +298,7 @@
 			            
 			            $( "#${id}_task_update_popup" ).dialog({
 			    	  	      autoOpen: false,
-			    	  	      height: 410,
+			    	  	      height: 420,
 			    	  	      width: 600,
 			    	  	      modal: true,
 			    	  	      buttons: {

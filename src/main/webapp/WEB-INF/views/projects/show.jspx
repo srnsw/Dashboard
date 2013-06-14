@@ -31,7 +31,13 @@
     </span>
     <h2>Project</h2>
    
-     <p><a href="#" class="button">New Project</a> <a href="#" class="button">Upload Files</a> <a href="#" class="button">Assign Task</a> <a href="#" class="button">Export Project</a></p>
+     <project:new_button title="New Project" id="new_proj" /> 
+     <span class="button">Upload Files</span> 
+     <span class="button">Assign Task</span> 
+     <span class="button">Export Project</span>
+     
+     <br/>
+     <br/> 
     <script>
 	    $(function() {
 	    	$('.button').button();

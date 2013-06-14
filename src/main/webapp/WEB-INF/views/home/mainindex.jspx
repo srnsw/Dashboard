@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:dashboard="urn:jsptagdir:/WEB-INF/tags/dashboard" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:widget="urn:jsptagdir:/WEB-INF/tags/widget" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+<div xmlns:project="urn:jsptagdir:/WEB-INF/tags/project" xmlns:dashboard="urn:jsptagdir:/WEB-INF/tags/dashboard" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:widget="urn:jsptagdir:/WEB-INF/tags/widget" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <jsp:output omit-xml-declaration="yes"/>
   <spring:message code="label_home_index" htmlEscape="false" var="title"/>
@@ -15,11 +15,12 @@
     <h2>  Dashboard Home  </h2>
     
     <!-- Link buttons -> [new project], [assign task], [find project] -->  
-    <p>
-       <a href="${root_url}projects?form" class="button">New Project</a> 
-       <a href="#" id="assign_task_btn" class="button">Assign Task</a> 
-       <a href="#" id="find_project_btn" class="button">Find Project</a>
-    </p> 
+    <project:new_button title="New Project" id="project_btn" />
+    <span id="assign_task_btn" class="button">Assign Task</span> 
+    <span id="find_project_btn" class="button">Find Project</span>
+    
+    <br/>
+    <br/>    
 
 		<!-- Projects Table, display all active projects -->    
     <dashboard:projects_table object="${projects}" page="${projects_page}" pageParam="project_page" size="${projects_size}" browseLink="/projects" maxpage="${projects_maxpage}" title="Projects" id="project_table" viewall="true"/>
@@ -35,7 +36,6 @@
 	    	$('#assign_task_btn').click(function(e) {
 	    		$('#task_archivist_new_task').click();
 	      });
-	    	
 	    });
 	</script>
 </div>

@@ -5,12 +5,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,7 @@ import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.model.ProjectType;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Stakeholder;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.model.StatusType;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
@@ -37,6 +40,8 @@ public class ProjectController {
 
 	private static final long PROJECTPLAN_TEMPLATE = 1L;
 	private static final long MIGRATIONPLAN_TEMPLATE = 2L;
+	
+	private static Logger logger = Logger.getLogger(ProjectController.class); 
 	
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
@@ -166,6 +171,8 @@ public class ProjectController {
 			 @RequestParam String agencyName,
 			 @RequestParam String srnswFileReference)  {
 		
+		logger.info(String.format("Updating project [%d] %s %s %s %s", id, name, type, agencyName, srnswFileReference));
+		
 		Project project = Project.findProject(id);
 		
 		project.setAgencyName(agencyName);
@@ -186,11 +193,74 @@ public class ProjectController {
 		return "ok";
 	}
 	
+
+	@RequestMapping(method =  RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public String create(Model uiModel,
+			 @RequestParam String name,
+			 @RequestParam String type,
+			 @RequestParam String agencyName,
+			 @RequestParam String srnswFileReference)  {
+		
+		logger.info(String.format("Creating project name[%s] type[%s] agencyName[%s] fileRef[%s]", name, type, agencyName, srnswFileReference));
+		
+		Project project = new Project();
+		
+		// migration plan population
+		Page migrationPlanTemplate = Page.findPage(MIGRATIONPLAN_TEMPLATE);
+		Page migrationPlan = new Page();
+		migrationPlan.setContent(migrationPlanTemplate.getContent());
+		migrationPlan.setTitle(migrationPlanTemplate.getTitle());
+		migrationPlan.persist();
+		project.setMigrationPlan(migrationPlan);
+
+		// project plan population
+		Page projectPlanTemplate = Page.findPage(PROJECTPLAN_TEMPLATE);
+		Page projectPlan = new Page();
+		projectPlan.setContent(projectPlanTemplate.getContent());
+		projectPlan.setTitle(projectPlanTemplate.getTitle());
+		projectPlan.persist();
+		project.setProjectPlan(projectPlan);
+
+		project.setAgencyName(agencyName);
+		project.setSrnswFileReference(srnswFileReference);
+		project.setLastUpdateDate(new Date());
+		project.setCreationDate(new Date());
+		
+		project.setName(name);
+		if (type.equalsIgnoreCase("physical")){
+			project.setProjectType(ProjectType.Physical);
+		} else if (type.equalsIgnoreCase("digital")){
+			project.setProjectType(ProjectType.Digital);
+		} else if (type.equalsIgnoreCase("hybrid")){
+			project.setProjectType(ProjectType.Hybrid);
+		}
+		// save project before adding status
+		project.persist();
+		
+		// default status population
+		Status status = new Status();
+		status.setProjectStatusType(StatusType.Startup);
+		status.setLastUpdateDate(new Date());
+		status.setProject(project);
+    status.persist();
+    
+    // twoway population
+    project.getStatus().add(status);
+    // save project
+    project.persist();
+    
+    logger.info(String.format("Created project [%d]", project.getId()));
+    
+    //TODO generate UUID for this project
+    //TODO create folder structure for the new project in the backend
+    return String.format("{\"id\": \"%d\", \"status\": \"ok\" }", project.getId());
+	}
 	
-	@RequestMapping(params = "form", produces = "text/html")
+	  @RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel, HttpServletRequest httpServletRequest) {
 				
-				Project project = new Project();
+				/*Project project = new Project();
 				
 				// migration plan population
 				Page migrationPlanTemplate = Page.findPage(MIGRATIONPLAN_TEMPLATE);
@@ -226,7 +296,39 @@ public class ProjectController {
         //TODO generate UUID for this project
         //TODO create folder structure for the new project in the backend
               
-        populateEditForm(uiModel, project);
-        return "redirect:/projects/" + project.getId().toString(); // + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
+        populateEditForm(uiModel, project);*/
+        return "redirect:/projects/1" ;//+ project.getId().toString(); // + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
+    }
+
+	@RequestMapping(produces = "text/html")
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+            uiModel.addAttribute("projects", Project.findProjectEntries(firstResult, sizeNo));
+            float nrOfPages = (float) Project.countProjects() / sizeNo;
+            uiModel.addAttribute("projects_maxpage", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+            uiModel.addAttribute("projects_page", page);
+            uiModel.addAttribute("projects_size", sizeNo);
+        } else {
+            uiModel.addAttribute("projects", Project.findAllProjects());
+        }
+        addDateTimeFormatPatterns(uiModel);
+        return "projects/list";
+    }
+
+	@RequestMapping(value = "/{id}", produces = "text/html")
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
+        Project project = Project.findProject(id);
+        uiModel.addAttribute("project", project);
+        uiModel.addAttribute("itemId", id);
+        uiModel.addAttribute("status", new ArrayList<Status>(project.getStatus()));
+        uiModel.addAttribute("last_status", project.getLatestStatus());
+        uiModel.addAttribute("stakeholders", new ArrayList<Stakeholder>(project.getStakeholders()));
+        uiModel.addAttribute("stakeholder", new Stakeholder());
+        uiModel.addAttribute("members", new ArrayList<Person>(Person.findPeopleByApprovedNot(false).getResultList()));
+       
+        return "projects/show";
     }
 }

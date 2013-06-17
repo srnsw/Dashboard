@@ -38,40 +38,6 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect ProjectController_Roo_Controller {
     
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String ProjectController.create(@Valid Project project, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, project);
-            return "projects/create";
-        }
-        uiModel.asMap().clear();
-        project.persist();
-        return "redirect:/projects/" + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", produces = "text/html")
-    public String ProjectController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("project", Project.findProject(id));
-        uiModel.addAttribute("itemId", id);
-        return "projects/show";
-    }
-    
-    @RequestMapping(produces = "text/html")
-    public String ProjectController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("projects", Project.findProjectEntries(firstResult, sizeNo));
-            float nrOfPages = (float) Project.countProjects() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("projects", Project.findAllProjects());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "projects/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String ProjectController.update(@Valid Project project, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {

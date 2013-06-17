@@ -52,6 +52,10 @@ public class Project {
     @OneToMany
     private List<Status> status = new ArrayList<Status>();
     
+    public Status getLatestStatus(){
+    	return status.size()>0? status.get(status.size()-1):null;
+    }
+    
     public String getStatusText(){ 
     	if (status!=null && !status.isEmpty() && status.get(0)!=null){
     		return status.get(0).getProjectStatusType().toString();

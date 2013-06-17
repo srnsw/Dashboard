@@ -58,7 +58,7 @@
         <c:when test="${not empty items}">
           <label for="_${sec_field}_id">
             <c:out value="${fn:escapeXml(label)}" />
-            :
+            <br/>
           </label>
           <c:choose>
             <c:when test="${empty itemValue}">
@@ -76,7 +76,7 @@
                   </select>
                 </c:when>
                 <c:otherwise>
-                  <form:select id="_${sec_field}_id" items="${items}" path="${sec_field}" disabled="${disabled}" multiple="${multiple}" />
+                  <form:select id="_${sec_field}_id" class="da_select" items="${items}" path="${sec_field}" disabled="${disabled}" multiple="${multiple}" />
                   <br />
                   <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
                 </c:otherwise>
@@ -85,7 +85,7 @@
             <c:otherwise>
               <c:choose>
                 <c:when test="${disableFormBinding}">
-                  <select id="_${sec_field}_id" name="${sec_field}" >
+                  <select id="_${sec_field}_id" class="da_select" name="${sec_field}" >
                     <c:if test="${emptyValueEnable}">
                       <option value="" ><c:out value="${emptyLabel}" /></option>
                     </c:if>
@@ -97,7 +97,7 @@
                   </select>
                 </c:when>
                 <c:otherwise>
-                  <form:select id="_${sec_field}_id" items="${items}" path="${sec_field}" disabled="${disabled}" multiple="${multiple}" itemValue="${fn:escapeXml(itemValue)}" />
+                  <form:select id="_${sec_field}_id" class="da_select" items="${items}" path="${sec_field}" disabled="${disabled}" multiple="${multiple}" itemValue="${fn:escapeXml(itemValue)}" />
                   <br />
                   <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
                 </c:otherwise>

@@ -1,0 +1,465 @@
+<jsp:root xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:jquery="urn:jsptagdir:/WEB-INF/tags/jquery" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jtable="urn:jsptagdir:/WEB-INF/tags/jtable" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="yes" />
+
+  <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="Id of this table" />
+  <jsp:directive.attribute name="object" type="java.util.ArrayList" required="true" rtexprvalue="true" description="All status" />
+  <jsp:directive.attribute name="title" type="java.lang.String" required="true" rtexprvalue="true" description="Title of the table" />
+  
+	<div class="jtable-main-container">
+					<div class="jtable-title">
+					  <div class="jtable-title-text">${title}</div>
+					</div>
+					<table class="jtable">
+                    <thead>
+                        <tr>
+                            <th class="jtable-column-header" style="width: 5%;">
+                                <div class="jtable-column-header-container">
+                                    <span class="jtable-column-header-text">Check</span>
+                                </div>
+                            </th>
+                            <th class="jtable-column-header" style="width: 50%;">
+                                <div class="jtable-column-header-container">
+                                    <span class="jtable-column-header-text">Requirement</span>
+                                    <div class="jtable-column-resize-handler"/>
+                                </div>
+                            </th>
+                            <th class="jtable-column-header" style="width:45%;">
+                                <div class="jtable-column-header-container">
+                                    <span class="jtable-column-header-text">Action</span>
+                                </div>
+                            </th>
+                            <th class="jtable-command-column-header" style="width: 1%;"/>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Series information</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Series registration</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">System description</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Access requirements</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Access direction drafting</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Access direction approval</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Access direction registration</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Agency registration</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Assessment activities(digital only)</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Draft Migration plan</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Migration plan approval</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Transfer documentation</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Consignment/item listing</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Conservation assessment</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Re-boxing/re-housing physical records</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Conservation treatment</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Migration</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Transfer of physical records</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Checking and storage</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Distributed management</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="jtable-row-even">
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Transfer of Control, Custody retained by another entity</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <input type="checkbox"/>
+                            </td>
+                            <td class="">Transfer of Custody and Control to State Records NSW</td>
+                            <td class=""/>
+                            <td class="jtable-command-column">
+                                <button class="jtable-command-button jtable-edit-command-button req" id="transfer_req_edit_btn" title="Edit Record">
+                                    <span>Edit Record</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+					<div class="jtable-bottom-panel">
+						<span class="alignright">
+						</span>
+					</div>
+				</div>
+				
+				<!-- 
+				<div class="dawidget" id="${id}_history_popup" title="Project Status History">
+                <div class="jtable-title">
+                    <div class="jtable-title-text">Project Status</div>
+                </div>
+                <table class="jtable">
+                    <thead>
+                        <tr>
+                            <th class="jtable-column-header" style="width: 20%;">
+                                <div class="jtable-column-header-container">
+                                    <span class="jtable-column-header-text">status</span>
+                                </div>
+                            </th>
+                            <th class="jtable-column-header" style="width: 20%;">
+                                <div class="jtable-column-header-container">
+                                    <span class="jtable-column-header-text">Last Updated</span>
+                                    <div class="jtable-column-resize-handler"/>
+                                </div>
+                            </th>
+                            <th class="jtable-column-header" style="width:60%;">
+                                <div class="jtable-column-header-container">
+                                    <span class="jtable-column-header-text">Comments</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <c:forEach items="${object}" var="status">
+									    <c:choose>
+									    	 <c:when test="${iseven eq true}">
+										    	 <c:set value="jtable-row-even" var="trclass"></c:set>
+										    	 <c:set value="false" var="iseven" />
+									    	 </c:when>
+									    	 <c:otherwise>
+									    	 	 <c:set value="" var="trclass"></c:set>
+									    		 <c:set value="true" var="iseven" />
+									    	 </c:otherwise>
+									    </c:choose>
+										  <tr class="${trclass}">
+									      <td class="">${status.projectStatusType}</td>
+				 							  <td class=""><fmt:formatDate pattern="dd MMMM yyyy" value="${status.lastUpdateDate}" /></td>
+												<td class="">${status.comment}</td>
+										  </tr>
+									   </c:forEach>
+                    </tbody>
+                </table>
+                <div class="jtable-bottom-panel">
+                    <span class="alignright"/>
+                </div>
+            </div>
+            <div class="dawidget" id="${id}_update_popup" title="Update Project Status">
+                <form>
+                    <fieldset>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Status</label>
+                            </dt>
+                            <dd>
+                                <select id="${id}_status_drpdwn" class="status_dropdwn" style="width:50%">
+                                    <option value="1">Startup</option>
+                                    <option value="2">Assessment</option>
+                                    <option value="3">Migration Plan</option>
+                                    <option value="4">Migration</option>
+                                    <option value="5">On Hold</option>
+                                    <option value="6">Discontinued</option>
+                                    <option value="7">Terminated</option>
+                                    <option value="8">Closed</option>
+                                </select>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                <label for="${field}">Comments</label>
+                            </dt>
+                            <dd>
+                                <textarea col="50" id="${id}_comment" style="height:5em" name="${field}" />
+                            </dd>
+                        </dl>
+                    </fieldset>
+                </form>
+            </div>
+	  	   -->
+	  	  <spring:url value="/" var="root_url"></spring:url>
+	  	  <script>
+	  			$(function() {
+	  				/*
+	  						$( "#${id}_update_btn" ).click(function() {
+   	  		    	 $( "#${id}_update_popup" ).dialog( "open" );
+		    	  		   return 1;
+		    	  		});
+	  						 
+	  						$( "#proceed" ).hide();
+	  						
+	  						
+	  						$( "#${id}_status_drpdwn" ).select2();
+	  						
+	  						$( "#${id}_update_popup" ).dialog({
+	  		    	  	      autoOpen: false,
+	  		    	  	      height: 360,
+	  		    	  	      width: 440,
+	  		    	  	      modal: true, 
+	  		    	  	      buttons: {
+	  		    	  	        "OK": function() { 
+	  		    	  	        	
+	  		    	  	        	var status = $("#${id}_status_drpdwn").val(); 
+	  		    	  	        	var comment = $("#${id}_comment").val();
+	  		    	  	        	
+	  		    	  	        	var dataString = 'status='+ status + '&amp;comment=' + comment  ;
+	  		    	  	        	
+	  		    	  	        	$('#${id}_dialog_error').hide();
+	  		    	  	        	
+	  		    	  	        	$.ajax({
+	  		    	  	              type: "POST",
+	  		    	  	              url: "${root_url}projects/" + ${latestStatus.project.id} + "/status/",
+	  		    	  	              data: dataString,
+	  		    	  	              success: function(data) {
+	  		    	  	            		$( '#${id}_update_popup' ).dialog( "close" );     
+	  		    	  	              },
+	  		    	  	              error: function() {
+	  		    	  	            		$('#${id}_dialog_error').show();
+	  	    	  	              	}
+	  		    	  	            });
+	  		    	  	        },
+	  		    	  	      	cancel: function() {
+	  		    	  	        	 $( this ).dialog( "close" );
+	  		    	  	        },
+	  		    	  	      },
+	  		    	  	      close: function() {
+	  		    	  	       
+	  		    	  	      }
+	  		    	  	    });
+	  				
+	  				
+	                $( "#${id}_history_btn" ).button().click(function() {
+	    	  		    	 $( "#${id}_history_popup" ).dialog( "open" );
+			    	  		   return 1;
+			    	  		});
+	                
+	                $('#${id}_dialog_error').hide();
+	                
+			            $( "#${id}_history_popup" ).dialog({
+		    	  	      autoOpen: false,
+		    	  	      height: 410,
+		    	  	      width: 600,
+		    	  	      modal: true,
+		    	  	      buttons: {
+		    	  	      	cancel: function() {
+		    	  	        	 $( this ).dialog( "close" );
+		    	  	        },
+		    	  	      },
+		    	  	      close: function() {
+		    	  	       
+		    	  	      }
+		    	  	    });
+			            */
+
+	  			});
+       </script>
+</jsp:root>

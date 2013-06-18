@@ -61,6 +61,9 @@
 	  	   $('#${id}_dialog_error').hide();
 	  	   $( ".button" ).button();
 	  	   
+	  	   $( "#${id}_agency" ).select2();
+	  	   $( "#${id}_type" ).select2();
+	  	
 		  	 $( "#${id}_new" ).click(function() {
 		  		   $( "#${id}_new_popup" ).dialog( "open" );
 	  		  });

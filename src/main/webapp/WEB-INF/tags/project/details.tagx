@@ -84,7 +84,7 @@
                                 <label for="${field}">Agency</label>
                             </dt>
                             <dd>
-                                <select id="${id}_agency" style="width:50%" class="select2">
+                                <select id="${id}_agency" style="width:50%">
                                     <option value="AgencyA">Agency A</option>
                                     <option value="AgencyB">Agency B</option>
                                     <option value="AgencyC">Agency C</option>
@@ -109,9 +109,9 @@
 	  	  <spring:url value="/" var="root_url"></spring:url>
 	  	  <script>
 	  	   
-	  	   $('#${id}_dialog_error').hide();
+	  	   $('#${id}_dialog_error').hide(); 
 	  	   $( ".button" ).button();
-	  	   $( ".select2" ).select2();
+	  	   $( "#${id}_agency" ).select2();
 	  	   
 		  	 $( "#${id}_update" ).click(function() {
 		  		   $( "#${id}_update_popup" ).dialog( "open" );

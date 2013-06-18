@@ -82,16 +82,33 @@
                 </c:if>
                 
                 <menu:item id="i_user_profile" url="/members/myprofile"/>
-                
+                 
                 <!-- only archivist can see this -->
                 <sc:authorize ifAllGranted="ROLE_ARCHIVIST">
                     <menu:item id="i_controller__adminindex_id" messageCode="global_generic" url="/admin/index" z="Vqqut04Ar2YjWWvud7/zWavBC+8="/>
-                    <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+				        				          
+                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                    <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}members?page=1&amp;size=${empty param.size ? 10 : param.size}">
 	                  	  <span><img src="${corner}" />Dashboard Users</span>
 	                    </a> 
-                    </li>
-				             <menu:item render="false" id="i_member_list" url="/members?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+                   </li>
+                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}admin/index">
+	                  	<span><img src="${corner_blank}" />User Management</span>
+	                  </a>  
+                  </li>
+                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}admin/templates">
+	                  	<span><img src="${corner_blank}" />Document Tamplate</span>
+	                  </a> 
+                  </li>
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}admin/tasks">
+	                  	<span><img src="${corner_blank}" />Tasks</span>
+	                  </a> 
+                  </li> 
+                  
+				            <menu:item render="false" id="i_member_list" url="/members?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 </sc:authorize>
             </menu:category>
         </sc:authorize>

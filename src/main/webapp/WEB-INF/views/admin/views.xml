@@ -4,4 +4,10 @@
     <definition extends="default" name="admin/index">
         <put-attribute name="body" value="/WEB-INF/views/admin/index.jspx"/>
     </definition>
+    <definition extends="default" name="admin/task_management">
+        <put-attribute name="body" value="/WEB-INF/views/admin/task_management.jspx"/>
+    </definition>
+    <definition extends="default" name="admin/project_templates">
+        <put-attribute name="body" value="/WEB-INF/views/admin/project_templates.jspx"/>
+    </definition>
 </tiles-definitions>

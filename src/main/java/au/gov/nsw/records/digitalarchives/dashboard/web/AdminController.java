@@ -41,6 +41,7 @@ public class AdminController {
       uiModel.addAttribute("user_appr_size", sizeNo);
       uiModel.addAttribute("user_appr", person_result);
       
+      /*
       List<Task> tasks = Task.findTasksByStatusNot(TaskStatusType.Completed).getResultList();
     	List<Task> task_result = new ArrayList<Task>(tasks.subList(Math.max((task_page-1)*sizeNo, 0), Math.min(task_page*sizeNo, tasks.size())));
     	nrOfPages = (float) tasks.size() / sizeNo;
@@ -51,7 +52,31 @@ public class AdminController {
       
       uiModel.addAttribute("all_members", Person.findPeopleByApprovedNot(false).getResultList());
   		uiModel.addAttribute("all_projects",Project.findAllProjects());
-  		
+  		*/
       return "admin/index";
+    }
+    
+    @RequestMapping(value="/tasks")
+    public String tasks(@RequestParam(value = "task_page", required = false, defaultValue="1") Integer task_page,
+    		@RequestParam(value = "user_appr_page", required = false, defaultValue="1") Integer user_appr_page, @RequestParam(value = "user_appr_size", required = false, defaultValue="30") Integer user_appr_size, Model uiModel) {
+    	
+      List<Task> tasks = Task.findTasksByStatusNot(TaskStatusType.Completed).getResultList();
+    	List<Task> task_result = new ArrayList<Task>(tasks.subList(Math.max((task_page-1)*sizeNo, 0), Math.min(task_page*sizeNo, tasks.size())));
+    	float nrOfPages = (float) tasks.size() / sizeNo;
+      uiModel.addAttribute("tasks_maxpage", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+      uiModel.addAttribute("tasks_page", task_page);
+      uiModel.addAttribute("tasks_size", sizeNo);
+      uiModel.addAttribute("tasks", task_result);
+      
+      uiModel.addAttribute("all_members", Person.findPeopleByApprovedNot(false).getResultList());
+  		uiModel.addAttribute("all_projects",Project.findAllProjects());
+  		
+      return "admin/task_management";
+    }
+    
+    @RequestMapping(value = "/templates")
+    public String projectTemplates( Model uiModel) {
+    	
+      return "admin/project_templates";
     }
 }

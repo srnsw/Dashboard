@@ -13,9 +13,6 @@
     
     <h4>User management</h4> <hr/>
     	
-    	<h6>Registration Request</h6>
-
-
     	<dashboard:users_table object="${user_appr}" title="Registration Request" pageParam="user_appr_page" approve_user="true" id="_registration_request_users" page="${user_appr_page}" size="${user_appr_size}" maxpage="${user_appr_maxpage}"/>
     	<br/>
 
@@ -25,15 +22,5 @@
 			<dashboard:users_table object="${user_update_req}" title="Update My Profile Request" approve_user="true" id="_registration_request_users" page="${user_update_req_page}" size="${user_update_req_size}" maxpage="${user_update_req_maxpage}"/>
   		<br/>
   		
-		 <h4>Task management</h4> <hr/>
-		 
-		 	<dashboard:tasks_table members="${all_members}" projects="${all_projects}" object="${tasks}" title="Tasks" pageParam="task_page" id="_registration_request_users" page="${tasks_page}" size="${tasks_size}" maxpage="${tasks_maxpage}"/>
-    	
-			  	  
-	   <h4>Project Templates</h4> <hr/>
-	    
-	     <p><a href="${root_url}pages/projectplan"> Project Plan Template <img src="${image_url}table_edit.png" /></a> <a href="${root_url}pages/1"><img src="${image_url}view.png" /></a><br/></p> 
-	     <p><a href="${root_url}pages/migrationplan"> Migration Plan Template  <img src="${image_url}table_edit.png" /></a> <a href="${root_url}pages/2"><img src="${image_url}view.png" /></a> <br/></p>
-    
   </util:panel>
 </div>

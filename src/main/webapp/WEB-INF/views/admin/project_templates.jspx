@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:dashboard="urn:jsptagdir:/WEB-INF/tags/dashboard" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <jsp:output omit-xml-declaration="yes"/>
+  <spring:message code="label_admin_index" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+   
+   <spring:url value="/" var="root_url"></spring:url>
+   <spring:url value="/resources/images/" var="image_url"></spring:url>
+    
+    <h2>Administrative area </h2>
+    <br/>
+			  	  
+	   <h4>Project Templates</h4> <hr/>
+	    
+	     <p><a href="${root_url}pages/projectplan"> Project Plan Template <img src="${image_url}table_edit.png" /></a> <a href="${root_url}pages/1"><img src="${image_url}view.png" /></a><br/></p> 
+	     <p><a href="${root_url}pages/migrationplan"> Migration Plan Template  <img src="${image_url}table_edit.png" /></a> <a href="${root_url}pages/2"><img src="${image_url}view.png" /></a> <br/></p>
+    
+  </util:panel>
+</div>

@@ -243,6 +243,9 @@
 	  	  <script>
 	  			$(function() {
 	  				      
+	  				      /*hide the button*/
+	  				      $('#${id}_new_task').hide();
+	  				 
 	  				      $( "#${id}_assign_to" ).select2();
 	  				      $( "#${id}_project" ).select2();
 	  				    

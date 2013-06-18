@@ -142,6 +142,12 @@ public class ProjectController {
 		return "projects/pathwayassessment";
 	}
 	
+	@RequestMapping(value = "/{id}/access", method =  RequestMethod.GET)
+	public String access(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/access";
+	}
+	
 	@RequestMapping(value = "/{id}/system_assessment", method =  RequestMethod.GET)
 	public String systemAssessment(@PathVariable("id") Long id, Model uiModel)  {
 		uiModel.addAttribute("project", Project.findProject(id));

@@ -81,7 +81,7 @@
                 </c:if>
             </p> 
             
-            <project:stakeholder_table object="${stakeholders}" title="Project Stakeholders" id="stakeholder" />
+            <project:stakeholder_table object="${stakeholders}" title="Project Users" id="stakeholder" />
             <br/>
             
         </div>

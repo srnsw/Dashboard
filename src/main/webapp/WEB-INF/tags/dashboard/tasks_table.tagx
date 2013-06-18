@@ -12,6 +12,8 @@
   <jsp:directive.attribute name="size" type="java.lang.String" required="false" rtexprvalue="true" description="Pagination size" />
   <jsp:directive.attribute name="maxpage" type="java.lang.String" required="false" rtexprvalue="true" description="Maximum page" />
   
+  <spring:url value="/" var="root_url"></spring:url>
+  
 	<div class="jtable-main-container">
 					<div class="jtable-title">
 					  <div class="jtable-title-text">${title}</div>
@@ -32,7 +34,7 @@
 								</th>
 								<th class="jtable-column-header" style="width: 10%;">
 								   <div class="jtable-column-header-container">
-									 <span class="jtable-column-header-text">Project Id</span>
+									 <span class="jtable-column-header-text">Project</span>
 									 <div class="jtable-column-resize-handler"></div>
 								   </div>
 								</th>
@@ -89,7 +91,7 @@
 						      <td class="">${task.id}</td>
 									 <td class="">${task.description}</td>
 									 <td class=""> 
-									   <a href="${root_url}projects/${task.project.id}">${task.project.id}</a>
+									   <a href="${root_url}projects/${task.project.id}">${task.project.name}</a>
 									 </td>
 									 <td class="">
 									   <a href="${root_url}members/${task.assignedTo.id}"> ${task.assignedTo.name} ${task.assignedTo.lastName} </a>
@@ -149,6 +151,7 @@
                                 <textarea id="${id}_details" rows="3" cols=""> <!--  --></textarea>
                             </dd>
                         </dl>
+                        <!-- 
                          <dl>
                             <dt>
                                 <label for="${field}">Project</label>
@@ -161,7 +164,7 @@
 									              </select>
                             </dd>
                         </dl>
-                        <!-- 
+                        
                         <dl>
                             <dt>
                                 <label for="${field}">Status</label>
@@ -237,7 +240,6 @@
             </div>
 	  	  <br/>
 	  	  
-	  	  <spring:url value="/" var="root_url"></spring:url>
 	  	  <script>
 	  			$(function() {
 	  				      

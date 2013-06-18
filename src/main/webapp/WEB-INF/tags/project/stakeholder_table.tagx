@@ -116,7 +116,7 @@
    	  	        	
    	  	        	$.ajax({
    	  	              type: "POST",
-   	  	              url: "${root_url}projects/" + project + "/status/",
+   	  	              url: "${root_url}projects/" + ${project.id} + "/status/",
    	  	              data: dataString,
    	  	              success: function(data) {
    	  	            		$( '#${id}_task_create_popup' ).dialog( "close" );     

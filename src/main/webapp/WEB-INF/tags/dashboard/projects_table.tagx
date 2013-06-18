@@ -23,7 +23,7 @@
 							<span class="jtable-column-header-text">id</span>
 						  </div>
 						</th>
-						<th class="jtable-column-header" style="width: 40%;">
+						<th class="jtable-column-header" style="width: 35%;">
 						   <div class="jtable-column-header-container">
 							 <span class="jtable-column-header-text">Project Name</span>
 							 <div class="jtable-column-resize-handler"></div>
@@ -34,7 +34,12 @@
 							<span class="jtable-column-header-text">Agency</span>
 						  </div>
 						</th>
-						<th class="jtable-column-header" style="width:15%;">
+						<th class="jtable-column-header" style="width:10%;">
+						  <div class="jtable-column-header-container">
+							<span class="jtable-column-header-text">Type</span>
+						  </div>
+						</th>
+						<th class="jtable-column-header" style="width:10%;">
 						  <div class="jtable-column-header-container">
 							<span class="jtable-column-header-text">Status</span>
 						  </div>
@@ -60,11 +65,12 @@
 					    	 	 <c:set value="" var="trclass"></c:set>
 					    		 <c:set value="true" var="iseven" />
 					    	 </c:otherwise>
-					    </c:choose>
+					    </c:choose> 
 						  <tr class="${trclass}">
 						     <td class="">${project.id}</td>
 							   <td class=""><a href="${root_url}projects/${project.id}">${project.name}</a></td>
 								 <td class=""><a href="http://search.records.nsw.gov.au/agencies/${project.agencyNumber}">${project.agencyName}</a></td>
+								 <td class="">${project.projectType}</td>
 								 <td class="">${project.statusText}</td>
 								 <td class=""><fmt:formatDate pattern="dd MMMM yyyy" value="${project.lastUpdateDate}" /></td>
 						  </tr>

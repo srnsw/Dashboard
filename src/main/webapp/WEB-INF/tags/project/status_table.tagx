@@ -60,7 +60,7 @@
                         <tr>
                             <th class="jtable-column-header" style="width: 20%;">
                                 <div class="jtable-column-header-container">
-                                    <span class="jtable-column-header-text">Current status</span>
+                                    <span class="jtable-column-header-text">status</span>
                                 </div>
                             </th>
                             <th class="jtable-column-header" style="width: 20%;">
@@ -108,7 +108,7 @@
                                 <label for="${field}">Status</label>
                             </dt>
                             <dd>
-                                <select class="status_dropdwn" style="width:50%">
+                                <select id="${id}_status_drpdwn" class="status_dropdwn" style="width:50%">
                                     <option value="1">Startup</option>
                                     <option value="2">Assessment</option>
                                     <option value="3">Migration Plan</option>
@@ -125,7 +125,7 @@
                                 <label for="${field}">Comments</label>
                             </dt>
                             <dd>
-                                <textarea col="50" id="id_dialog_${field}" style="height:5em" name="${field}">
+                                <textarea col="50" id="${id}_comment" style="height:5em" name="${field}">
                                     <!--  -->
                                 </textarea>
                             </dd>
@@ -144,31 +144,30 @@
 	  						 
 	  						$( "#proceed" ).hide();
 	  						
-	  						$( ".status_dropdwn" ).select2();
+	  						
+	  						$( "#${id}_status_drpdwn" ).select2();
 	  						
 	  						$( "#${id}_update_popup" ).dialog({
 	  		    	  	      autoOpen: false,
-	  		    	  	      height: 300,
-	  		    	  	      width: 400,
+	  		    	  	      height: 360,
+	  		    	  	      width: 440,
 	  		    	  	      modal: true, 
 	  		    	  	      buttons: {
-	  		    	  	        "OK": function() {
+	  		    	  	        "OK": function() { 
 	  		    	  	        	
-	  		    	  	        	var description = $("#${id}_details").val(); 
-	  		    	  	        	var due = $("#${id}_due").val();
-	  		    	  	        	var assignedTo = $("#${id}_assign_to").val();
-	  		    	  	        	var project = $("#${id}_project").val();
+	  		    	  	        	var status = $("#${id}_status_drpdwn").val(); 
+	  		    	  	        	var comment = $("#${id}_comment").val();
 	  		    	  	        	
-	  		    	  	        	var dataString = 'description='+ description + '&amp;due=' + due + '&amp;assignedTo=' + assignedTo ;
+	  		    	  	        	var dataString = 'status='+ status + '&amp;comment=' + comment  ;
 	  		    	  	        	
 	  		    	  	        	$('#${id}_dialog_error').hide();
 	  		    	  	        	
 	  		    	  	        	$.ajax({
 	  		    	  	              type: "POST",
-	  		    	  	              url: "${root_url}projects/" + project + "/status/",
+	  		    	  	              url: "${root_url}projects/" + ${latestStatus.project.id} + "/status/",
 	  		    	  	              data: dataString,
 	  		    	  	              success: function(data) {
-	  		    	  	            		$( '#${id}_task_create_popup' ).dialog( "close" );     
+	  		    	  	            		$( '#${id}_update_popup' ).dialog( "close" );     
 	  		    	  	              },
 	  		    	  	              error: function() {
 	  		    	  	            		$('#${id}_dialog_error').show();
@@ -198,29 +197,6 @@
 		    	  	      width: 600,
 		    	  	      modal: true,
 		    	  	      buttons: {
-		    	  	        "OK": function() {
-		    	  	        	
-		    	  	        	var description = $("#${id}_details").val(); 
-		    	  	        	var due = $("#${id}_due").val();
-		    	  	        	var assignedTo = $("#${id}_assign_to").val();
-		    	  	        	var project = $("#${id}_project").val();
-		    	  	        	
-		    	  	        	var dataString = 'description='+ description + '&amp;due=' + due + '&amp;assignedTo=' + assignedTo ;
-		    	  	        	
-		    	  	        	$('#${id}_dialog_error').hide();
-		    	  	        	
-		    	  	        	$.ajax({
-		    	  	              type: "POST",
-		    	  	              url: "${root_url}projects/" + project + "/status/",
-		    	  	              data: dataString,
-		    	  	              success: function(data) {
-		    	  	            		$( '#${id}_task_create_popup' ).dialog( "close" );     
-		    	  	              },
-		    	  	              error: function() {
-		    	  	            		$('#${id}_dialog_error').show();
-	    	  	              	}
-		    	  	            });
-		    	  	        },
 		    	  	      	cancel: function() {
 		    	  	        	 $( this ).dialog( "close" );
 		    	  	        },

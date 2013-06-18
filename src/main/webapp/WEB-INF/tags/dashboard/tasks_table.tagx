@@ -134,7 +134,7 @@
                                 <label for="${field}">Assign to</label>
                             </dt>
                             <dd>
-                                <select style="width:40%" id="${id}_assign_to" class="select2" name="options" width="200">
+                                <select style="width:40%" id="${id}_assign_to" name="options" width="200">
 									                <c:forEach items="${members}" var="memb">
 										                <option value="${memb.id}">${memb.name} ${memb.lastName}</option>
 									                </c:forEach>
@@ -154,7 +154,7 @@
                                 <label for="${field}">Project</label>
                             </dt>
                             <dd >
-                                <select style="width:40%" id="${id}_project" class="select2" name="options">
+                                <select style="width:40%" id="${id}_project" name="options">
                                   <c:forEach items="${projects}" var="proj">
 										                <option value="${proj.id}">${proj.name}</option>
 									                </c:forEach>
@@ -196,7 +196,7 @@
                                 <label for="${field}">Assign to</label>
                             </dt>
                             <dd>
-                                <select style="width:40%" id="${id}_assign_to" class="select2" name="options" width="200">
+                                <select style="width:40%" id="${id}_assign_to" name="options" width="200">
 									                <c:forEach items="${members}" var="memb">
 										                <option value="${memb.id}">${memb.name} ${memb.lastName}</option>
 									                </c:forEach>
@@ -241,10 +241,11 @@
 	  	  <script>
 	  			$(function() {
 	  				      
-	  				      $( ".select2" ).select2();
-	  				      
+	  				      $( "#${id}_assign_to" ).select2();
+	  				      $( "#${id}_project" ).select2();
+	  				    
                 	$( "#${id}_new_task" ).button();
-                
+                  
 	                $( "#${id}_new_task" ).click(function() {
 	    	  		    	 $( "#${id}_task_create_popup" ).dialog( "open" );
 			    	  		   return 1;
@@ -324,7 +325,7 @@
 			    	  	            		$('#${id}_dialog_error').show();
 		    	  	              	}
 			    	  	            });
-			    	  	        },
+			    	  	        }, 
 			    	  	      	cancel: function() {
 			    	  	        	 $( this ).dialog( "close" );
 			    	  	        },
@@ -334,5 +335,9 @@
 			    	  	      }
 			    	  	    });
 	  			});
+	  			
+	  			function popUpClosed() {
+	  			    window.location.reload();
+	  			}
        </script>
 </jsp:root>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:project="urn:jsptagdir:/WEB-INF/tags/project" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:dashboard="urn:jsptagdir:/WEB-INF/tags/dashboard" xmlns:project="urn:jsptagdir:/WEB-INF/tags/project" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show create="false" delete="false" id="ps_au_gov_nsw_records_digitalarchives_dashboard_model_Project" list="false" object="${project}" path="/projects" render="false" z="user-managed">
@@ -21,6 +21,9 @@
         <field:display field="description" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_description" object="${project}" z="1GuEt5d8pSmt4aAWut2N66xfksY="/>
         <field:display field="records" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_records" object="${project}" z="F9RICmqryO9J2aZEqWJAfOrNp5Q="/>
     </page:show>
+    
+    <spring:url value="/" var="root_url"/>
+    
     <span class="alignright">
         
             <spring:url value="/resources/images/help-browser.png" var="help"/>
@@ -33,7 +36,7 @@
    
      <project:new_button title="New Project" id="new_proj" /> 
      <span class="button">Upload Files</span> 
-     <span class="button">Assign Task</span> 
+     <span id="assign_task_btn" class="button">Assign Task</span> 
      <span class="button">Export Project</span>
      
      <br/>
@@ -41,6 +44,10 @@
     <script>
 	    $(function() {
 	    	$('.button').button();
+    	  $( "#assign_task_btn" ).click(function() {
+ 		    	 $( "#task_task_create_popup" ).dialog( "open" );
+   	  		   return 1;
+   	  	});
 	    });
     </script>
     
@@ -67,12 +74,15 @@
             <br/>
             
             <p>
-                <a class="button" href="">Project Plan</a> <a class="button" href="">Migration Plan</a> <a class="button" href="">View files</a>
+                <a class="button" href="${root_url}projects/${project.id}/project_plan">Project Plan</a> 
+                <c:set var="physical" value="Physical" />
+                <c:if test="${project.projectType ne physical}" >
+                	<a class="button" href="${root_url}projects/${project.id}/migration_plan">Migration Plan</a> <a class="button" href="${root_url}projects/${project.id}/files">View files</a>
+                </c:if>
             </p> 
             
             <project:stakeholder_table object="${stakeholders}" title="Project Stakeholders" id="stakeholder" />
             <br/>
-            
             
         </div>
         <div id="update_tabs-1">
@@ -627,154 +637,12 @@
             
         </div>
         <div id="update_tabs-2">
-            <spring:url value="/resources/images/error.png" var="err_img" />
-	     	    <spring:url value="/resources/images/exclamation.png" var="excla_img" />
-	     	 
-			  	  <div class="jtable-main-container">
-							<div class="jtable-title">
-							  <div class="jtable-title-text">Tasks</div>
-							</div>
-							<table class="jtable" >
-							 <thead>
-							   <tr>
-								<th class="jtable-column-header" style="width: 22%;">
-								   <div class="jtable-column-header-container">
-									 <span class="jtable-column-header-text">Task Details</span>
-									 <div class="jtable-column-resize-handler"></div>
-								   </div>
-								</th>
-								<th class="jtable-column-header" style="width:10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Assigned To</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Created</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:10%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Created By</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:15%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Due</span>
-								  </div>
-								</th>
-								<th class="jtable-column-header" style="width:5%;">
-								  <div class="jtable-column-header-container">
-									<span class="jtable-column-header-text">Alerts</span>
-								  </div>
-								</th>
-								
-								<th class="jtable-command-column-header" style="width: 1%;"></th>
-								</tr>
-							 </thead>
-							 <tbody>
-							  <tr class="">
-									 <td class="">Contact State Rocket NSW for ...</td>
-									 <td class="">Richard Lehane</td>
-									 <td class="">14 April 2013</td>
-									 <td class="">Ken Zhai</td>
-									 <td class="">24 April 2013</td>
-									 <td class="">Overdue <!-- <img src="${excla_img}" style="border:0"/> --></td>
-									 <td class="jtable-command-column"><button id="task_1_view_btn" class="jtable-command-button jtable-view-command-button" title="View Task"><span>Edit Record</span></button></td>
-							  </tr>
-							 </tbody>
-							</table>
-							<div class="jtable-bottom-panel">
-							   <!-- <span class="alignright"><a href="#" id="new_task_btn" class="button">View all your tasks</a></span>  -->
-							</div>
-						</div> 
-						
-			  	  <br/>
+        	  <dashboard:tasks_table id="task" object="${tasks}" projects="${all_projects}" members="${members}" title="Tasks"/>
         </div>
         <div id="update_tabs-4">
-            <div class="jtable-main-container">
-                <div class="jtable-title">
-                    <div class="jtable-title-text">Event Logs</div>
-                </div>
-                <table class="jtable">
-                    <thead>
-                        <tr>
-                            <th class="jtable-column-header" style="width: 20%;">
-                                <div class="jtable-column-header-container">
-                                    <span class="jtable-column-header-text">User</span>
-                                </div>
-                            </th>
-                            <th class="jtable-column-header" style="width: 60%;">
-                                <div class="jtable-column-header-container">
-                                    <span class="jtable-column-header-text">Event</span>
-                                    <div class="jtable-column-resize-handler"/>
-                                </div>
-                            </th>
-                            <th class="jtable-column-header" style="width:20%;">
-                                <div class="jtable-column-header-container">
-                                    <span class="jtable-column-header-text">Timestamp</span>
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="">
-                            <td class="">
-                                <a href="#">Richard Lehane</a>
-                            </td>
-                            <td class="">Changed project status to Approved</td>
-                            <td class="">10:35:05 13/2/2013</td>
-                        </tr>
-                        <tr class="jtable-row-even">
-                            <td class="">
-                                <a href="#">Ken Zhai</a>
-                            </td>
-                            <td class="">Updated Delivery Options</td>
-                            <td class="">12:34:55 9/2/2013</td>
-                        </tr>
-                        <tr>
-                            <td class="">
-                                <a href="#">Cassie Findlay</a>
-                            </td>
-                            <td class="">Created the project</td>
-                            <td class="">9:24:15 25/1/2013</td>
-                        </tr>
-                        <tr>
-                            <td class="">
-                                <a href="#">Cassie Findlay</a>
-                            </td>
-                            <td class="">Created the project</td>
-                            <td class="">9:24:15 25/1/2013</td>
-                        </tr>
-                        <tr>
-                            <td class="">
-                                <a href="#">System</a>
-                            </td>
-                            <td class="">Sent project approval notifications to email@somewhere.gov.au, email@jedi.gov.au</td>
-                            <td class="">9:24:15 25/1/2013</td>
-                        </tr>
-                        <tr>
-                            <td class="">
-                                <a href="#">Cassie Findlay</a>
-                            </td>
-                            <td class="">Created the project</td>
-                            <td class="">9:24:15 25/1/2013</td>
-                        </tr>
-                        <tr>
-                            <td class="">
-                                <a href="#">Cassie Findlay</a>
-                            </td>
-                            <td class="">Created the project</td>
-                            <td class="">9:24:15 25/1/2013</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="jtable-bottom-panel">
-                    <span class="alignright"> Page 1 of 4 <a href="#">&gt;&gt;</a>
-                    </span>
-                </div>
-            </div>
-            <br/>
+        
+           <dashboard:events_table object="${events}" title="Event Logs" id="event_logs" />
+            
         </div>
     </div>
     <div class="dawidget" id="file_upload_popup" title="Upload file">
@@ -795,7 +663,7 @@
             </fieldset>
         </form>
     </div>
-    <spring:url value="/" var="root_url"/>
+    
     <script>
 	    $(function() {
 	    	$('.dk').select2({

@@ -4,16 +4,26 @@
 package au.gov.nsw.records.digitalarchives.dashboard.model;
 
 import au.gov.nsw.records.digitalarchives.dashboard.model.EventHistory;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import java.util.Date;
 
 privileged aspect EventHistory_Roo_JavaBean {
     
-    public String EventHistory.getUser() {
+    public Person EventHistory.getUser() {
         return this.user;
     }
     
-    public void EventHistory.setUser(String user) {
+    public void EventHistory.setUser(Person user) {
         this.user = user;
+    }
+    
+    public Project EventHistory.getProject() {
+        return this.project;
+    }
+    
+    public void EventHistory.setProject(Project project) {
+        this.project = project;
     }
     
     public String EventHistory.getEvent() {
@@ -24,12 +34,12 @@ privileged aspect EventHistory_Roo_JavaBean {
         this.event = event;
     }
     
-    public Date EventHistory.getTimestamp() {
-        return this.timestamp;
+    public Date EventHistory.getCreationDate() {
+        return this.creationDate;
     }
     
-    public void EventHistory.setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void EventHistory.setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
     
 }

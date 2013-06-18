@@ -25,12 +25,9 @@
              <spring:url value="/resources/images/corner_blank.png" var="corner_blank" />
              <spring:url value="/resources/images/corner.png" var="corner" />
                   
-            <menu:category id="c_workspace" url="/workspace" z="user-managed">
+             <menu:category id="c_workspace" url="/workspace" z="user-managed">
                 <!-- only agency can see this -->
-                <sc:authorize ifAllGranted="ROLE_AGENCY">
-                    <menu:item id="i_request_migration" url="/projectrequests?form"/>
-                </sc:authorize>
-                <menu:item id="i_migration_project" url="/projects?page=1&amp;size=${empty param.size ? 10 : param.size}"/>
+                <menu:item id="i_migration_project" url="/projects?page=1&amp;size=15"/> 
                 <c:if test="${not empty project}">
                    <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}">

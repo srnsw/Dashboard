@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import au.gov.nsw.records.digitalarchives.dashboard.model.EventHistory;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
@@ -68,6 +69,7 @@ public class ProjectController {
 		
 		Person person = Person.findPerson(Long.valueOf(assignedTo)); 
 		
+		// create task
 		Task task = new Task();
 		task.setProject(project);
 		task.setCreated(new Date());
@@ -77,7 +79,17 @@ public class ProjectController {
 		task.setDue(due);
 		task.setAssignedTo(person);
 		task.persist();
+		
+		project.getTask().add(task);
 		project.persist();
+		
+		// add event history
+		EventHistory event = new EventHistory();
+		event.setEvent(String.format("Created task #%d", task.getId()));
+		event.setProject(project);
+		event.setUser(UserService.getLoggedinUser());
+		event.persist();
+		
 		//uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
 		//uiModel.addAttribute("project", Project.findProject(id));
 		return "ok";
@@ -188,12 +200,55 @@ public class ProjectController {
 			project.setProjectType(ProjectType.Hybrid);
 		}
 		
+		// log event
+		EventHistory event = new EventHistory();
+		event.setProject(project);
+		event.setUser(UserService.getLoggedinUser());
+		event.setEvent("Updated project details #" + project.getId());
+		event.persist();
+		
 		project.persist();
 		
-		return "ok";
+		return "{\"status\": \"ok\"}";
 	}
 	
-
+	@RequestMapping(value = "/{id}/status", method =  RequestMethod.POST)
+	@ResponseBody
+	public String updateStatus(@PathVariable("id") Long id, Model uiModel,
+			 @RequestParam String comment,
+			 @RequestParam String status)  {
+		try{
+			logger.info(String.format("Updating project status [%d] %s %s", id, status, comment));
+			
+			Project project = Project.findProject(id);
+			
+			// default status population
+			Status prjStatus = new Status();
+			prjStatus.setProjectStatusType(StatusType.fromInt(Integer.valueOf(status)));
+			prjStatus.setLastUpdateDate(new Date());
+			prjStatus.setProject(project);
+			prjStatus.setComment(comment);
+			prjStatus.persist();
+	    
+	    // twoway population
+	    project.getStatus().add(prjStatus);
+			
+			// log event
+			EventHistory event = new EventHistory();
+			event.setProject(project);
+			event.setUser(UserService.getLoggedinUser());
+			event.setEvent("Updated project status #" + project.getId() + " to " + prjStatus.getProjectStatusType().toString());
+			event.persist();
+			
+			project.setLastUpdateDate(new Date());
+			project.persist();
+		
+			return "{\"status\": \"ok\"}";
+		}catch (Exception e){
+			e.printStackTrace();
+			return "{\"status\": \"error\"}";
+		}
+	}
 	@RequestMapping(method =  RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String create(Model uiModel,
@@ -250,6 +305,13 @@ public class ProjectController {
     // save project
     project.persist();
     
+    // add event history
+ 		EventHistory event = new EventHistory();
+ 		event.setEvent(String.format("Created project #" + project.getId()));
+ 		event.setProject(project);
+ 		event.setUser(UserService.getLoggedinUser());
+ 		event.persist();
+ 		
     logger.info(String.format("Created project [%d]", project.getId()));
     
     //TODO generate UUID for this project
@@ -257,49 +319,6 @@ public class ProjectController {
     return String.format("{\"id\": \"%d\", \"status\": \"ok\" }", project.getId());
 	}
 	
-	  @RequestMapping(params = "form", produces = "text/html")
-    public String createForm(Model uiModel, HttpServletRequest httpServletRequest) {
-				
-				/*Project project = new Project();
-				
-				// migration plan population
-				Page migrationPlanTemplate = Page.findPage(MIGRATIONPLAN_TEMPLATE);
-				Page migrationPlan = new Page();
-				migrationPlan.setContent(migrationPlanTemplate.getContent());
-				migrationPlan.setTitle(migrationPlanTemplate.getTitle());
-				migrationPlan.persist();
-				project.setMigrationPlan(migrationPlan);
-
-				// project plan population
-				Page projectPlanTemplate = Page.findPage(PROJECTPLAN_TEMPLATE);
-				Page projectPlan = new Page();
-				projectPlan.setContent(projectPlanTemplate.getContent());
-				projectPlan.setTitle(projectPlanTemplate.getTitle());
-				projectPlan.persist();
-				project.setProjectPlan(projectPlan);
-
-				// save project
-				project.persist();
-				
-				// default status population
-				Status status = new Status();
-				status.setProjectStatusType(StatusType.Startup);
-				status.setLastUpdateDate(new Date());
-				status.setProject(project);
-        status.persist();
-        
-        // twoway population
-        project.getStatus().add(status);
-        project.setName("[new project]");
-        project.persist();
-        
-        //TODO generate UUID for this project
-        //TODO create folder structure for the new project in the backend
-              
-        populateEditForm(uiModel, project);*/
-        return "redirect:/projects/1" ;//+ project.getId().toString(); // + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
-    }
-
 	@RequestMapping(produces = "text/html")
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
@@ -323,12 +342,15 @@ public class ProjectController {
         Project project = Project.findProject(id);
         uiModel.addAttribute("project", project);
         uiModel.addAttribute("itemId", id);
-        uiModel.addAttribute("status", new ArrayList<Status>(project.getStatus()));
+        uiModel.addAttribute("status", new ArrayList<Status>(Status.findStatusesByProject(project).getResultList()));
         uiModel.addAttribute("last_status", project.getLatestStatus());
         uiModel.addAttribute("stakeholders", new ArrayList<Stakeholder>(project.getStakeholders()));
         uiModel.addAttribute("stakeholder", new Stakeholder());
         uiModel.addAttribute("members", new ArrayList<Person>(Person.findPeopleByApprovedNot(false).getResultList()));
-       
+        uiModel.addAttribute("all_projects", new ArrayList<Project>(Project.findAllProjects()));
+        uiModel.addAttribute("tasks", new ArrayList<Task>(project.getTask()));
+        uiModel.addAttribute("events", new ArrayList<EventHistory>(EventHistory.findEventHistorysByProject(project).getResultList()));
+        
         return "projects/show";
     }
 }

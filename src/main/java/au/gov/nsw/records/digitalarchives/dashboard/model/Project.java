@@ -58,7 +58,7 @@ public class Project {
     
     public String getStatusText(){ 
     	if (status!=null && !status.isEmpty() && status.get(0)!=null){
-    		return status.get(0).getProjectStatusType().toString();
+    		return status.get(status.size()-1).getProjectStatusType().toString();
     	}
     	return "none";
     }
@@ -97,7 +97,7 @@ public class Project {
     private List<Upload> upload;
     
     @OneToMany
-    private List<Task> task;
+    private List<Task> task = new ArrayList<Task>();
     
     // link to another tables
     @ManyToOne

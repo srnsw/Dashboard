@@ -38,6 +38,12 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect ProjectController_Roo_Controller {
     
+    @RequestMapping(params = "form", produces = "text/html")
+    public String ProjectController.createForm(Model uiModel) {
+        populateEditForm(uiModel, new Project());
+        return "projects/create";
+    }
+    
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String ProjectController.update(@Valid Project project, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {

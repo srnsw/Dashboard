@@ -80,7 +80,7 @@
                 	<a class="button" href="${root_url}projects/${project.id}/migration_plan">Migration Plan</a> <a class="button" href="${root_url}projects/${project.id}/files">View files</a>
                 </c:if>
             </p> 
-            
+
             <project:stakeholder_table object="${stakeholders}" members="${members}" projectId="${project.id}" title="Project Users" id="stakeholder" />
             <br/>
             

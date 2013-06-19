@@ -95,6 +95,8 @@
            <dashboard:events_table object="${events}" title="Event Logs" id="event_logs" />
         </div>
     </div>
+    
+    <!-- 
     <div class="dawidget" id="file_upload_popup" title="Upload file">
         <form>
             <fieldset>
@@ -113,7 +115,7 @@
             </fieldset>
         </form>
     </div>
-    
+     -->
     <script>
 	    $(function() {
 	    	$('.dk').select2({

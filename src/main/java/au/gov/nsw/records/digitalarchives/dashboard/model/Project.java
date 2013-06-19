@@ -91,10 +91,10 @@ public class Project {
     private Page migrationPlan;
     
     @OneToMany
-    private List<Stakeholder> stakeholders;
+    private List<Person> stakeholders = new ArrayList<Person>();
     
     @OneToMany
-    private List<Upload> upload;
+    private List<Upload> upload = new ArrayList<Upload>();
     
     @OneToMany
     private List<Task> task = new ArrayList<Task>();

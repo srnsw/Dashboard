@@ -10,12 +10,12 @@ import au.gov.nsw.records.digitalarchives.dashboard.model.EventHistory;
 import au.gov.nsw.records.digitalarchives.dashboard.model.FileStorage;
 import au.gov.nsw.records.digitalarchives.dashboard.model.MigrationStrategyAssessment;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.model.ProjectType;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Record;
 import au.gov.nsw.records.digitalarchives.dashboard.model.RelationshipWithOtherRecords;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Requirement;
-import au.gov.nsw.records.digitalarchives.dashboard.model.Stakeholder;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.model.SystemAnalysis;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
@@ -153,11 +153,11 @@ privileged aspect Project_Roo_JavaBean {
         this.migrationPlan = migrationPlan;
     }
     
-    public List<Stakeholder> Project.getStakeholders() {
+    public List<Person> Project.getStakeholders() {
         return this.stakeholders;
     }
     
-    public void Project.setStakeholders(List<Stakeholder> stakeholders) {
+    public void Project.setStakeholders(List<Person> stakeholders) {
         this.stakeholders = stakeholders;
     }
     

@@ -31,4 +31,7 @@
 <definition extends="default" name="projects/migrationprocess">
     <put-attribute name="body" value="/WEB-INF/views/projects/migrationprocess.jspx"/>
 </definition>
+<definition extends="default" name="projects/access">
+    <put-attribute name="body" value="/WEB-INF/views/projects/access.jspx"/>
+</definition>
 </tiles-definitions>

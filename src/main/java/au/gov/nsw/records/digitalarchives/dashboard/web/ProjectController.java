@@ -27,7 +27,6 @@ import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.model.ProjectType;
-import au.gov.nsw.records.digitalarchives.dashboard.model.Stakeholder;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.model.StatusType;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
@@ -110,6 +109,18 @@ public class ProjectController {
 		return "pages/update";
 	}
 	
+	@RequestMapping(value = "/{id}/members", method =  RequestMethod.POST)
+	@ResponseBody
+	public String addMembers(@PathVariable("id") Long id, int member, Model uiModel)  {
+		
+		Project project = Project.findProject(id);
+		Person person = Person.findPerson(Long.valueOf(member)); 
+		project.getStakeholders().add(person);
+		project.persist();
+		
+		return "{\"status\": \"ok\"}";
+	}
+	
 	@RequestMapping(value = "/{id}/project_plan", method =  RequestMethod.GET)
 	public String projectPlan(@PathVariable("id") Long id, Model uiModel)  {
 		uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
@@ -140,6 +151,12 @@ public class ProjectController {
 	public String pathwayAssessment(@PathVariable("id") Long id, Model uiModel)  {
 		uiModel.addAttribute("project", Project.findProject(id));
 		return "projects/pathwayassessment";
+	}
+	
+	@RequestMapping(value = "/{id}/access", method =  RequestMethod.GET)
+	public String access(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/access";
 	}
 	
 	@RequestMapping(value = "/{id}/system_assessment", method =  RequestMethod.GET)
@@ -278,6 +295,8 @@ public class ProjectController {
 		project.setProjectPlan(projectPlan);
 
 		project.setAgencyName(agencyName);
+		// auto populate creator to be a stakeholder
+		project.getStakeholders().add(UserService.getLoggedinUser());
 		project.setSrnswFileReference(srnswFileReference);
 		project.setLastUpdateDate(new Date());
 		project.setCreationDate(new Date());
@@ -344,8 +363,7 @@ public class ProjectController {
         uiModel.addAttribute("itemId", id);
         uiModel.addAttribute("status", new ArrayList<Status>(Status.findStatusesByProject(project).getResultList()));
         uiModel.addAttribute("last_status", project.getLatestStatus());
-        uiModel.addAttribute("stakeholders", new ArrayList<Stakeholder>(project.getStakeholders()));
-        uiModel.addAttribute("stakeholder", new Stakeholder());
+        uiModel.addAttribute("stakeholders", new ArrayList<Person>(project.getStakeholders()));
         uiModel.addAttribute("members", new ArrayList<Person>(Person.findPeopleByApprovedNot(false).getResultList()));
         uiModel.addAttribute("all_projects", new ArrayList<Project>(Project.findAllProjects()));
         uiModel.addAttribute("tasks", new ArrayList<Task>(project.getTask()));

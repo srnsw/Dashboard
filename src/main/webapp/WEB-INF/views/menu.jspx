@@ -49,6 +49,11 @@
 	                  </a> 
                    </li>
                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/access">
+	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />Access</span>
+	                  </a> 
+                  </li>
+                  <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/files">
 	                  	<span><img src="${spacer}" style="width:8px"/><img src="${corner_blank}" />File Management</span>
 	                  </a> 

@@ -26,8 +26,7 @@
              <spring:url value="/resources/images/corner.png" var="corner" />
                   
              <menu:category id="c_workspace" url="/workspace" z="user-managed">
-                <!-- only agency can see this -->
-                <menu:item id="i_migration_project" url="/projects?page=1&amp;size=15"/> 
+                
                 <c:if test="${not empty project}">
                    <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}">
@@ -35,7 +34,7 @@
 	                  </a>
                   </li>
                   
-                  <c:set var="physical" value="Physical"><!--  --></c:set>
+                  <c:set var="physical" value="Physical" />
                   
                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}projects/${project.id}/project_plan">
@@ -91,10 +90,15 @@
                 <!-- only archivist can see this -->
                 <sc:authorize ifAllGranted="ROLE_ARCHIVIST">
                     <menu:item id="i_controller__adminindex_id" messageCode="global_generic" url="/admin/index" z="Vqqut04Ar2YjWWvud7/zWavBC+8="/>
-				        				          
+										
+									<li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
+	                    <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}/projects?page=1&amp;size=15">
+	                  	  <span><img src="${corner}" />View Projects</span>
+	                    </a> 
+                   </li> 
                    <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                    <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}members?page=1&amp;size=${empty param.size ? 10 : param.size}">
-	                  	  <span><img src="${corner}" />Dashboard Users</span>
+	                  	  <span><img src="${corner_blank}" />Dashboard Users</span>
 	                    </a> 
                    </li>
                    <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
@@ -109,7 +113,7 @@
                   </li>
                   <li class="navTreeItem visualNoMarker navTreeFolderish" id="i_migration_project">
 	                  <a title="" class="state-published navTreeFolderish contenttype-folder" href="${rooturl}admin/tasks">
-	                  	<span><img src="${corner_blank}" />Tasks</span>
+	                  	<span><img src="${corner_blank}" />Tasks Management</span>
 	                  </a> 
                   </li> 
                   

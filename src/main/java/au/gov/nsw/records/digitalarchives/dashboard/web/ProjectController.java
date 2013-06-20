@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import au.gov.nsw.records.digitalarchives.dashboard.bean.DashboardConfig;
 import au.gov.nsw.records.digitalarchives.dashboard.model.EventHistory;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
@@ -31,6 +37,7 @@ import au.gov.nsw.records.digitalarchives.dashboard.model.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.model.StatusType;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.model.TaskStatusType;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Upload;
 import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
 
 @RequestMapping("/projects")
@@ -42,71 +49,14 @@ public class ProjectController {
 	private static final long MIGRATIONPLAN_TEMPLATE = 2L;
 	
 	private static Logger logger = Logger.getLogger(ProjectController.class); 
+
+	@Autowired
+	private DashboardConfig config;
 	
-	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Project.findProject(id));
-        uiModel.addAttribute("stakeholders", Person.findAllPeople());
-        return "projects/update";
-    }
-	
-	@RequestMapping(value = "/{id}/files", method =  RequestMethod.GET)
-	public String filemanagement(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request, HttpServletResponse response)  {
+	@RequestMapping(value = "/{id}/access", method =  RequestMethod.GET)
+	public String access(@PathVariable("id") Long id, Model uiModel)  {
 		uiModel.addAttribute("project", Project.findProject(id));
-		return "projects/filelist";
-	}
-	
-	//TODO user role validation
-	@RequestMapping(value = "/{id}/tasks", method =  RequestMethod.POST)
-	@ResponseBody
-	public String createTask(@PathVariable("id") Long id, Model uiModel,
-			 @RequestParam String description,
-			 @RequestParam Date due,
-			 @RequestParam int assignedTo)  {
-		
-		Project project = Project.findProject(id);
-		
-		Person person = Person.findPerson(Long.valueOf(assignedTo)); 
-		
-		// create task
-		Task task = new Task();
-		task.setProject(project);
-		task.setCreated(new Date());
-		task.setCreatedBy(UserService.getLoggedinUser());
-		task.setDescription(description);
-		task.setStatus(TaskStatusType.Open);
-		task.setDue(due);
-		task.setAssignedTo(person);
-		task.persist();
-		
-		project.getTask().add(task);
-		project.persist();
-		
-		// add event history
-		EventHistory event = new EventHistory();
-		event.setEvent(String.format("Created task #%d", task.getId()));
-		event.setProject(project);
-		event.setUser(UserService.getLoggedinUser());
-		event.persist();
-		
-		//uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
-		//uiModel.addAttribute("project", Project.findProject(id));
-		return "ok";
-	}
-	
-	//TODO
-	@RequestMapping(value = "/{id}/tasks", method =  RequestMethod.GET)
-	public String getTask(@PathVariable("id") Long id, Model uiModel)  {
-//		Project project = Project.findProject(id);
-//		
-//		Task task = new Task();
-//		task.setProject(project);
-//		
-//		task.persist();
-//		
-//		uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
-//		uiModel.addAttribute("project", Project.findProject(id));
-		return "pages/update";
+		return "projects/access";
 	}
 	
 	@RequestMapping(value = "/{id}/members", method =  RequestMethod.POST)
@@ -121,151 +71,49 @@ public class ProjectController {
 		return "{\"status\": \"ok\"}";
 	}
 	
-	@RequestMapping(value = "/{id}/project_plan", method =  RequestMethod.GET)
-	public String projectPlan(@PathVariable("id") Long id, Model uiModel)  {
-		uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
-		uiModel.addAttribute("project", Project.findProject(id));
-		return "pages/update";
-	}
-	
-	@RequestMapping(value = "/{id}/migration_plan", method =  RequestMethod.GET)
-	public String migrationPlan(@PathVariable("id") Long id, Model uiModel)  {
-		uiModel.addAttribute("page", Project.findProject(id).getMigrationPlan());
-		uiModel.addAttribute("project", Project.findProject(id));
-		return "pages/update";
-	}
-	
-	@RequestMapping(value = "/{id}/format_assessment", method =  RequestMethod.GET)
-	public String fileAnalysis(@PathVariable("id") Long id, Model uiModel)  {
-		uiModel.addAttribute("project", Project.findProject(id));
-		return "projects/formatassessment";
-	}
-	
-	@RequestMapping(value = "/{id}/migration_process", method =  RequestMethod.GET)
-	public String migrationProcess(@PathVariable("id") Long id, Model uiModel)  {
-		uiModel.addAttribute("project", Project.findProject(id));
-		return "projects/migrationprocess";
-	}
-	
-	@RequestMapping(value = "/{id}/pathway_assessment", method =  RequestMethod.GET)
-	public String pathwayAssessment(@PathVariable("id") Long id, Model uiModel)  {
-		uiModel.addAttribute("project", Project.findProject(id));
-		return "projects/pathwayassessment";
-	}
-	
-	@RequestMapping(value = "/{id}/access", method =  RequestMethod.GET)
-	public String access(@PathVariable("id") Long id, Model uiModel)  {
-		uiModel.addAttribute("project", Project.findProject(id));
-		return "projects/access";
-	}
-	
-	@RequestMapping(value = "/{id}/system_assessment", method =  RequestMethod.GET)
-	public String systemAssessment(@PathVariable("id") Long id, Model uiModel)  {
-		uiModel.addAttribute("project", Project.findProject(id));
-		return "projects/systemassessment";
-	}
-	
-	@RequestMapping(value = "/{id}/metadata_assessment", method =  RequestMethod.GET)
-	public String metadataAssessment(@PathVariable("id") Long id, Model uiModel)  {
-		uiModel.addAttribute("project", Project.findProject(id));
-		return "projects/metadataassessment";
-	}
-	
-	@RequestMapping(value = "/{id}/files/{file_id}", method =  RequestMethod.GET)
-	public void download(@PathVariable("id") Long id, @PathVariable("file_id") Long file_id, HttpServletRequest request, HttpServletResponse response)  {
-		
-		File f = new File("c:\\nott\\ProjectPlan.docx");
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + f.getName() + "\"");
-		try {
-			if (f.exists()){
-				FileInputStream in = new FileInputStream(f);
-				OutputStream out = response.getOutputStream();
-				IOUtils.copy(in, out);	
-				response.flushBuffer();
-				out.close();
-				in.close();
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@RequestMapping(value = "/{id}/details", method =  RequestMethod.POST)
+	@RequestMapping(value = "/{id}/files", method =  RequestMethod.POST)
 	@ResponseBody
-	public String updateDetails(@PathVariable("id") Long id, Model uiModel,
-			 @RequestParam String name,
-			 @RequestParam String type,
-			 @RequestParam String agencyName,
-			 @RequestParam String srnswFileReference)  {
+	public String addFile(@PathVariable("id") Long id, Model uiModel, MultipartFile content, HttpServletRequest request)  {
 		
-		logger.info(String.format("Updating project [%d] %s %s %s %s", id, name, type, agencyName, srnswFileReference));
+	  if (!(request instanceof MultipartHttpServletRequest)) {
+      //error(resp, "Invalid request (multipart request expected)");
+      //lreturn null;
+  		System.out.println("not multipart request!!");
+  	}
+	  
+	  Project project = Project.findProject(id);
+		Upload upload = new Upload();
 		
-		Project project = Project.findProject(id);
+  	Map<String, MultipartFile> files = ((MultipartHttpServletRequest)request).getFileMap();
+  	try{
+	  	for (String f:files.keySet()){
+	  		MultipartFile mp = files.get(f);
+	  		System.out.println("file_name:" + mp.getOriginalFilename());
+	  		System.out.println("file_size:" + mp.getSize());
+	  		
+	  		String destinationFile = config.getInboxPath() + project.getId() + "/upload/" + upload.getUuid() + mp.getOriginalFilename();
+	  		
+	  		File destination = new File(destinationFile);
+	  		mp.transferTo(destination);
+
+	  	}
+	  	
+  	}catch(IOException e){
+  		e.printStackTrace();
+  	}
+  	
+//		String inbox = config.getInboxPath();
 		
-		project.setAgencyName(agencyName);
-		project.setSrnswFileReference(srnswFileReference);
-		project.setLastUpdateDate(new Date());
 		
-		project.setName(name);
-		if (type.equalsIgnoreCase("physical")){
-			project.setProjectType(ProjectType.Physical);
-		} else if (type.equalsIgnoreCase("digital")){
-			project.setProjectType(ProjectType.Digital);
-		} else if (type.equalsIgnoreCase("hybrid")){
-			project.setProjectType(ProjectType.Hybrid);
-		}
 		
-		// log event
-		EventHistory event = new EventHistory();
-		event.setProject(project);
-		event.setUser(UserService.getLoggedinUser());
-		event.setEvent("Updated project details #" + project.getId());
-		event.persist();
+		upload.persist();
 		
+		project.getUpload().add(upload);
 		project.persist();
-		
+
 		return "{\"status\": \"ok\"}";
 	}
 	
-	@RequestMapping(value = "/{id}/status", method =  RequestMethod.POST)
-	@ResponseBody
-	public String updateStatus(@PathVariable("id") Long id, Model uiModel,
-			 @RequestParam String comment,
-			 @RequestParam String status)  {
-		try{
-			logger.info(String.format("Updating project status [%d] %s %s", id, status, comment));
-			
-			Project project = Project.findProject(id);
-			
-			// default status population
-			Status prjStatus = new Status();
-			prjStatus.setProjectStatusType(StatusType.fromInt(Integer.valueOf(status)));
-			prjStatus.setLastUpdateDate(new Date());
-			prjStatus.setProject(project);
-			prjStatus.setComment(comment);
-			prjStatus.persist();
-	    
-	    // twoway population
-	    project.getStatus().add(prjStatus);
-			
-			// log event
-			EventHistory event = new EventHistory();
-			event.setProject(project);
-			event.setUser(UserService.getLoggedinUser());
-			event.setEvent("Updated project status #" + project.getId() + " to " + prjStatus.getProjectStatusType().toString());
-			event.persist();
-			
-			project.setLastUpdateDate(new Date());
-			project.persist();
-		
-			return "{\"status\": \"ok\"}";
-		}catch (Exception e){
-			e.printStackTrace();
-			return "{\"status\": \"error\"}";
-		}
-	}
 	@RequestMapping(method =  RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String create(Model uiModel,
@@ -333,9 +181,111 @@ public class ProjectController {
  		
     logger.info(String.format("Created project [%d]", project.getId()));
     
-    //TODO generate UUID for this project
-    //TODO create folder structure for the new project in the backend
+    try {
+	    String inboxPath = String.format("%s%s%s",config.getInboxPath(), File.separatorChar, Long.toString(project.getId()));
+	    logger.info(String.format("creating %s", inboxPath));
+			FileUtils.forceMkdir(new File(inboxPath));
+
+			String uploadPath = String.format("creating %s%s%s", inboxPath, File.separatorChar, "upload");
+			logger.info(String.format("creating %s", uploadPath));
+			FileUtils.forceMkdir(new File(uploadPath));
+			
+			String etcPath = String.format("creating %s%s%s", inboxPath, File.separatorChar, "etc");
+			logger.info(String.format("creating %s", etcPath));
+			FileUtils.forceMkdir(new File(etcPath));
+			
+			logger.info("Created initial directories for project [" + project.getId() + "]" );
+		} catch (Exception e) {
+			logger.error(e);
+		}
+    
     return String.format("{\"id\": \"%d\", \"status\": \"ok\" }", project.getId());
+	}
+	
+	//TODO user role validation
+	@RequestMapping(value = "/{id}/tasks", method =  RequestMethod.POST)
+	@ResponseBody
+	public String createTask(@PathVariable("id") Long id, Model uiModel,
+			 @RequestParam String description,
+			 @RequestParam Date due,
+			 @RequestParam int assignedTo)  {
+		
+		Project project = Project.findProject(id);
+		
+		Person person = Person.findPerson(Long.valueOf(assignedTo)); 
+		
+		// create task
+		Task task = new Task();
+		task.setProject(project);
+		task.setCreated(new Date());
+		task.setCreatedBy(UserService.getLoggedinUser());
+		task.setDescription(description);
+		task.setStatus(TaskStatusType.Open);
+		task.setDue(due);
+		task.setAssignedTo(person);
+		task.persist();
+		
+		project.getTask().add(task);
+		project.persist();
+		
+		// add event history
+		EventHistory event = new EventHistory();
+		event.setEvent(String.format("Created task #%d", task.getId()));
+		event.setProject(project);
+		event.setUser(UserService.getLoggedinUser());
+		event.persist();
+		
+		//uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
+		//uiModel.addAttribute("project", Project.findProject(id));
+		return "ok";
+	}
+	
+	@RequestMapping(value = "/{id}/files/{file_id}", method =  RequestMethod.GET)
+	public void download(@PathVariable("id") Long id, @PathVariable("file_id") Long file_id, HttpServletRequest request, HttpServletResponse response)  {
+		
+		File f = new File("c:\\nott\\ProjectPlan.docx");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + f.getName() + "\"");
+		try {
+			if (f.exists()){
+				FileInputStream in = new FileInputStream(f);
+				OutputStream out = response.getOutputStream();
+				IOUtils.copy(in, out);	
+				response.flushBuffer();
+				out.close();
+				in.close();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/{id}/format_assessment", method =  RequestMethod.GET)
+	public String fileAnalysis(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/formatassessment";
+	}
+	
+	@RequestMapping(value = "/{id}/files", method =  RequestMethod.GET)
+	public String filemanagement(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request, HttpServletResponse response)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/filelist";
+	}
+	
+	//TODO
+	@RequestMapping(value = "/{id}/tasks", method =  RequestMethod.GET)
+	public String getTask(@PathVariable("id") Long id, Model uiModel)  {
+//		Project project = Project.findProject(id);
+//		
+//		Task task = new Task();
+//		task.setProject(project);
+//		
+//		task.persist();
+//		
+//		uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
+//		uiModel.addAttribute("project", Project.findProject(id));
+		return "pages/update";
 	}
 	
 	@RequestMapping(produces = "text/html")
@@ -354,6 +304,38 @@ public class ProjectController {
         addDateTimeFormatPatterns(uiModel);
         return "projects/list";
     }
+	
+	@RequestMapping(value = "/{id}/metadata_assessment", method =  RequestMethod.GET)
+	public String metadataAssessment(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/metadataassessment";
+	}
+	
+	@RequestMapping(value = "/{id}/migration_plan", method =  RequestMethod.GET)
+	public String migrationPlan(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("page", Project.findProject(id).getMigrationPlan());
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "pages/update";
+	}
+	
+	@RequestMapping(value = "/{id}/migration_process", method =  RequestMethod.GET)
+	public String migrationProcess(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/migrationprocess";
+	}
+	
+	@RequestMapping(value = "/{id}/pathway_assessment", method =  RequestMethod.GET)
+	public String pathwayAssessment(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/pathwayassessment";
+	}
+	
+	@RequestMapping(value = "/{id}/project_plan", method =  RequestMethod.GET)
+	public String projectPlan(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("page", Project.findProject(id).getProjectPlan());
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "pages/update";
+	}
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
@@ -371,4 +353,91 @@ public class ProjectController {
         
         return "projects/show";
     }
+	
+	@RequestMapping(value = "/{id}/system_assessment", method =  RequestMethod.GET)
+	public String systemAssessment(@PathVariable("id") Long id, Model uiModel)  {
+		uiModel.addAttribute("project", Project.findProject(id));
+		return "projects/systemassessment";
+	}
+	@RequestMapping(value = "/{id}/details", method =  RequestMethod.POST)
+	@ResponseBody
+	public String updateDetails(@PathVariable("id") Long id, Model uiModel,
+			 @RequestParam String name,
+			 @RequestParam String type,
+			 @RequestParam String agencyName,
+			 @RequestParam String srnswFileReference)  {
+		
+		logger.info(String.format("Updating project [%d] %s %s %s %s", id, name, type, agencyName, srnswFileReference));
+		
+		Project project = Project.findProject(id);
+		
+		project.setAgencyName(agencyName);
+		project.setSrnswFileReference(srnswFileReference);
+		project.setLastUpdateDate(new Date());
+		
+		project.setName(name);
+		if (type.equalsIgnoreCase("physical")){
+			project.setProjectType(ProjectType.Physical);
+		} else if (type.equalsIgnoreCase("digital")){
+			project.setProjectType(ProjectType.Digital);
+		} else if (type.equalsIgnoreCase("hybrid")){
+			project.setProjectType(ProjectType.Hybrid);
+		}
+		
+		// log event
+		EventHistory event = new EventHistory();
+		event.setProject(project);
+		event.setUser(UserService.getLoggedinUser());
+		event.setEvent("Updated project details #" + project.getId());
+		event.persist();
+		
+		project.persist();
+		
+		return "{\"status\": \"ok\"}";
+	}
+	
+	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+        populateEditForm(uiModel, Project.findProject(id));
+        uiModel.addAttribute("stakeholders", Person.findAllPeople());
+        return "projects/update";
+    }
+
+	@RequestMapping(value = "/{id}/status", method =  RequestMethod.POST)
+	@ResponseBody
+	public String updateStatus(@PathVariable("id") Long id, Model uiModel,
+			 @RequestParam String comment,
+			 @RequestParam String status)  {
+		try{
+			logger.info(String.format("Updating project status [%d] %s %s", id, status, comment));
+			
+			Project project = Project.findProject(id);
+			
+			// default status population
+			Status prjStatus = new Status();
+			prjStatus.setProjectStatusType(StatusType.fromInt(Integer.valueOf(status)));
+			prjStatus.setLastUpdateDate(new Date());
+			prjStatus.setProject(project);
+			prjStatus.setComment(comment);
+			prjStatus.persist();
+	    
+	    // twoway population
+	    project.getStatus().add(prjStatus);
+			
+			// log event
+			EventHistory event = new EventHistory();
+			event.setProject(project);
+			event.setUser(UserService.getLoggedinUser());
+			event.setEvent("Updated project status #" + project.getId() + " to " + prjStatus.getProjectStatusType().toString());
+			event.persist();
+			
+			project.setLastUpdateDate(new Date());
+			project.persist();
+		
+			return "{\"status\": \"ok\"}";
+		}catch (Exception e){
+			e.printStackTrace();
+			return "{\"status\": \"error\"}";
+		}
+	}
 }

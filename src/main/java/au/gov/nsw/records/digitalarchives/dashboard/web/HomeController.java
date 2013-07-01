@@ -3,7 +3,6 @@ package au.gov.nsw.records.digitalarchives.dashboard.web;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,11 +29,8 @@ import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
-import au.gov.nsw.records.digitalarchives.dashboard.service.PDFGeneratorService;
 import au.gov.nsw.records.digitalarchives.dashboard.service.PaginatorService;
 import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
-
-import com.itextpdf.text.DocumentException;
 
 @RequestMapping("/workspace")
 @Controller
@@ -48,10 +44,11 @@ public class HomeController {
     public String index(HttpServletRequest request, Model uiModel) {
     	
     	if (request.isUserInRole("ROLE_ARCHIVIST")) {
-    		//uiModel.addAttribute("projects", Project.findAllProjects());
     		
     		PaginatorService paginaotr = new PaginatorService();
-    		paginaotr.populatePaginationResponse(Project.findAllProjects(), 1, 20, "projects", uiModel);
+    		List<Person> loggedinUser = new ArrayList<Person>();
+    		loggedinUser.add(UserService.getLoggedinUser());
+    		paginaotr.populatePaginationResponse(new ArrayList<Project>(Project.findProjectsByStakeholders(loggedinUser).getResultList()), 1, 20, "projects", uiModel);
 
     		uiModel.addAttribute("tasks", Task.findTasksByAssignedToOrCreatedBy(UserService.getLoggedinUser()).getResultList());
     		uiModel.addAttribute("all_members", Person.findPeopleByApprovedNot(false).getResultList());
@@ -60,20 +57,13 @@ public class HomeController {
     		return "home/mainindex";
     		
     	}else if (request.isUserInRole("ROLE_AGENCY")) {
-//    		try {
-//					PDFGeneratorService.createPDF();
-//				} catch (MalformedURLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (DocumentException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//    		
-//    		uiModel.addAttribute("projects", Project.findAllProjects());
+
+     		PaginatorService paginaotr = new PaginatorService();
+
+	  		List<Person> loggedinUser = new ArrayList<Person>();
+	  		loggedinUser.add(UserService.getLoggedinUser());
+	  		paginaotr.populatePaginationResponse(new ArrayList<Project>(Project.findProjectsByStakeholders(loggedinUser).getResultList()), 1, 20, "projects", uiModel);
+
     		return "home/externalindex";
     	}
        return "redirect:/";

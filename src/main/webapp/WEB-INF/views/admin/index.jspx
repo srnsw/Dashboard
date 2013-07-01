@@ -8,19 +8,64 @@
    <spring:url value="/" var="root_url"></spring:url>
    <spring:url value="/resources/images/" var="image_url"></spring:url>
     
-    <h2>Administrative area </h2>
+    <h2>Administration</h2>
     <br/>
     
-    <h4>User management</h4> <hr/>
-    	
-    	<dashboard:users_table object="${user_appr}" title="Registration Request" pageParam="user_appr_page" approve_user="true" id="_registration_request_users" page="${user_appr_page}" size="${user_appr_size}" maxpage="${user_appr_maxpage}"/>
-    	<br/>
-
-			<dashboard:users_table object="${user_login_req}" title="Retrieve Login Details Request" approve_user="true" id="_registration_request_users" page="${user_login_req_page}" size="${user_login_req_size}" maxpage="${user_login_req_maxpage}"/>
-			<br/>
-			
-			<dashboard:users_table object="${user_update_req}" title="Update My Profile Request" approve_user="true" id="_registration_request_users" page="${user_update_req_page}" size="${user_update_req_size}" maxpage="${user_update_req_maxpage}"/>
-  		<br/>
-  		
+     <table width="100%">
+	     <tbody>
+		     <td class="dashboard" width="50%">
+				    <fieldset class="PFGFieldsetWidget">
+						     			<legend><span>User Request</span></legend>
+						     			<p><a href="${root_url}admin/users" class="button"> Registration Request (x) </a></p>
+						     			<p><a href="${root_url}admin/users" class="button"> Retrieve Login Request (x) </a></p>
+						     			<p><a href="${root_url}admin/users" class="button"> Update Profile Request (x) </a></p>
+						</fieldset>
+						<fieldset class="PFGFieldsetWidget">
+						     			<legend><span>Projects</span></legend>
+						     			<p><a href="${root_url}projects" class="button"> All projects (x) </a></p>
+						     			<!-- 
+						     			<p><a href="${root_url}projects" class="button"> New projects (x) </a></p>
+						     			<p><a href="${root_url}projects" class="button"> On hold projects (x) </a></p>
+						     			<p><a href="${root_url}projects" class="button"> Terminated projects (x) </a></p>
+						     			<p><a href="${root_url}projects" class="button"> Discontinued projects (x) </a></p>
+						     			<p><a href="${root_url}projects" class="button"> Completed projects (x) </a></p>
+						     			 -->
+						</fieldset>
+		 			</td>
+		 			<td class="dashboard" width="50%">
+					    <fieldset class="PFGFieldsetWidget">
+							     			<legend><span>Tasks</span></legend>
+							     			<p><a href="${root_url}admin/tasks" class="button"> All tasks (x) </a></p>
+							     			<p><a href="${root_url}admin/tasks" class="button"> New tasks (x) </a></p>
+							     			<p><a href="${root_url}admin/tasks" class="button"> Overdue tasks (x) </a></p>
+							</fieldset>
+							<fieldset class="PFGFieldsetWidget">
+							     			<legend><span>Miscellaneous</span></legend>
+							     			<p><a href="${root_url}admin/templates" class="button"> Document Template </a></p>
+							</fieldset>
+		 			</td>
+	     </tbody>
+	    </table>
+	     
+	     <table width="100%">
+	     <tbody>
+		 			<td class="dashboard" width="100%">
+					    <fieldset class="PFGFieldsetWidget">
+							     			<legend><span>Activities</span></legend>
+							     			<p>04/06/13 <a href="">Paul Elloitt</a>  created a new project <a href="">Demo Project</a></p>
+							     			<p>03/06/13 Task <a href="">complete assessment</a> is overdue</p>
+							     			<p>02/06/13 Project <a href="">Test Project</a> is completed</p>
+							     			<p></p>
+							     			<p></p>
+							</fieldset>
+		 			</td>
+	     </tbody>
+	    </table>
   </util:panel>
+  
+  <script>
+  $(function() {
+      $('.button').button();
+   });
+  </script>
 </div>

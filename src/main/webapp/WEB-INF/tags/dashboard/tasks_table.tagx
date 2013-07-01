@@ -7,6 +7,7 @@
   <jsp:directive.attribute name="members" type="java.util.ArrayList" required="true" rtexprvalue="true" description="The Member's form backing object" />
   <jsp:directive.attribute name="title" type="java.lang.String" required="true" rtexprvalue="true" description="Title of the table" />
   <jsp:directive.attribute name="edit" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Link to approve the user registration request" />
+  <jsp:directive.attribute name="hidefilter" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Show filter input" />
   <jsp:directive.attribute name="page" type="java.lang.String" required="false" rtexprvalue="true" description="Current pagination page" />
   <jsp:directive.attribute name="pageParam" type="java.lang.String" required="false" rtexprvalue="true" description="Page parameter name" />
   <jsp:directive.attribute name="size" type="java.lang.String" required="false" rtexprvalue="true" description="Pagination size" />
@@ -89,7 +90,9 @@
 					    </c:choose>
 						  <tr class="${trclass}">
 						      <td class="">${task.id}</td>
-									 <td class="">${task.description}</td>
+									 <td class="">
+									 		<a href="${root_url}projects/${task.project.id}#tasks"> ${task.description}</a>
+									 </td>
 									 <td class=""> 
 									   <a href="${root_url}projects/${task.project.id}">${task.project.name}</a>
 									 </td>
@@ -115,15 +118,17 @@
 					 
 					  <span class="button" id="${id}_new_task">new</span>
 					  
-						<span class="alignright">
-							<input type="text" size="8"/><span href="#" id="${id}_filter_btn" class="button">Filter</span>
-			        <script>
-					     $(function() {
-					        $("#${id}_filter_btn").button();
-					     });
-					    </script>
-							<util:pagination maxPages="${maxpage}" page="${page}" pageParam="${pageParam}" size="${size}"/>
-						</span>
+					  <c:if test="${not hidefilter}"> 
+							<span class="alignright">
+								<input type="text" size="8"/><span href="#" id="${id}_filter_btn" class="button">Filter</span>
+				        <script>
+						     $(function() {
+						        $("#${id}_filter_btn").button();
+						     });
+						    </script>
+								<util:pagination maxPages="${maxpage}" page="${page}" pageParam="${pageParam}" size="${size}"/>
+							</span>
+						</c:if>
 					</div>
 				</div>
 				
@@ -269,7 +274,6 @@
 		    	  	        	var description = $("#${id}_details").val(); 
 		    	  	        	var due = $("#${id}_due").val();
 		    	  	        	var assignedTo = $("#${id}_assign_to").val();
-		    	  	        	var project = $("#${id}_project").val();
 		    	  	        	
 		    	  	        	var dataString = 'description='+ description + '&amp;due=' + due + '&amp;assignedTo=' + assignedTo ;
 		    	  	        	
@@ -277,7 +281,7 @@
 		    	  	        	
 		    	  	        	$.ajax({
 		    	  	              type: "POST",
-		    	  	              url: "${root_url}projects/" + project + "/tasks/",
+		    	  	              url: "${root_url}projects/" + ${project.id} + "/tasks/",
 		    	  	              data: dataString,
 		    	  	              success: function(data) {
 		    	  	            		$( '#${id}_task_create_popup' ).dialog( "close" );     

@@ -51,6 +51,11 @@
     </pluginRepositories>
     <dependencies>
 			  <!-- General dependencies for standard applications -->
+			  <dependency>
+					<groupId>net.sf.opencsv</groupId>
+					<artifactId>opencsv</artifactId>
+					<version>2.3</version>
+				</dependency>
 				<dependency>
 					<groupId>com.itextpdf</groupId>
 					<artifactId>itextpdf</artifactId>

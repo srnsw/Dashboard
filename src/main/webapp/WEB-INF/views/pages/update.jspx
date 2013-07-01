@@ -21,7 +21,6 @@
         <field:input field="lastUpdateUser" id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Page_lastUpdateUser" render="false" z="user-managed"/>
     </form:update>
 
-	
     <script type="text/javascript">
 	    $(function() {
 	    	$("#proceed").hide();

@@ -3,12 +3,11 @@
 
 package au.gov.nsw.records.digitalarchives.dashboard.web;
 
+import au.gov.nsw.records.digitalarchives.dashboard.model.Agency;
 import au.gov.nsw.records.digitalarchives.dashboard.model.FileRecord;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
-import au.gov.nsw.records.digitalarchives.dashboard.model.ProjectPlan;
-import au.gov.nsw.records.digitalarchives.dashboard.model.ProjectRequest;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Upload;
 import au.gov.nsw.records.digitalarchives.dashboard.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -18,6 +17,30 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+    
+    public Converter<Agency, String> ApplicationConversionServiceFactoryBean.getAgencyToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<au.gov.nsw.records.digitalarchives.dashboard.model.Agency, java.lang.String>() {
+            public String convert(Agency agency) {
+                return new StringBuilder().append(agency.getName()).append(" ").append(agency.getNumber()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Agency> ApplicationConversionServiceFactoryBean.getIdToAgencyConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, au.gov.nsw.records.digitalarchives.dashboard.model.Agency>() {
+            public au.gov.nsw.records.digitalarchives.dashboard.model.Agency convert(java.lang.Long id) {
+                return Agency.findAgency(id);
+            }
+        };
+    }
+    
+    public Converter<String, Agency> ApplicationConversionServiceFactoryBean.getStringToAgencyConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, au.gov.nsw.records.digitalarchives.dashboard.model.Agency>() {
+            public au.gov.nsw.records.digitalarchives.dashboard.model.Agency convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Agency.class);
+            }
+        };
+    }
     
     public Converter<FileRecord, String> ApplicationConversionServiceFactoryBean.getFileRecordToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<au.gov.nsw.records.digitalarchives.dashboard.model.FileRecord, java.lang.String>() {
@@ -107,54 +130,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<ProjectPlan, String> ApplicationConversionServiceFactoryBean.getProjectPlanToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<au.gov.nsw.records.digitalarchives.dashboard.model.ProjectPlan, java.lang.String>() {
-            public String convert(ProjectPlan projectPlan) {
-                return new StringBuilder().append(projectPlan.getName()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, ProjectPlan> ApplicationConversionServiceFactoryBean.getIdToProjectPlanConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, au.gov.nsw.records.digitalarchives.dashboard.model.ProjectPlan>() {
-            public au.gov.nsw.records.digitalarchives.dashboard.model.ProjectPlan convert(java.lang.Long id) {
-                return ProjectPlan.findProjectPlan(id);
-            }
-        };
-    }
-    
-    public Converter<String, ProjectPlan> ApplicationConversionServiceFactoryBean.getStringToProjectPlanConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, au.gov.nsw.records.digitalarchives.dashboard.model.ProjectPlan>() {
-            public au.gov.nsw.records.digitalarchives.dashboard.model.ProjectPlan convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), ProjectPlan.class);
-            }
-        };
-    }
-    
-    public Converter<ProjectRequest, String> ApplicationConversionServiceFactoryBean.getProjectRequestToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<au.gov.nsw.records.digitalarchives.dashboard.model.ProjectRequest, java.lang.String>() {
-            public String convert(ProjectRequest projectRequest) {
-                return new StringBuilder().append(projectRequest.getReason()).append(" ").append(projectRequest.getOverview()).append(" ").append(projectRequest.getDisposalAuthorisationNumber()).append(" ").append(projectRequest.getAccessDirectionNumber()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, ProjectRequest> ApplicationConversionServiceFactoryBean.getIdToProjectRequestConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, au.gov.nsw.records.digitalarchives.dashboard.model.ProjectRequest>() {
-            public au.gov.nsw.records.digitalarchives.dashboard.model.ProjectRequest convert(java.lang.Long id) {
-                return ProjectRequest.findProjectRequest(id);
-            }
-        };
-    }
-    
-    public Converter<String, ProjectRequest> ApplicationConversionServiceFactoryBean.getStringToProjectRequestConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, au.gov.nsw.records.digitalarchives.dashboard.model.ProjectRequest>() {
-            public au.gov.nsw.records.digitalarchives.dashboard.model.ProjectRequest convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), ProjectRequest.class);
-            }
-        };
-    }
-    
     public Converter<Upload, String> ApplicationConversionServiceFactoryBean.getUploadToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<au.gov.nsw.records.digitalarchives.dashboard.model.Upload, java.lang.String>() {
             public String convert(Upload upload) {
@@ -180,6 +155,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(getAgencyToStringConverter());
+        registry.addConverter(getIdToAgencyConverter());
+        registry.addConverter(getStringToAgencyConverter());
         registry.addConverter(getFileRecordToStringConverter());
         registry.addConverter(getIdToFileRecordConverter());
         registry.addConverter(getStringToFileRecordConverter());
@@ -192,12 +170,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getProjectToStringConverter());
         registry.addConverter(getIdToProjectConverter());
         registry.addConverter(getStringToProjectConverter());
-        registry.addConverter(getProjectPlanToStringConverter());
-        registry.addConverter(getIdToProjectPlanConverter());
-        registry.addConverter(getStringToProjectPlanConverter());
-        registry.addConverter(getProjectRequestToStringConverter());
-        registry.addConverter(getIdToProjectRequestConverter());
-        registry.addConverter(getStringToProjectRequestConverter());
         registry.addConverter(getUploadToStringConverter());
         registry.addConverter(getIdToUploadConverter());
         registry.addConverter(getStringToUploadConverter());

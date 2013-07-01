@@ -2,6 +2,9 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    
+    <spring:url value="/" var="root_url"/>
+    
     <page:list id="pl_au_gov_nsw_records_digitalarchives_dashboard_model_Upload" items="${uploads}" render="false" z="user-managed">
         <table:table data="${uploads}" id="l_au_gov_nsw_records_digitalarchives_dashboard_model_Upload" path="/uploads" z="qJ2D9FRF0U76KMiCx2QHWtBktYI=">
             <table:column id="c_au_gov_nsw_records_digitalarchives_dashboard_model_Upload_fileName" property="fileName" z="QLHpS4CfNpzY/fLxU7+bf1SfKTs="/>
@@ -18,6 +21,7 @@
                 <img height="30px" src="${help}" style="border:0"/>
             </a>
     </span>
+    <!-- 
     <div class="dawidget" id="run_assessment" title="Run Assessment options">
         <form>
             <h4>Select options</h4>
@@ -34,6 +38,7 @@
             <input name="exportformat" type="radio" value="pdf"/>Update file type ID<br/>
         </form>
     </div>
+     
     <div class="dawidget" id="metadata_analysis" title="Metadata Analysis options">
         <form>
             <h4>Select options</h4>
@@ -41,10 +46,10 @@
             <input name="exportformat" type="radio" value="pdf"/>Run EXIFTOOL<br/>
         </form>
     </div>
-    <spring:url value="/" var="root_url"/>
+    -->
   
     <h2>File Management</h2>
-     <p><a href="#" class="button">Upload Files</a> <a href="#" class="button">Remove Files</a> <a href="#" class="button">Format Assessment</a> <a href="#" class="button">Pathway Assessment</a> <a href="#" class="button">System Assessment</a> <a href="#" class="button">Metadata Assessment</a></p>
+     <p><a href="#" id="upload_btn" class="button">Upload Files</a> <a href="#" class="button">Remove Files</a> <a href="#" class="button">Format Assessment</a> <a href="#" class="button">Pathway Assessment</a> <a href="#" class="button">System Assessment</a> <a href="#" class="button">Metadata Assessment</a></p>
     <script>
 	    $(function() {
 	    	$('.button').button();
@@ -59,7 +64,7 @@
 	    </div>  
 	    <div style="float:left">
 		    <form> 
-		        <select class="dk2" name="options2">
+		        <select id="file_filter" name="options2">
 		        		<option value="">Filter By</option>
 		            <option value="">File Extension</option>
 		            <option value="upload">File Type</option>
@@ -127,24 +132,53 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="">
-                    <td class=""/>
-                    <td class=""/>
-                    <td class=""/>
-                    <td class=""/>
-                    <td class=""/>
-                    <td class=""/>
-                    <td class=""/>
+              <c:forEach items="${files}" var="file">
+	                <c:choose>
+						    	 <c:when test="${iseven eq true}">
+							    	 <c:set value="jtable-row-even" var="trclass"></c:set>
+							    	 <c:set value="false" var="iseven" />
+						    	 </c:when>
+						    	 <c:otherwise>
+						    	 	 <c:set value="" var="trclass"></c:set>
+						    		 <c:set value="true" var="iseven" />
+						    	 </c:otherwise>
+							    </c:choose>
+								  <tr id="row_${file.id}" class="${trclass}">
+                    <td class="">
+                     <a href="${root_url}projects/${project.id}/files/${file.id}"> ${file.fileName} </a>
+                    </td>
+                    <td class="">${file.extension}</td>
+                    <td class="">${file.fileType}</td>
+                    <td class="">${file.formatTypeID}</td>
+                    <td class="">${file.PUID}</td>
+                    <td class="">${file.formattedSize}</td>
+                    <td class="">${file.status}</td>
                     <td class="jtable-command-column">
-                        <button class="jtable-command-button jtable-delete-command-button" title="Delete file">
+                        <button id="delete_${file.id}" class="jtable-command-button jtable-delete-command-button" title="Delete file">
                             <span>Delete file</span>
                         </button>
                     </td>
+                    <script>
+	                    $(function() {
+			           		 	 	$( '#delete_${file.id}').click(function() {
+			           		 	 			$.ajax({
+				    	  	              type: "DELETE",
+				    	  	              url: "${root_url}projects/${project.id}/files/${file.id}",
+				    	  	              success: function(data) {
+				    	  	            		$( '#row_${file.id}' ).remove();     
+				    	  	              },
+				    	  	              error: function() {
+				    	  	            		$('#row_${file.id}').show().animate({ top: 305 }, {duration: 1000, easing: 'easeOutBounce'});
+			    	  	              	}
+				    	  	            });
+			           		 	 	});
+			           		 	});
+                    </script>
                 </tr>
+              </c:forEach>
             </tbody>
         </table>
         <div class="jtable-bottom-panel">
-            
             <!-- 
             <span id="upload">Upload</span>
             <script>
@@ -158,63 +192,37 @@
     </div>
     <br/>
     <br/>
-    <div class="dawidget" id="exportform" title="Report options">
-        <form>
-            <h4>Tools</h4>
-            <input name="exportcontent" type="checkbox" value="proposal"/> Exif<br/>
-            <input name="exportcontent" type="checkbox" value="assessment"/> Apache Tika <br/>
-            <input name="exportcontent" type="checkbox" value="assessment"/> Droid <br/>
-            <h4>Report type</h4>
-            <input name="exportformat" type="radio" value="word"/>Summary report<br/>
-            <input name="exportformat" type="radio" value="pdf"/>Detailed report<br/>
-            <h4>Report coverage</h4>
-            <input name="exportformat" type="radio" value="word"/>Current batch<br/>
-            <input name="exportformat" type="radio" value="pdf"/>All records<br/>
-        </form>
-    </div>
-    <div class="dawidget" id="splitform" title="Split to..">
-        <form>
-            <h4>Select batch size</h4>
-            <input name="exportformat" type="radio" value="word"/>10<br/>
-            <input name="exportformat" type="radio" value="pdf"/>20<br/>
-            <input name="exportformat" type="radio" value="pdf"/>50<br/>
-            <input name="exportformat" type="radio" value="pdf"/>Custom:<br/>
-            <input size="10" type="text"/>
+   
+     <div class="dawidget" id="uploadform" title="Upload file">
+        <form name="file_upload" method="post" enctype="multipart/form-data" action="${root_url}projects/${project.id}/files">
+            <h4>Select file to upload</h4>
+            <input size="10" name="content" type="file"/>
             <br/>
+            <input type="submit" />
         </form>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <span id="rescan_btn" >Rescan</span>
+        <br/>
+        
+        <span>Rescan location: ${inbox}</span>
     </div>
     <script>
   
   $(document).ready(function() {
-	  $("#report_btn").button().click(function() {
-		    $( "#exportform" ).dialog( "open" );
+	  $("#rescan_btn").button().click(function() {
+		    $( "" ).dialog( "open" );
 		});
 	  
-	  $("#split_btn").button().click(function() {
-		    $( "#splitform" ).dialog( "open" );
+	  $("#upload_btn").button().click(function() {
+		    $( "#uploadform" ).dialog( "open" );
 		});
-	  
-	  $( "#exportform" ).dialog({
+	  $( "#uploadform" ).dialog({
 	      autoOpen: false,
 	      height: 350,
-	      width: 350,
-	      modal: true,
-	      buttons: {
-	        "OK": function() {
-	        	$( this ).dialog( "close" );
-	        },
-	        Cancel: function() {
-	          $( this ).dialog( "close" );
-	        }
-	      },
-	      close: function() {
-	       
-	      }
-	    });
-	  
-	  $( "#splitform" ).dialog({
-	      autoOpen: false,
-	      height: 270,
 	      width: 350,
 	      modal: true,
 	      buttons: {
@@ -242,27 +250,11 @@
  	      close: function() {}
  	    });
  	  
- 	 $( "#file_analysis" ).dialog({
- 	      autoOpen: false, height: 250, width: 350, modal: true,
- 	      buttons: {
- 	        "OK": function() { $( this ).dialog( "close" ); },
- 	        Cancel: function() { $( this ).dialog( "close" ); }
- 	      },
- 	      close: function() {}
- 	    });
- 	 
- 	 $( "#metadata_analysis" ).dialog({
- 	      autoOpen: false, height: 200, width: 350, modal: true,
- 	      buttons: {
- 	        "OK": function() { $( this ).dialog( "close" ); },
- 	        Cancel: function() { $( this ).dialog( "close" ); }
- 	      },
- 	      close: function() {}
- 	    });
   });
  
 	$(function() {
-			
+		$("#file_filter").width('200px').select2();
+		
 		// Convert divs to queue widgets when the DOM is ready
 		$("#uploader").plupload({
 			// General settings
@@ -286,6 +278,7 @@
 	
 		});
 	
+		
 		// Client side form validation
 		$('form').submit(function(e) {
 	        var uploader = $('#uploader').plupload('getUploader');

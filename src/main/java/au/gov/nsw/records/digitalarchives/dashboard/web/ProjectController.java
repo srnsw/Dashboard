@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import au.gov.nsw.records.digitalarchives.dashboard.bean.DashboardConfig;
+import au.gov.nsw.records.digitalarchives.dashboard.bean.DroidHelper;
+import au.gov.nsw.records.digitalarchives.dashboard.bean.DroidResult;
+import au.gov.nsw.records.digitalarchives.dashboard.bean.StorageHelper;
 import au.gov.nsw.records.digitalarchives.dashboard.model.EventHistory;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Page;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
@@ -51,7 +55,10 @@ public class ProjectController {
 	private static Logger logger = Logger.getLogger(ProjectController.class); 
 
 	@Autowired
-	private DashboardConfig config;
+	private StorageHelper storageHelper;
+	
+	@Autowired
+	private DroidHelper droidHelper;
 	
 	@RequestMapping(value = "/{id}/access", method =  RequestMethod.GET)
 	public String access(@PathVariable("id") Long id, Model uiModel)  {
@@ -71,47 +78,87 @@ public class ProjectController {
 		return "{\"status\": \"ok\"}";
 	}
 	
-	@RequestMapping(value = "/{id}/files", method =  RequestMethod.POST)
+	@RequestMapping(value = "/{id}/files/{file_id}", method =  RequestMethod.DELETE)
 	@ResponseBody
+	public String deleteFile(@PathVariable("id") Long id, @PathVariable("file_id") long file_id, Model uiModel, HttpServletRequest request)  {
+		Upload upload = Upload.findUpload(file_id);
+		String dir = storageHelper.getUploadPathForUpload(String.valueOf(id), upload);
+		try {
+			logger.warn("Deleting " + dir);
+			FileUtils.deleteDirectory(new File(dir));
+			upload.remove();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "{\"status\": \"ok\"}";
+	}
+	
+
+	@RequestMapping(value = "/{id}/files/process", method =  RequestMethod.POST)
+	public String runDroid(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request)  {
+
+		Project project = Project.findProject(id);
+		uiModel.addAttribute("project", project);
+		uiModel.addAttribute("inbox", storageHelper.getUploadPathForProject(String.valueOf(id)));
+		uiModel.addAttribute("files", project.getUpload());
+		
+		List<DroidResult> results = droidHelper.analyse(storageHelper.getUploadPathForProject(String.valueOf(id)), String.valueOf(id));
+		for (DroidResult res:results){
+			logger.info(res.getFilePath() + "," + res.getName() + "," + res.getFormatName() + "," + res.getPuid());
+		}
+		return "projects/filelist";
+	}
+	
+	@RequestMapping(value = "/{id}/files", method =  RequestMethod.POST)
 	public String addFile(@PathVariable("id") Long id, Model uiModel, MultipartFile content, HttpServletRequest request)  {
 		
 	  if (!(request instanceof MultipartHttpServletRequest)) {
       //error(resp, "Invalid request (multipart request expected)");
       //lreturn null;
-  		System.out.println("not multipart request!!");
+	  	logger.warn("not multipart request!!");
   	}
 	  
 	  Project project = Project.findProject(id);
-		Upload upload = new Upload();
+		
 		
   	Map<String, MultipartFile> files = ((MultipartHttpServletRequest)request).getFileMap();
   	try{
+  		
 	  	for (String f:files.keySet()){
 	  		MultipartFile mp = files.get(f);
-	  		System.out.println("file_name:" + mp.getOriginalFilename());
-	  		System.out.println("file_size:" + mp.getSize());
+	  		logger.info("file_name:" + mp.getOriginalFilename());
+	  		logger.info("file_size:" + mp.getSize());
 	  		
-	  		String destinationFile = config.getInboxPath() + project.getId() + "/upload/" + upload.getUuid() + mp.getOriginalFilename();
+	  		Upload upload = new Upload();
 	  		
-	  		File destination = new File(destinationFile);
+	  		String destinationPath = storageHelper.getUploadPathForUpload(String.valueOf(project.getId()), upload); 
+	  		
+	  		FileUtils.forceMkdir(new File(destinationPath));
+	  		
+	  		logger.info(String.format("Saving file to %s", destinationPath));
+	  		File destination = new File(destinationPath + "/" + mp.getOriginalFilename() );
 	  		mp.transferTo(destination);
-
+	  		logger.info(String.format("Saved at %s", destination.getAbsolutePath()));
+	  		
+	  		// persist related data to the database
+	  		upload.setFileName(FilenameUtils.getBaseName(mp.getOriginalFilename()));
+	  		upload.setExtension(FilenameUtils.getExtension(mp.getOriginalFilename()));
+	  		upload.setSize(mp.getSize());
+	  		upload.persist();
+	  		
+	  		project.getUpload().add(upload);
 	  	}
 	  	
-  	}catch(IOException e){
+  	}catch(Exception e){
   		e.printStackTrace();
   	}
-  	
-//		String inbox = config.getInboxPath();
 		
-		
-		
-		upload.persist();
-		
-		project.getUpload().add(upload);
 		project.persist();
 
-		return "{\"status\": \"ok\"}";
+		return "redirect:/projects/" + project.getId() + "/files";
+		
+		//return "{\"status\": \"ok\"}";
 	}
 	
 	@RequestMapping(method =  RequestMethod.POST, produces = "application/json")
@@ -182,17 +229,13 @@ public class ProjectController {
     logger.info(String.format("Created project [%d]", project.getId()));
     
     try {
-	    String inboxPath = String.format("%s%s%s",config.getInboxPath(), File.separatorChar, Long.toString(project.getId()));
+	    String inboxPath = storageHelper.getPathForProject(Long.toString(project.getId()));
 	    logger.info(String.format("creating %s", inboxPath));
 			FileUtils.forceMkdir(new File(inboxPath));
 
-			String uploadPath = String.format("creating %s%s%s", inboxPath, File.separatorChar, "upload");
+			String uploadPath =  storageHelper.getUploadPathForProject(Long.toString(project.getId()));
 			logger.info(String.format("creating %s", uploadPath));
 			FileUtils.forceMkdir(new File(uploadPath));
-			
-			String etcPath = String.format("creating %s%s%s", inboxPath, File.separatorChar, "etc");
-			logger.info(String.format("creating %s", etcPath));
-			FileUtils.forceMkdir(new File(etcPath));
 			
 			logger.info("Created initial directories for project [" + project.getId() + "]" );
 		} catch (Exception e) {
@@ -241,10 +284,16 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "/{id}/files/{file_id}", method =  RequestMethod.GET)
-	public void download(@PathVariable("id") Long id, @PathVariable("file_id") Long file_id, HttpServletRequest request, HttpServletResponse response)  {
+	public void download(@PathVariable("id") Long id, @PathVariable("file_id") long file_id, HttpServletRequest request, HttpServletResponse response)  {
 		
-		File f = new File("c:\\nott\\ProjectPlan.docx");
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + f.getName() + "\"");
+		Upload u = Upload.findUpload(file_id);
+		String path =  storageHelper.getInboxPathForUpload(String.valueOf(id), u);
+		
+		logger.info("Downloading " + path);
+		
+		File f = new File(path);
+		
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + u.getFileName()  + "." + u.getExtension()+ "\"");
 		try {
 			if (f.exists()){
 				FileInputStream in = new FileInputStream(f);
@@ -269,7 +318,11 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/{id}/files", method =  RequestMethod.GET)
 	public String filemanagement(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request, HttpServletResponse response)  {
-		uiModel.addAttribute("project", Project.findProject(id));
+		Project project = Project.findProject(id);
+		uiModel.addAttribute("project", project);
+		uiModel.addAttribute("inbox", storageHelper.getUploadPathForProject(String.valueOf(id)));
+		
+		uiModel.addAttribute("files", project.getUpload());
 		return "projects/filelist";
 	}
 	

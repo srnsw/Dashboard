@@ -128,3 +128,38 @@ focus --class au.gov.nsw.records.digitalarchives.dashboard.model.Task
 finder list
 finder add --finderName findTasksByStatus
 finder add --finderName findTasksByAssignedTo
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-06-12 09:30:16
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-06-12 09:47:26
+focus --class ~.model.Person
+focus --class ~.model.Person
+finder list
+finder add --finderName findPeopleByApprovedNot
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-06-14 10:07:05
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-06-14 11:06:22
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-06-17 09:06:07
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-06-17 09:09:52
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-06-17 11:35:42
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-06-17 11:35:54
+focus --class au.gov.nsw.records.digitalarchives.dashboard.model.Stakeholder
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.model.Stakeholder
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.EventHistory
+finder list
+finder add --finderName findEventHistorysByProject
+finder add --finderName findEventHistorysByUser
+focus --class au.gov.nsw.records.digitalarchives.dashboard.model.Status
+finder list
+finder add --finderName findStatusesByProject
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-06-19 10:08:51
+focus --class au.gov.nsw.records.digitalarchives.dashboard.model.Project
+finder list 
+finder add --finderName findProjectsByStakeholders
+focus --class au.gov.nsw.records.digitalarchives.dashboard.model.Upload
+finder list
+finder add --finderName findUploadsByPUIDEquals
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-06-21 15:24:42
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-06-26 09:52:17
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2013-06-28 16:11:46
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2013-07-01 09:55:21
+entity jpa --class au.gov.nsw.records.digitalarchives.dashboard.model.Agency
+finder list
+web mvc scaffold --class au.gov.nsw.records.digitalarchives.dashboard.web.AgencyController

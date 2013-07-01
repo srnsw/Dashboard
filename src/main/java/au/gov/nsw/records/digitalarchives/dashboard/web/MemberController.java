@@ -35,7 +35,10 @@ import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse;
 import au.gov.nsw.records.digitalarchives.dashboard.bean.JTableResponse.Status;
 import au.gov.nsw.records.digitalarchives.dashboard.email.NotificationService;
 import au.gov.nsw.records.digitalarchives.dashboard.model.Person;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Project;
+import au.gov.nsw.records.digitalarchives.dashboard.model.Task;
 import au.gov.nsw.records.digitalarchives.dashboard.service.JsonService;
+import au.gov.nsw.records.digitalarchives.dashboard.service.PaginatorService;
 import au.gov.nsw.records.digitalarchives.dashboard.service.UserService;
 
 @RequestMapping("/members")
@@ -48,6 +51,20 @@ public class MemberController {
 	
 	@RequestMapping(value = "/{id}/approve",method = RequestMethod.GET, produces = "text/html")
   public String approveForm(@PathVariable("id") Long id, Model uiModel) {
+     
+		 Person person = Person.findPerson(id);
+		 if (person!=null){
+			 populateEditForm(uiModel, person);
+			 return "members/update";
+		 }
+
+		 uiModel.asMap().clear();
+
+      return "projects/update";
+  }
+	
+	@RequestMapping(value = "/{id}/update",method = RequestMethod.GET, produces = "text/html")
+  public String update(@PathVariable("id") Long id, Model uiModel) {
      
 		 Person person = Person.findPerson(id);
 		 if (person!=null){
@@ -104,6 +121,15 @@ public class MemberController {
   public String migrationplan(Model uiModel) {
 		Person current = UserService.getLoggedinUser();
 		if (current!=null){
+			PaginatorService paginaotr = new PaginatorService();
+  		List<Person> loggedinUser = new ArrayList<Person>();
+  		loggedinUser.add(UserService.getLoggedinUser());
+  		paginaotr.populatePaginationResponse(new ArrayList<Project>(Project.findProjectsByStakeholders(loggedinUser).getResultList()), 1, 20, "projects", uiModel);
+
+  		uiModel.addAttribute("tasks", Task.findTasksByAssignedToOrCreatedBy(UserService.getLoggedinUser()).getResultList());
+  		uiModel.addAttribute("all_members", Person.findPeopleByApprovedNot(false).getResultList());
+  		uiModel.addAttribute("all_projects",Project.findAllProjects());
+  		
 	    uiModel.addAttribute("person", current);
 	    uiModel.addAttribute("itemId", current.getId());
 		}
@@ -208,14 +234,19 @@ public class MemberController {
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
 				Person person = Person.findPerson(id);
-//				
-//				if (person.getEmail().equals(UserService.getLoggedinUser().getEmail())){
-//					uiModel.addAttribute("ismyuser", "true");
-//				}else{
-//					
-//				}
+
+	  		List<Person> loggedinUser = new ArrayList<Person>();
+	  		loggedinUser.add(UserService.getLoggedinUser());
+	  		
+	  		PaginatorService paginaotr = new PaginatorService();
+	  		paginaotr.populatePaginationResponse(new ArrayList<Project>(Project.findProjectsByStakeholders(loggedinUser).getResultList()), 1, 20, "projects", uiModel);
+
+	  		uiModel.addAttribute("tasks", Task.findTasksByAssignedToOrCreatedBy(UserService.getLoggedinUser()).getResultList());
+	  		uiModel.addAttribute("all_members", Person.findPeopleByApprovedNot(false).getResultList());
+	  		uiModel.addAttribute("all_projects",Project.findAllProjects());
+	  		
+		    uiModel.addAttribute("person", person);
 				
-        uiModel.addAttribute("person", Person.findPerson(id));
         uiModel.addAttribute("itemId", id);
         return "members/admin_show";
     }

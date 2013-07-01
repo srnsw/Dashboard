@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:dashboard="urn:jsptagdir:/WEB-INF/tags/dashboard" xmlns:project="urn:jsptagdir:/WEB-INF/tags/project" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:dashboard="urn:jsptagdir:/WEB-INF/tags/dashboard" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:project="urn:jsptagdir:/WEB-INF/tags/project" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show create="false" delete="false" id="ps_au_gov_nsw_records_digitalarchives_dashboard_model_Project" list="false" object="${project}" path="/projects" render="false" z="user-managed">
@@ -20,10 +20,9 @@
         <field:display field="requirement" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_requirement" object="${project}" z="3dX3CIVl+4ZVj9F3xMS9+8d1cC4="/>
         <field:display field="description" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_description" object="${project}" z="1GuEt5d8pSmt4aAWut2N66xfksY="/>
         <field:display field="records" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_records" object="${project}" z="F9RICmqryO9J2aZEqWJAfOrNp5Q="/>
+        <field:display field="stakeholders" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Project_stakeholders" object="${project}" z="kqm/AHVt3VUJzqhtgGhD9twTyIc="/>
     </page:show>
-    
     <spring:url value="/" var="root_url"/>
-    
     <span class="alignright">
         <spring:url value="/resources/images/help-browser.png" var="help"/>
         <a class="noborder" href="#">
@@ -31,14 +30,12 @@
         </a>
     </span>
     <h2>Project</h2>
-   
-     <project:new_button title="New Project" id="new_proj" /> 
-     <span class="button">Upload Files</span> 
-     <span id="assign_task_btn" class="button">Assign Task</span> 
-     <span class="button">Export Project</span>
-     
-     <br/>
-     <br/> 
+    <project:new_button id="new_proj" title="New Project"/>
+    <span class="button" id="upload_btn">Upload Files</span>
+    <span class="button" id="assign_task_btn">Assign Task</span>
+    <span class="button">Export Project</span>
+    <br/>
+    <br/>
     <script>
 	    $(function() {
 	    	$('.button').button();
@@ -46,56 +43,55 @@
  		    	 $( "#task_task_create_popup" ).dialog( "open" );
    	  		   return 1;
    	  	});
+    	  $( "#upload_btn" ).click(function() {
+		    	 window.location = '${root_url}projects/${project.id}/files';
+	  		   return 1;
+	  		});
 	    });
     </script>
-    
     <div id="project_tabs_holder">
         <ul>
             <li>
-                <a href="#update_tabs-0">Project Overview</a>
+                <a href="#overview">Project Overview</a>
             </li>
             <li>
-                <a href="#update_tabs-1">Project Requirement</a>
+                <a href="#requirement">Project Requirement</a>
             </li>
             <li>
-                <a href="#update_tabs-2">Project Tasks</a>
+                <a href="#tasks">Project Tasks</a>
             </li>
-           <li>
-                <a href="#update_tabs-4">Event History</a>
+            <li>
+                <a href="#history">Event History</a>
             </li>
         </ul>
-        <div id="update_tabs-0">
-             
+        <div id="overview">
             <project:details id="project_details" object="${project}" title="Project Details"/>
             <br/>
-           	<project:status_table latestStatus="${last_status}" object="${status}" title="Project Status" id="project_status" />
+            <project:status_table id="project_status" latestStatus="${last_status}" object="${status}" title="Project Status"/>
             <br/>
-            
             <p>
-                <a class="button" href="${root_url}projects/${project.id}/project_plan">Project Plan</a> 
-                <c:set var="physical" value="Physical" />
-                <c:if test="${project.projectType ne physical}" >
-                	<a class="button" href="${root_url}projects/${project.id}/migration_plan">Migration Plan</a> <a class="button" href="${root_url}projects/${project.id}/files">View files</a>
+                <a class="button" href="${root_url}projects/${project.id}/project_plan">Project Plan</a>
+                <c:set value="Physical" var="physical"/>
+                <c:if test="${project.projectType ne physical}">
+                    <a class="button" href="${root_url}projects/${project.id}/migration_plan">Migration Plan</a>
+                    <a class="button" href="${root_url}projects/${project.id}/files">View files</a>
                 </c:if>
-            </p> 
-
-            <project:stakeholder_table object="${stakeholders}" members="${members}" projectId="${project.id}" title="Project Users" id="stakeholder" />
+            </p>
+            <project:stakeholder_table id="stakeholder" members="${members}" object="${stakeholders}" projectId="${project.id}" title="Project Users"/>
             <br/>
-            
         </div>
-        <div id="update_tabs-1">
-           <div id="abt_project_tabs_holder">
-              <project:project_requirement_table object="${none}" title="Project Requirements" id="project_requirement" />
-          </div>
+        <div id="requirement">
+            <div id="abt_project_tabs_holder">
+                <project:project_requirement_table id="project_requirement" object="${none}" title="Project Requirements"/>
+            </div>
         </div>
-        <div id="update_tabs-2">
-        	  <dashboard:tasks_table id="task" object="${tasks}" projects="${all_projects}" members="${members}" title="Tasks"/>
+        <div id="tasks">
+            <dashboard:tasks_table id="task" members="${members}" object="${tasks}" projects="${all_projects}" title="Tasks"/>
         </div>
-        <div id="update_tabs-4">
-           <dashboard:events_table object="${events}" title="Event Logs" id="event_logs" />
+        <div id="history">
+            <dashboard:events_table id="event_logs" object="${events}" title="Event Logs"/>
         </div>
     </div>
-    
     <!-- 
     <div class="dawidget" id="file_upload_popup" title="Upload file">
         <form>

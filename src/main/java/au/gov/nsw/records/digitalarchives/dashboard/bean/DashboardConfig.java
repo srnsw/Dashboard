@@ -16,6 +16,7 @@ public class DashboardConfig {
 	private static Logger logger = Logger.getLogger(DashboardConfig.class); 
 	
 	private String inboxPath; 
+	private String droidPath;
 	
 	public DashboardConfig(){
 		try {
@@ -26,6 +27,7 @@ public class DashboardConfig {
 
 				//restore configuration
 				inboxPath = prop.getProperty("inbox_path", "/mnt/inbox");
+				droidPath = prop.getProperty("droid_path", "/mnt/droid/");
 				logger.info("inboxPath:" + inboxPath);
 			}
 		} catch (IOException e) {
@@ -35,5 +37,9 @@ public class DashboardConfig {
 	
 	public String getInboxPath() {
 		return inboxPath;
+	}
+	
+	public String getDroidPath(){
+		return droidPath;
 	}
 }

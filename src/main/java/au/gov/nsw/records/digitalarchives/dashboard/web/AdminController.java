@@ -56,6 +56,20 @@ public class AdminController {
       return "admin/index";
     }
     
+    @RequestMapping(value="/users")
+    public String users( @RequestParam(value = "user_appr_page", required = false, defaultValue="1") Integer user_appr_page, @RequestParam(value = "user_appr_size", required = false, defaultValue="30") Integer user_appr_size, Model uiModel) {
+    	
+    	List<Person> persons = Person.findPeopleByApprovedNot(true).getResultList();
+    	List<Person> person_result = new ArrayList<Person>(persons.subList(Math.max((user_appr_page-1)*sizeNo, 0), Math.min(user_appr_page*sizeNo, persons.size())));
+    	float nrOfPages = (float) persons.size() / sizeNo;
+      uiModel.addAttribute("user_appr_maxpage", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+      uiModel.addAttribute("user_appr_page", user_appr_page);
+      uiModel.addAttribute("user_appr_size", sizeNo);
+      uiModel.addAttribute("user_appr", person_result);
+      
+      return "admin/user_management";
+    }
+    
     @RequestMapping(value="/tasks")
     public String tasks(@RequestParam(value = "task_page", required = false, defaultValue="1") Integer task_page,
     		@RequestParam(value = "user_appr_page", required = false, defaultValue="1") Integer user_appr_page, @RequestParam(value = "user_appr_size", required = false, defaultValue="30") Integer user_appr_size, Model uiModel) {

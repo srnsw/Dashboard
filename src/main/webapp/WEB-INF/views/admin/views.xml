@@ -10,4 +10,7 @@
     <definition extends="default" name="admin/project_templates">
         <put-attribute name="body" value="/WEB-INF/views/admin/project_templates.jspx"/>
     </definition>
+    <definition extends="default" name="admin/user_management">
+        <put-attribute name="body" value="/WEB-INF/views/admin/user_management.jspx"/>
+    </definition>
 </tiles-definitions>

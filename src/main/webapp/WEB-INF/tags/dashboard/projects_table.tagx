@@ -10,7 +10,9 @@
   <jsp:directive.attribute name="viewall" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Viewall button" />
   <jsp:directive.attribute name="browseLink" type="java.lang.String" required="false" rtexprvalue="true" description="Viewall link" />
   <jsp:directive.attribute name="pageParam" type="java.lang.String" required="false" rtexprvalue="true" description="Page parameter name" />
-    
+   
+  <spring:url value="/" var="root_url"></spring:url>
+  
 	<div class="jtable-main-container">
 					<div class="jtable-title">
 					  <div class="jtable-title-text">${title}</div>

@@ -16,9 +16,8 @@
     
     <!-- Link buttons -> [new project], [assign task], [find project] -->  
     <project:new_button title="New Project" id="project_btn" />
-    <!-- <span id="assign_task_btn" class="button">Assign Task</span>  --> 
-    <span id="find_project_btn" class="button">Find Project</span>
     <span id="my_profile_btn" class="button">My Profile</span>
+    <span id="admin_btn" class="button">Administration</span>
     
     <br/>
     <br/>    
@@ -40,6 +39,10 @@
 	    	
 	    	$('#my_profile_btn').click(function(e) {
 	    		window.location = '${root_url}members/myprofile';
+	    	});
+	    	
+	    	$('#admin_btn').click(function(e) {
+	    		window.location = '${root_url}admin';
 	    	});
 	    	
 	    });

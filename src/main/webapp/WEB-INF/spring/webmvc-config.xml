@@ -72,6 +72,12 @@
 	  <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="tilesViewResolver">
 	    <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
 	  </bean>
+		
+		<!-- Configuration bean -->
+		<bean class="au.gov.nsw.records.digitalarchives.dashboard.bean.DashboardConfig" id="dashboardConfig" />
+		<bean class="au.gov.nsw.records.digitalarchives.dashboard.bean.StorageHelper" id="storageHelper" />
+		<bean class="au.gov.nsw.records.digitalarchives.dashboard.bean.DroidHelper" id="droidHelper" />
+		
     <bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer" id="tilesConfigurer">
     <property name="definitions">
       <list>

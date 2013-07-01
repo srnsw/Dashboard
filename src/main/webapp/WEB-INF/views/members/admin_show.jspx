@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:project="urn:jsptagdir:/WEB-INF/tags/project" xmlns:dashboard="urn:jsptagdir:/WEB-INF/tags/dashboard"  xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <h2>User Profile</h2>
@@ -17,6 +17,17 @@
         <field:display field="roleType" id="s_au_gov_nsw_records_digitalarchives_dashboard_model_Person_roleType" object="${person}" render="false" z="user-managed"/>
     </page:show> 
     <span class="button" id="request_update_btn">Edit User</span>
+    <br/> 
+    <br/>
+    
+    <!-- Projects Table, display all active projects -->    
+    <dashboard:projects_table object="${projects}" page="${projects_page}" pageParam="project_page" size="${projects_size}" browseLink="/projects" maxpage="${projects_maxpage}" title="Related Projects" id="project_table" viewall="true"/>
+    
+    <!-- Tasks Table, display all tasks related to the logged in user -->
+    <c:if test="${not empty tasks}">
+    	<dashboard:tasks_table object="${tasks}" title="Related Tasks" members="${all_members}" projects="${all_projects}" pageParam="task_page" id="task_archivist" page="${tasks_page}" size="${tasks_size}" maxpage="${tasks_maxpage}"> <!--  --></dashboard:tasks_table>
+   	</c:if>
+   	
     <spring:url value="/" var="root_url"/>
     <script>
     $(function() {
